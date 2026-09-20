@@ -236,202 +236,200 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            align-items: center;
+            align-items: start;
             max-width: 1200px;
             margin: 0 auto;
-            position: relative;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: 40%;
-            background: linear-gradient(135deg, transparent, transparent 50%, var(--bg-subtle));
-            pointer-events: none;
+        .hero-left {
+            padding-top: 2rem;
         }
 
         @media (max-width: 768px) {
             .hero {
                 grid-template-columns: 1fr;
                 gap: 3rem;
+            }
+
+            .hero-left {
+                padding-top: 0;
                 text-align: center;
             }
 
-            .hero::before {
-                display: none;
+            .hero .hero-desc {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-visual {
+                justify-content: center;
             }
 
             .hero h1 {
-                font-size: clamp(2.5rem, 6vw, 3.5rem);
+                font-size: clamp(2rem, 7vw, 3rem);
             }
 
-            .hero p {
-                font-size: 1rem;
+            .hero-system {
+                max-width: 100%;
             }
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 6vw, 4.5rem);
-            line-height: 1.05;
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            line-height: 1.1;
             margin-bottom: 1.75rem;
             color: var(--text-on-card);
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
-        .hero p {
-            font-size: clamp(1.25rem, 3vw, 1.5rem);
+        .hero h1 .hero-line {
+            display: block;
+        }
+
+        .hero h1 .hero-line-accent {
+            color: var(--accent);
+        }
+
+        .hero .hero-desc {
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             line-height: 1.7;
+            max-width: 440px;
         }
 
         .hero .eyebrow {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: var(--accent);
-            color: white;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            border-radius: 6px;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .hero .btn-primario {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 4px;
+            font-size: 0.65rem;
             font-weight: 600;
-            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .hero .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
             text-decoration: none;
-            transition: var(--transition-smooth);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.85rem 1.75rem;
+            border: 1px solid var(--muted-border);
+            transition: color 0.2s ease, border-color 0.2s ease;
         }
 
-        .hero .btn-primario:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(59, 102, 241, 0.35);
+        .hero .hero-cta:hover {
+            color: var(--accent);
+            border-color: var(--accent);
         }
 
-        .hero .btn-primario:focus-visible {
-            outline: 2px solid white;
+        .hero .hero-cta:focus-visible {
+            outline: 2px solid var(--accent);
             outline-offset: 2px;
         }
 
-        /* Visual del monitor dentro del Hero */
-        .glass-panel {
-            position: relative;
-            background: var(--card);
-            border: 1px solid var(--muted-border);
-            border-radius: 20px;
-            padding: 2rem;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-md);
+        .hero .hero-cta-arrow {
+            transition: transform 0.2s ease;
         }
 
-        .monitor {
-            position: relative;
-            background: var(--bg);
-            border-radius: 12px;
-            overflow: hidden;
+        .hero .hero-cta:hover .hero-cta-arrow {
+            transform: translateX(3px);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .hero-system {
             border: 1px solid var(--muted-border);
-            max-width: 400px;
             width: 100%;
+            max-width: 420px;
         }
 
-        .screen {
-            padding: 1.5rem 2rem;
-            max-height: 350px;
+        .hero-system-header {
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
-        }
-
-        /* Nuevo: interfaz minimal del monitor */
-        .product-header {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
+            align-items: center;
+            padding: 1rem 1.5rem;
             border-bottom: 1px solid var(--muted-border);
         }
 
-        .product-name {
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-weight: 600;
+        .hero-system-header span:first-child {
+            font-size: 0.7rem;
+            font-weight: 700;
             letter-spacing: -0.01em;
+            color: var(--text-primary);
         }
 
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            margin-top: 0.5rem;
-            gap: 0.5rem;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .status-label {
-            color: var(--text-secondary);
-            font-size: 0.65rem;
+        .hero-system-header span:last-child {
+            font-size: 0.55rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem 1.25rem;
-            margin-top: 1rem;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            color: var(--text-secondary);
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .feature-icon {
+            letter-spacing: 0.1em;
             color: var(--accent);
-            font-size: 0.8rem;
-            line-height: 1;
         }
 
-        /* Estilos para las items del menú del monitor */
-        .menu {
-            padding: 1rem 0;
-            border-top: 1px solid var(--muted-border);
+        .hero-system-body {
+            padding: 0 1.5rem;
+        }
+
+        .hero-system-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.7rem 0;
             border-bottom: 1px solid var(--muted-border);
         }
 
-        .menu .item {
-            width: 8px;
-            height: 8px;
-            background: var(--text-secondary);
-            border-radius: 50%;
-            margin: 0 2px;
-            transition: background 0.2s ease;
+        .hero-system-line:last-child {
+            border-bottom: none;
         }
 
-        .menu .item.active {
-            background: var(--accent);
-            transform: scale(1.25);
+        .hero-system-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .hero-system-value {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-on-card);
+        }
+
+        .hero-system-value.status-online {
+            color: var(--accent);
+        }
+
+        .hero-system-footer {
+            border-top: 1px solid var(--muted-border);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-system-footer span {
+            font-size: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .hero-system-footer span:last-child {
+            color: var(--accent);
         }
 
         /* CAPABILITIES */
@@ -1652,47 +1650,47 @@
     <main>
         <section id="inicio">
             <div class="hero">
-                <div>
-                    <span class="eyebrow">DIGITAL INTERFACES</span>
-                    <h1>Tu negocio también necesita una buena interfaz.</h1>
-                    <p>Diseñamos experiencias digitales que convierten la identidad de tu negocio en una interfaz clara, rápida y memorable.</p>
-                    <a href="#contacto" class="btn-primario">Solicitar una propuesta</a>
+                <div class="hero-left">
+                    <span class="eyebrow">00 / DIGITAL INTERFACES</span>
+                    <h1>
+                        <span class="hero-line">Tu negocio también necesita</span>
+                        <span class="hero-line">una buena</span>
+                        <span class="hero-line hero-line-accent">interfaz.</span>
+                    </h1>
+                    <p class="hero-desc">NovaWeb diseña y desarrolla experiencias digitales que convierten la identidad de tu negocio en una interfaz clara, rápida y memorable.</p>
+                    <a href="#contacto" class="hero-cta">INITIALIZE PROJECT <span class="hero-cta-arrow">→</span></a>
                 </div>
                 <div class="hero-visual">
-                    <div class="glass-panel">
-                        <div class="monitor">
-                            <div class="screen">
-                                <div class="header">
-                                    <div class="menu">
-                                        <div class="item active"></div>
-                                        <div class="item"></div>
-                                        <div class="item"></div>
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <div class="product-header">
-                                        <div class="product-name">NOVA SYSTEM</div>
-                                        <div class="status-indicator">
-                                            <div class="status-dot"></div>
-                                            <span class="status-label">Online</span>
-                                        </div>
-                                    </div>
-                                    <div class="features">
-                                        <div class="feature-item">
-                                            <span class="feature-icon">✓</span>
-                                            <span class="feature-desc">STRUCTURE</span>
-                                        </div>
-                                        <div class="feature-item">
-                                            <span class="feature-icon">✓</span>
-                                            <span class="feature-desc">INTERACTION</span>
-                                        </div>
-                                        <div class="feature-item">
-                                            <span class="feature-icon">✓</span>
-                                            <span class="feature-desc">PERFORMANCE</span>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="hero-system">
+                        <div class="hero-system-header">
+                            <span>SYSTEM / 00</span>
+                            <span>ACTIVE</span>
+                        </div>
+                        <div class="hero-system-body">
+                            <div class="hero-system-line">
+                                <span class="hero-system-label">SYSTEM STATUS</span>
+                                <span class="hero-system-value status-online">ONLINE</span>
                             </div>
+                            <div class="hero-system-line">
+                                <span class="hero-system-label">CORE</span>
+                                <span class="hero-system-value">DIGITAL EXPERIENCE</span>
+                            </div>
+                            <div class="hero-system-line">
+                                <span class="hero-system-label">STRUCTURE</span>
+                                <span class="hero-system-value">READY</span>
+                            </div>
+                            <div class="hero-system-line">
+                                <span class="hero-system-label">INTERACTION</span>
+                                <span class="hero-system-value">ACTIVE</span>
+                            </div>
+                            <div class="hero-system-line">
+                                <span class="hero-system-label">PERFORMANCE</span>
+                                <span class="hero-system-value">OPTIMIZED</span>
+                            </div>
+                        </div>
+                        <div class="hero-system-footer">
+                            <span>INTERFACE CORE</span>
+                            <span>CONNECTED</span>
                         </div>
                     </div>
                 </div>
