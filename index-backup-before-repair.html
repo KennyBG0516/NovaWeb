@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaWeb | Agencia de Desarrollo Web</title>
+    <meta name="description" content="NovaWeb: agencia de desarrollo web especializada en crear sitios web modernos y optimizados para convertir visitantes en clientes">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --bg-subtle: #f1f5f9;
+            --card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-on-card: #0f172a;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --muted-border: #cbd5e1;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition-fast: 0.2s ease;
+            --transition-smooth: 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Tipografía */
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; }
+        h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; line-height: 1.2; }
+        h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); font-weight: 600; }
+        p { font-size: clamp(1rem, 2vw, 1.125rem); }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            z-index: 100;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(248, 250, 252, 0.95);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text-on-card);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a.active {
+            color: var(--text-primary);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        nav a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Menú móvil */
+        .mobile-nav-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-nav-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-nav-btn {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 100%;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                width: 60%;
+                max-width: 300px;
+                padding-top: 4rem;
+                transition: left 0.3s ease;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin: 1rem 0;
+            }
+
+            nav a {
+                font-size: 1rem;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Hero */
+        #inicio {
+            padding-top: calc(8rem + 64px);
+            padding-bottom: 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 5vw, 3rem);
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-on-card);
+        }
+
+        .hero p {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .btn-primario {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .hero .btn-primario:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(59, 102, 241, 0.35);
+        }
+
+        .hero .btn-primario:focus-visible {
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+
+        /* Services */
+        #servicios {
+            padding: 8rem 2rem 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .seccion-titulo {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .seccion-titulo .section-eyebrow {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+
+        .seccion-titulo h2 {
+            color: var(--text-on-card);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            line-height: 1.2;
+        }
+
+        .seccion-titulo p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: clamp(1rem, 2vw, 1.125rem);
+        }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .servicio-card {
+            background: var(--card);
+            border: 1px solid var(--muted-border);
+            border-radius: 16px;
+            padding: 2.5rem 2rem 2rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .servicio-card .card-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--bg-subtle);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            font-family: inherit;
+        }
+
+        .servicio-card .card-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1.5rem;
+        }
+
+        .servicio-card .card-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .servicio-card h3 {
+            margin: 1rem 0 0.5rem;
+            color: var(--text-on-card);
+            font-size: 1.25rem;
+        }
+
+        .servicio-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .servicio-card .card-indicator {
+            position: absolute;
+            bottom: 1.5rem;
+            opacity: 0;
+            transform: scale(0.8) rotate(-45deg);
+            transition: var(--transition-fast);
+            color: var(--accent);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .servicio-card:hover .card-indicator {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .servicio-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .servicio-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Proceso */
+        #proceso {
+            padding: 8rem 2rem 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .proceso-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            position: relative;
+            padding: 0 2rem;
+        }
+
+        .proceso-grid::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 5%;
+            right: 5%;
+            height: 2px;
+            background: var(--muted-border);
+            transition: background 0.3s ease;
+        }
+
+        .proceso-grid:hover::before {
+            background: var(--accent);
+        }
+
+        .proceso-etapa {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+            position: relative;
+            padding: 2rem 1rem;
+            background: var(--card);
+            border: 1px solid var(--muted-border);
+            border-radius: 16px;
+            transition: var(--transition-smooth);
+            cursor: default;
+        }
+
+        .proceso-etapa:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .proceso-etapa:hover .proceso-numero {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .proceso-numero {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--bg-subtle);
+            line-height: 1;
+            transition: var(--transition-fast);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .proceso-etapa:hover .proceso-numero svg {
+            stroke: var(--accent);
+        }
+
+        .proceso-icono {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            transition: var(--transition-fast);
+        }
+
+        .proceso-etapa:hover .proceso-icono {
+            transform: scale(1.1);
+        }
+
+        .proceso-etapa h3 {
+            margin: 0.5rem 0 0;
+            color: var(--text-on-card);
+            font-size: 1rem;
+            transition: color var(--transition-fast);
+        }
+
+        .proceso-etapa:hover h3 {
+            color: var(--accent);
+        }
+
+        .proceso-etapa p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .proceso-linea {
+            width: 100%;
+            height: 1px;
+            background: var(--muted-border);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .proceso-numero {
+                transition: none;
+            }
+            .proceso-etapa:hover {
+                transform: none;
+            }
+            .proceso-icono {
+                transition: none;
+            }
+            .proceso-etapa:hover .proceso-icono {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .proceso-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .proceso-grid::before {
+                position: static;
+                margin: 2rem 0;
+                height: 1px;
+            }
+
+            .proceso-etapa {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nosotros-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nosotros-texto h2 {
+            color: var(--text-on-card);
+            margin-bottom: 1rem;
+        }
+
+        .nosotros-texto p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .nosotros-ico {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .nosotros-ico svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* Contacto */
+        #contacto {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contacto-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            margin-top: 1rem;
+        }
+
+        .contacto-cta:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: var(--shadow-md);
+        }
+
+        .contacto-cta:focus-visible {
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+
+        .contacto-info {
+            margin-top: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contacto-detalle {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .contacto-detalle strong {
+            color: var(--text-on-card);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--muted-border);
+        }
+
+        /* Animaciones de aparición */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-smooth);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Interacciones específicas */
+        .nav a { transition: color 0.2s ease; }
+        .hero .btn-primario { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .servicio-card { transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; }
+
+        /* Reduced motion overlay */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { transition: opacity 0.01ms ease; }
+            .hero .btn-primario { transition: none; }
+            .servicio-card { transition: none; }
+            .proyecto-card { transition: transform 0.2s ease; }
+        }
+
+        #servicios {
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                NovaWeb
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 2l20 8L2 18z"/>
+                </svg>
+            </a>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <button class="mobile-nav-btn" aria-label="Abrir menú">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="">
+                    <path d="M3 12l2.29 2.29M12 3l2.29 2.29M21 12l-2.29 2.29"/>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio">
+            <div class="hero">
+                <div>
+                    <span class="eyebrow">Desarrollo Web</span>
+                    <h1>Creamos sitios web que hacen crecer tu negocio</h1>
+                    <p>Diseñamos y desarrollamos páginas web profesionales, rápidas y optimizadas para convertir visitantes en clientes. Tu negocio merece una presencia digital que genere resultados.</p>
+                    <a href="#contacto" class="btn-primario">Solicitar una propuesta</a>
+                </div>
+                <div class="hero-visual">
+                    <div class="glass-panel">
+                        <div class="monitor">
+                            <div class="screen">
+                                <div class="header">
+                                    <div class="menu">
+                                        <div class="item active"></div>
+                                        <div class="item"></div>
+                                        <div class="item"></div>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div class="project-name">NovaWeb Dashboard</div>
+                                    <div class="stats">
+                                        <div class="stat">
+                                            <span class="number">47</span>
+                                            <span class="label">Proyectos</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="number">12</span>
+                                            <span class="label">Clientes</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="number">234</span>
+                                            <span class="label">Visitas</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios">
+            <div class="seccion-titulo">
+                <span class="section-eyebrow">LO QUE HACEMOS</span>
+                <h2>Nuestros servicios</h2>
+                <p>Soluciones digitales personalizadas para hacer crecer tu negocio en línea</p>
+            </div>
+            <div class="servicios-grid">
+                <div class="servicio-card">
+                    <div class="card-number">01</div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <path d="M3 9l9 6l9-6M3 15l9-6l9 6"/>
+                        </svg>
+                    </div>
+                    <h3>Diseño web</h3>
+                    <p>Creamos interfaces modernas, atractivas y fáciles de usar que reflejan la identidad de tu marca y enamoran a tus clientes desde el primer clic.</p>
+                    <div class="card-indicator">→</div>
+                </div>
+                <div class="servicio-card">
+                    <div class="card-number">02</div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.66-2 2-3M12 14s2 1.66 3 2M8 10s1.66-2 2-3M12 10s2-1.66 3-2M12 6a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z"/>
+                            <line x1="9" y1="9" x2="15" y2="9"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3>Desarrollo web</h3>
+                    <p>Construimos sitios web robustos, rápidos y escalables utilizando tecnologías actuales que garantizan el mejor rendimiento.</p>
+                    <div class="card-indicator">→</div>
+                </div>
+                <div class="servicio-card">
+                    <div class="card-number">03</div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <circle cx="12" cy="12" r="1"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2"/>
+                        </svg>
+                    </div>
+                    <h3>Optimización y mantenimiento</h3>
+                    <p>Mantenemos tu sitio actualizado, seguro y funcionando al máximo rendimiento para que tú te centres en tu negocio.</p>
+                    <div class="card-indicator">→</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="proceso">
+            <div class="seccion-titulo">
+                <span class="section-eyebrow">ASÍ TRABAJAMOS</span>
+                <h2>De la idea a una presencia digital que genera resultados.</h2>
+                <p>Un proceso claro y estratégico para transformar las necesidades de tu negocio en una experiencia web profesional.</p>
+            </div>
+            <div class="proceso-grid">
+                <div class="proceso-etapa">
+                    <div class="proceso-numero">01</div>
+                    <div class="proceso-icono">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.66-2 2-3M12 14s2 1.66 3 2M8 10s1.66-2 2-3M12 10s2-1.66 3-2M12 6a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z"/>
+                            <line x1="9" y1="9" x2="15" y2="9"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3>Descubrimos</h3>
+                    <p>Conocemos tu negocio, tus objetivos y lo que necesitas para conectar mejor con tus clientes.</p>
+                </div>
+                <div class="proceso-etapa">
+                    <div class="proceso-numero">02</div>
+                    <div class="proceso-icono">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <path d="M3 9l9 6l9-6M3 15l9-6l9 6"/>
+                        </svg>
+                    </div>
+                    <h3>Diseñamos</h3>
+                    <p>Construimos una propuesta visual alineada con la identidad de tu marca y pensada para ofrecer una experiencia atractiva.</p>
+                </div>
+                <div class="proceso-etapa">
+                    <div class="proceso-numero">03</div>
+                    <div class="proceso-icono">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.66-2 2-3M12 14s2 1.66 3 2M8 10s1.66-2 2-3M12 10s2-1.66 3-2M12 6a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z"/>
+                            <line x1="9" y1="9" x2="15" y2="9"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3>Desarrollamos</h3>
+                    <p>Convertimos el diseño en un sitio web rápido, responsive y funcional utilizando tecnología web moderna.</p>
+                </div>
+                <div class="proceso-etapa">
+                    <div class="proceso-numero">04</div>
+                    <div class="proceso-icono">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <circle cx="12" cy="12" r="1"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2"/>
+                        </svg>
+                    </div>
+                    <h3>Lanzamos y optimizamos</h3>
+                    <p>Publicamos tu sitio y realizamos mejoras para que pueda seguir creciendo junto con tu negocio.</p>
+                </div>
+                <div class="proceso-linea"></div>
+            </div>
+        </section>
+
+        <!--
+        <section id="proyectos" style="display: none">
+            <div class="seccion-titulo">
+                <span class="section-eyebrow">PROYECTOS DESTACADOS</span>
+                <h2>Experiencias digitales diseñadas para destacar.</h2>
+                <p>Explora algunos conceptos creados por NovaWeb para diferentes tipos de negocios y descubre lo que podemos construir para tu marca.</p>
+            </div>
+
+            <div class="proyectos-grid">
+                <!-- Proyecto 1: Barbafina -->
+                <article class="proyecto-card">
+                    <div class="proyecto-categoria">Barbería & Grooming</div>
+                    <div class="proyecto-numero">01</div>
+                    <h3 class="proyecto-titulo">Barbafina</h3>
+                    <p class="proyecto-descripcion">Una experiencia digital elegante y moderna para una marca de barbería enfocada en atraer nuevos clientes y facilitar sus reservas.</p>
+                    <div class="proyecto-mockup">
+                        <div class="browser-top">
+                            <div class="browser-bar">
+                                <span>Barbafina</span>
+                                <div class="browser-controls">
+                                    <button></button>
+                                    <button></button>
+                                    <button></button>
+                                </div>
+                            </div>
+                            <div class="browser-url">
+                                <span>barbafina.novaweb.co</span>
+                            </div>
+                        </div>
+                        <div class="browser-content">
+                            <div class="browser-header">
+                                <div class="avatar">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <path d="M8 14s1.66-2 2-3M12 14s2 1.66 3 2M8 10s1.66-2 2-3M12 10s2-1.66 3-2M12 6a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z"/>
+                                    </svg>
+                                </div>
+                                <h2>Bienvenido a Barbafina</h2>
+                                <p class="subtitle">El mejor barber shop en línea</p>
+                            </div>
+                            <div class="browser-main">
+                                <section class="services">
+                                    <h3>Nuestros servicios</h3>
+                                    <ul>
+                                        <li>Corte tradicional</li>
+                                        <li>Barba premium</li>
+                                        <li>Consultoría de estilo</li>
+                                    </ul>
+                                </section>
+                                <section class="booking">
+                                    <h3>Reserva ahora</h3>
+                                    <p>Reserva tu cita en minutos</p>
+                                    <button class="btn-reserva">Reservar</button>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="proyecto-ver">Ver proyecto →</a>
+                </article>
+
+                <!-- Proyecto 2: Sovian -->
+                <article class="proyecto-card">
+                    <div class="proyecto-categoria">E-commerce & Tecnología</div>
+                    <div class="proyecto-numero">02</div>
+                    <h3 class="proyecto-titulo">Sovian</h3>
+                    <p class="proyecto-descripcion">Una propuesta de tienda online enfocada en productos tecnológicos, experiencia de compra y una presentación visual premium.</p>
+                    <div class="proyecto-mockup">
+                        <div class="browser-top">
+                            <div class="browser-bar tech-bar">
+                                <span>Sovian</span>
+                                <div class="browser-controls">
+                                    <button></button>
+                                    <button></button>
+                                    <button></button>
+                                </div>
+                            </div>
+                            <div class="browser-url">
+                                <span>sovian.novaweb.co</span>
+                            </div>
+                        </div>
+                        <div class="browser-content">
+                            <div class="browser-header">
+                                <h2>Sovian Tech</h2>
+                                <p class="subtitle">Tienda de tecnología premium</p>
+                            </div>
+                            <div class="browser-main">
+                                <div class="product-grid">
+                                    <article class="producto">
+                                        <img src="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'%3E%3Cpath d='M3 9l9 6l9-6M3 15l9-6l9 6' stroke-width='1.5' stroke='currentColor'/%3E%3C/svg%3E" alt="Producto tech" />
+                                        <div class="product-info">
+                                            <h3>Laptop Pro</h3>
+                                            <p>$1,299</p>
+                                        </div>
+                                    </article>
+                                    <article class="producto">
+                                        <img src="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'%3E%3Cpath d='M3 9l9 6l9-6M3 15l9-6l9 6' stroke-width='1.5' stroke='currentColor'/%3E%3C/svg%3E" alt="Producto tech" />
+                                        <div class="product-info">
+                                            <h3>Mouse Gaming</h3>
+                                            <p>$79</p>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="producto-destacado">
+                                    <h3>Accesorios</h3>
+                                    <p>Todo lo que necesitas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="proyecto-ver">Ver proyecto →</a>
+                </article>
+
+                <!-- Proyecto 3: Nova Restaurant -->
+                <article class="proyecto-card">
+                    <div class="proyecto-categoria">Gastronomía</div>
+                    <div class="proyecto-numero">03</div>
+                    <h3 class="proyecto-titulo">Nova Restaurant</h3>
+                    <p class="proyecto-descripcion">Un concepto web diseñado para presentar una propuesta gastronómica, destacar el menú y convertir visitantes en reservas.</p>
+                    <div class="proyecto-mockup">
+                        <div class="browser-top">
+                            <div class="browser-bar restaurant-bar">
+                                <span>Nova Restaurant</span>
+                                <div class="browser-controls">
+                                    <button></button>
+                                    <button></button>
+                                    <button></button>
+                                </div>
+                            </div>
+                            <div class="browser-url">
+                                <span>restaurant.novaweb.co</span>
+                            </div>
+                        </div>
+                        <div class="browser-content">
+                            <div class="browser-header">
+                                <div class="logo-ico">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 2l20 8L2 18z"/>
+                                    </svg>
+                                </div>
+                                <h2>Nuestra propuesta</h2>
+                                <p class="subtitle">Gastronomía de autor</p>
+                            </div>
+                            <div class="browser-main">
+                                <section class="menu">
+                                    <h3>Menú del día</h3>
+                                    <div class="plato">
+                                        <h4>Entrante</h4>
+                                        <p>Crudités de temporada</p>
+                                        <span>$12</span>
+                                    </div>
+                                    <div class="plato">
+                                        <h4>Plato principal</h4>
+                                        <p>Salmón salvaje</p>
+                                        <span>$28</span>
+                                    </div>
+                                    <div class="plato">
+                                        <h4>Postre</h4>
+                                        <p>Tarta de chocolate</p>
+                                        <span>$9</span>
+                                    </div>
+                                </section>
+                                <section class="reservas">
+                                    <h3>Reserva tu mesa</h3>
+                                    <p>Elige fecha y hora</p>
+                                    <button class="btn-reserva">Reservar</button>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="proyecto-ver">Ver proyecto →</a>
+                </article>
+            </div>
+        </section>
+-->
+
+        <section id="nosotros">
+            <div class="nosotros-grid">
+                <div class="nosotros-texto">
+                    <h2>¿Qué es NovaWeb?</h2>
+                    <p>Somos un equipo de profesionales apasionados por el diseño y desarrollo web. Trabajamos con negocios que quieren crecer online, ofreciéndoles soluciones digitales personalizadas que generan resultados reales. No solo creamos páginas web, creamos herramientas que hacen crecer tu negocio.</p>
+                </div>
+                <div class="nosotros-ico">
+                    <svg viewBox="0 0 24 24" fill="white">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 2l20 8L2 18z"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto">
+            <div class="contacto-cta" href="https://wa.me/573004593517?text=Hola%2C%20vi%20la%20página%20de%20NovaWeb%20y%20me%20gustaría%20recibir%20información%20sobre%20sus%20servicios%20de%20desarrollo%20web." target="_blank" rel="noopener noreferrer">
+                Hablar con NovaWeb
+            </div>
+            <div class="contacto-info">
+                <div class="contacto-detalle">
+                    <strong>Correo electrónico</strong>
+                    <span>hola@novaweb.com</span>
+                </div>
+                <div class="contacto-detalle">
+                    <strong>Teléfono</strong>
+                    <span>+57 300 459 3517</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 NovaWeb. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        const header = document.querySelector('header');
+        let lastScroll = 0;
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Mobile nav toggle
+        const mobileNavBtn = document.querySelector('.mobile-nav-btn');
+        const navUl = document.querySelector('nav ul');
+        
+        if (mobileNavBtn) {
+            mobileNavBtn.addEventListener('click', () => {
+                navUl.classList.toggle('active');
+            });
+        }
+
+        // Close mobile nav when clicking a link
+        document.querySelectorAll('nav ul a').forEach(link => {
+            link.addEventListener('click', () => {
+                navUl.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
