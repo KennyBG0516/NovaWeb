@@ -878,6 +878,179 @@
             }
         }
 
+        /* WORK */
+        #work {
+            padding: 8rem 2rem 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .work-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 4rem;
+        }
+
+        .work-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .work-header-left h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.0;
+            letter-spacing: -0.03em;
+            color: var(--text-on-card);
+            margin-bottom: 0;
+        }
+
+        .work-header-right {
+            padding-top: 3.2rem;
+        }
+
+        .work-header-right p {
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 420px;
+        }
+
+        .work-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--muted-border);
+            margin-bottom: 0;
+        }
+
+        .work-list {
+            width: 100%;
+        }
+
+        .work-row {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 2rem;
+            align-items: start;
+            padding: 2.5rem 0;
+            border-bottom: 1px solid var(--muted-border);
+            cursor: default;
+        }
+
+        .work-row:first-child {
+            border-top: 1px solid var(--muted-border);
+        }
+
+        .work-number {
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 900;
+            color: var(--bg-subtle);
+            line-height: 1;
+            letter-spacing: -0.02em;
+            transition: color 0.2s ease;
+        }
+
+        .work-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .work-title {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--text-on-card);
+            transition: color 0.2s ease;
+        }
+
+        .work-meta {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+        }
+
+        .work-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 480px;
+            margin-top: 0.25rem;
+        }
+
+        .work-action {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            transition: color 0.2s ease, transform 0.2s ease;
+            white-space: nowrap;
+            padding-top: 0.3rem;
+        }
+
+        .work-action-arrow {
+            transition: transform 0.2s ease;
+        }
+
+        .work-row:hover .work-number {
+            color: var(--accent);
+        }
+
+        .work-row:hover .work-title {
+            color: var(--accent);
+        }
+
+        .work-row:hover .work-action {
+            color: var(--accent);
+        }
+
+        .work-row:hover .work-action-arrow {
+            transform: translateX(4px);
+        }
+
+        @media (max-width: 768px) {
+            #work {
+                padding: 5rem 1.5rem 4rem;
+            }
+
+            .work-header {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .work-header-left h2 {
+                font-size: clamp(2.5rem, 8vw, 3.5rem);
+            }
+
+            .work-header-right {
+                padding-top: 0;
+            }
+
+            .work-row {
+                grid-template-columns: 50px 1fr;
+                gap: 1.25rem;
+                padding: 2rem 0;
+            }
+
+            .work-action {
+                grid-column: 2;
+                margin-top: 0.5rem;
+            }
+        }
+
         /* Contacto */
         #contacto {
             padding: 6rem 2rem;
@@ -1588,6 +1761,49 @@
                 </div>
             </div>
         </section>
+
+        <section id="work">
+            <div class="work-header">
+                <div class="work-header-left">
+                    <div class="work-eyebrow">06 / WORK</div>
+                    <h2>SELECTED<br>SYSTEMS.</h2>
+                </div>
+                <div class="work-header-right">
+                    <p>Interfaces, systems and experiments built around real digital problems.</p>
+                </div>
+            </div>
+            <div class="work-divider"></div>
+            <div class="work-list">
+                <div class="work-row">
+                    <span class="work-number">01</span>
+                    <div class="work-info">
+                        <span class="work-title">INTERACTIVE COMMERCE</span>
+                        <span class="work-meta">CONCEPT / UI / E-COMMERCE</span>
+                        <p class="work-desc">An interface experiment focused on product discovery, interaction and digital commerce.</p>
+                    </div>
+                    <span class="work-action">VIEW SYSTEM <span class="work-action-arrow">→</span></span>
+                </div>
+                <div class="work-row">
+                    <span class="work-number">02</span>
+                    <div class="work-info">
+                        <span class="work-title">AI WORKFLOW</span>
+                        <span class="work-meta">CONCEPT / AI / AUTOMATION</span>
+                        <p class="work-desc">A digital workflow concept designed to connect intelligent automation with everyday business operations.</p>
+                    </div>
+                    <span class="work-action">VIEW SYSTEM <span class="work-action-arrow">→</span></span>
+                </div>
+                <div class="work-row">
+                    <span class="work-number">03</span>
+                    <div class="work-info">
+                        <span class="work-title">DIGITAL PRESENCE</span>
+                        <span class="work-meta">CONCEPT / WEB / EXPERIENCE</span>
+                        <p class="work-desc">A structured digital experience designed to turn a business presence into an interactive interface.</p>
+                    </div>
+                    <span class="work-action">VIEW SYSTEM <span class="work-action-arrow">→</span></span>
+                </div>
+            </div>
+        </section>
+
         <section id="contacto">
             <div class="contacto-cta" href="https://wa.me/573004593517?text=Hola%2C%20vi%20la%20página%20de%20NovaWeb%20y%20me%20gustaría%20recibir%20información%20sobre%20sus%20servicios%20de%20desarrollo%20web." target="_blank" rel="noopener noreferrer">
                 Hablar con NovaWeb
