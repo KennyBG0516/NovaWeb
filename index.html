@@ -263,6 +263,11 @@
             .hero-system {
                 max-width: 100%;
             }
+
+            .hero-scroll-indicator {
+                justify-content: center;
+                margin-top: 2rem;
+            }
         }
 
         .hero h1 {
@@ -329,11 +334,47 @@
             transition: transform 0.2s ease;
         }
 
-        .hero .hero-cta:hover .hero-cta-arrow {
-            transform: translateX(3px);
-        }
+.hero .hero-cta:hover .hero-cta-arrow {
+    transform: translateX(3px);
+}
 
-        .hero-visual {
+.hero-scroll-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    opacity: 0.4;
+}
+
+.hero-scroll-label {
+    font-size: 0.55rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
+}
+
+.hero-scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--muted-border);
+}
+
+.hero-scroll-num {
+    font-size: 0.55rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    animation: scroll-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes scroll-pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+.hero-visual {
             display: flex;
             justify-content: flex-end;
         }
@@ -1587,9 +1628,103 @@
             }
         }
 
+        /* NOVA FIELD */
+        #nova-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Hero animation targets */
+        .hero-left,
+        .hero-visual {
+            will-change: transform, opacity;
+        }
+
+        /* System status */
+        .system-status {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+
+        .system-status-dot {
+            width: 5px;
+            height: 5px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse-dot 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Technical label */
+        .tech-label {
+            position: fixed;
+            top: 5rem;
+            left: 2rem;
+            z-index: 100;
+            font-size: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-secondary);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .system-status {
+                bottom: 1rem;
+                right: 1rem;
+            }
+
+            .tech-label {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .system-status-dot {
+                animation: none;
+                opacity: 0.7;
+            }
+
+            .hero-scroll-num {
+                animation: none;
+                opacity: 0.6;
+            }
+        }
+
 </style>
 </head>
 <body>
+    <canvas id="nova-field"></canvas>
+
+    <div class="system-status">
+        <span class="system-status-dot"></span>
+        <span>SYSTEM / ONLINE</span>
+    </div>
+
+    <div class="tech-label">NovaWeb // DIGITAL SYSTEM v3.0</div>
+
     <header>
         <nav>
             <div class="nav-container">
@@ -1627,6 +1762,11 @@
                     </h1>
                     <p class="hero-desc">NovaWeb diseña y desarrolla experiencias digitales que convierten la identidad de tu negocio en una interfaz clara, rápida y memorable.</p>
                     <a href="#contacto" class="hero-cta">INITIALIZE PROJECT <span class="hero-cta-arrow">→</span></a>
+                    <div class="hero-scroll-indicator">
+                        <span class="hero-scroll-label">SCROLL</span>
+                        <span class="hero-scroll-line"></span>
+                        <span class="hero-scroll-num">01 ↓</span>
+                    </div>
                 </div>
                 <div class="hero-visual">
                     <div class="hero-system">
@@ -1991,6 +2131,8 @@
         <p>&copy; 2026 NovaWeb. Todos los derechos reservados.</p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
         // Mobile nav toggle
         const mobileNavBtn = document.querySelector('.mobile-nav-btn');
@@ -2081,6 +2223,279 @@
             const el = document.getElementById(id);
             if (el) observer.observe(el);
         });
+
+        // GSAP base
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero scroll progress (shared with NOVA FIELD)
+            window._heroScrollProgress = 0;
+
+            // Hero entrance animation
+            const heroReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!heroReducedMotion) {
+                const heroTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+                heroTl
+                    .from('.hero .eyebrow', { opacity: 0, y: 12, duration: 0.4 }, 0)
+                    .from('.hero .hero-line', { opacity: 0, y: 18, duration: 0.45, stagger: 0.12 }, 0.15)
+                    .from('.hero .hero-desc', { opacity: 0, y: 14, duration: 0.4 }, 0.5)
+                    .from('.hero-cta', { opacity: 0, y: 12, duration: 0.35 }, 0.65)
+                    .from('.hero-scroll-indicator', { opacity: 0, duration: 0.3 }, 0.8)
+                    .from('.hero-system', { opacity: 0, x: 30, duration: 0.5 }, 0.2);
+            }
+
+            // Hero scroll transformation
+            if (!heroReducedMotion && window.innerWidth > 768) {
+                const heroSection = document.getElementById('inicio');
+                const heroLeft = document.querySelector('.hero-left');
+                const heroVisual = document.querySelector('.hero-visual');
+                const systemHeader = document.querySelector('.hero-system-header');
+                const systemStatus = document.querySelector('.system-status span:last-child');
+                const statusValue = document.querySelector('.hero-system-value.status-online');
+
+                if (heroSection && heroLeft && heroVisual) {
+                    // Text yields first: fades 15%-85% of hero scroll
+                    gsap.to(heroLeft, {
+                        y: -30,
+                        opacity: 0,
+                        ease: 'power2.in',
+                        scrollTrigger: {
+                            trigger: heroSection,
+                            start: '15% top',
+                            end: 'bottom top',
+                            scrub: 0.5,
+                        }
+                    });
+
+                    // System panel holds presence: scales 10%-60%, fades 30%-90%
+                    gsap.to(heroVisual, {
+                        y: -12,
+                        opacity: 0.08,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: heroSection,
+                            start: '30% top',
+                            end: 'bottom top',
+                            scrub: 0.5,
+                        }
+                    });
+
+                    // Panel scale-down: staggered, starts later
+                    gsap.to(heroVisual, {
+                        scale: 0.96,
+                        ease: 'power1.in',
+                        scrollTrigger: {
+                            trigger: heroSection,
+                            start: '10% top',
+                            end: '60% top',
+                            scrub: 0.5,
+                        }
+                    });
+
+                    // System status text transition
+                    if (systemStatus) {
+                        ScrollTrigger.create({
+                            trigger: heroSection,
+                            start: 'top top',
+                            end: '65% top',
+                            onLeave: function() {
+                                systemStatus.textContent = 'SYSTEM / TRANSITION';
+                            },
+                            onEnterBack: function() {
+                                systemStatus.textContent = 'SYSTEM / ONLINE';
+                            }
+                        });
+                    }
+
+                    // Hero system panel "ACTIVE" -> "HANDING OFF"
+                    if (systemHeader) {
+                        const statusSpan = systemHeader.querySelector('span:last-child');
+                        if (statusSpan) {
+                            ScrollTrigger.create({
+                                trigger: heroSection,
+                                start: 'top top',
+                                end: '65% top',
+                                onLeave: function() {
+                                    statusSpan.textContent = 'HANDING OFF';
+                                    statusSpan.style.color = 'var(--text-secondary)';
+                                },
+                                onEnterBack: function() {
+                                    statusSpan.textContent = 'ACTIVE';
+                                    statusSpan.style.color = '';
+                                }
+                            });
+                        }
+                    }
+
+                    // Hero system panel status value "ONLINE" -> "HANDING OFF"
+                    if (statusValue) {
+                        ScrollTrigger.create({
+                            trigger: heroSection,
+                            start: 'top top',
+                            end: '65% top',
+                            onLeave: function() {
+                                statusValue.textContent = 'HANDING OFF';
+                                statusValue.classList.remove('status-online');
+                            },
+                            onEnterBack: function() {
+                                statusValue.textContent = 'ONLINE';
+                                statusValue.classList.add('status-online');
+                            }
+                        });
+                    }
+                }
+            }
+
+            // Mobile: simpler scroll fade
+            if (!heroReducedMotion && window.innerWidth <= 768) {
+                const heroSection = document.getElementById('inicio');
+                const heroLeft = document.querySelector('.hero-left');
+                const heroVisual = document.querySelector('.hero-visual');
+                if (heroSection && heroLeft && heroVisual) {
+                    gsap.to([heroLeft, heroVisual], {
+                        opacity: 0,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: heroSection,
+                            start: 'top top',
+                            end: '80% top',
+                            scrub: 0.5,
+                        }
+                    });
+                }
+            }
+
+            // Hero progress tracker (for NOVA FIELD connection)
+            var heroProg = document.getElementById('inicio');
+            if (heroProg) {
+                ScrollTrigger.create({
+                    trigger: heroProg,
+                    start: 'top top',
+                    end: 'bottom top',
+                    onUpdate: function(self) {
+                        window._heroScrollProgress = self.progress;
+                    }
+                });
+            }
+        }
+
+        // NOVA FIELD
+        (function() {
+            const canvas = document.getElementById('nova-field');
+            const ctx = canvas.getContext('2d');
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const isMobile = window.innerWidth <= 768;
+            const SPACING = isMobile ? 160 : 100;
+            const CONNECTION_DIST = isMobile ? 120 : 180;
+            const MOUSE_RADIUS = 200;
+
+            let w, h, cols, rows, nodes, mouseX, mouseY, scrollY;
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+                cols = Math.ceil(w / SPACING) + 1;
+                rows = Math.ceil(h / SPACING) + 1;
+                nodes = [];
+                for (let i = 0; i < cols; i++) {
+                    for (let j = 0; j < rows; j++) {
+                        nodes.push({
+                            x: i * SPACING,
+                            y: j * SPACING,
+                            ox: i * SPACING,
+                            oy: j * SPACING
+                        });
+                    }
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+                const t = Date.now() * 0.00008;
+                const sy = (scrollY || 0) * 0.02;
+                const hp = window._heroScrollProgress || 0;
+
+                for (let i = 0; i < nodes.length; i++) {
+                    const n = nodes[i];
+                    if (!reducedMotion) {
+                        n.x = n.ox + Math.sin(t + n.oy * 0.005) * 3;
+                        n.y = n.oy + Math.cos(t + n.ox * 0.005) * 2 + sy % SPACING;
+                    } else {
+                        n.x = n.ox;
+                        n.y = n.oy;
+                    }
+                }
+
+                // Connections
+                const connBoost = 1 + hp * 0.6;
+                ctx.lineWidth = 0.5;
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const dx = nodes[i].x - nodes[j].x;
+                        const dy = nodes[i].y - nodes[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < CONNECTION_DIST) {
+                            const alpha = 0.08 * (1 - dist / CONNECTION_DIST) * connBoost;
+                            ctx.strokeStyle = 'rgba(37, 99, 235, ' + Math.min(alpha, 0.2) + ')';
+                            ctx.beginPath();
+                            ctx.moveTo(nodes[i].x, nodes[i].y);
+                            ctx.lineTo(nodes[j].x, nodes[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                // Nodes
+                const nodeBoost = 1 + hp * 0.5;
+                for (let i = 0; i < nodes.length; i++) {
+                    const n = nodes[i];
+                    let alpha = 0.12 * nodeBoost;
+                    if (mouseX !== undefined) {
+                        const dx = n.x - mouseX;
+                        const dy = n.y - mouseY;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < MOUSE_RADIUS) {
+                            alpha = (0.12 + 0.5 * (1 - dist / MOUSE_RADIUS)) * nodeBoost;
+                        }
+                    }
+                    ctx.fillStyle = 'rgba(37, 99, 235, ' + Math.min(alpha, 0.6) + ')';
+                    ctx.fillRect(n.x - 1, n.y - 1, 2, 2);
+                }
+
+                // Coordinate labels (desktop only, sparse)
+                if (!isMobile) {
+                    ctx.font = '500 8px system-ui, sans-serif';
+                    ctx.fillStyle = 'rgba(115, 115, 115, 0.15)';
+                    for (let i = 0; i < nodes.length; i += 5) {
+                        const n = nodes[i];
+                        const gx = Math.floor(n.ox / SPACING);
+                        const gy = Math.floor(n.oy / SPACING);
+                        ctx.fillText(gx + '.' + gy, n.x + 4, n.y - 4);
+                    }
+                }
+            }
+
+            function animate() {
+                draw();
+                requestAnimationFrame(animate);
+            }
+
+            resize();
+            animate();
+
+            window.addEventListener('mousemove', function(e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            }, { passive: true });
+
+            window.addEventListener('scroll', function() {
+                scrollY = window.pageYOffset;
+            }, { passive: true });
+
+            window.addEventListener('resize', function() {
+                resize();
+            }, { passive: true });
+        })();
     </script>
 </body>
 </html>
