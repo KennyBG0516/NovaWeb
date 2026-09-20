@@ -268,6 +268,36 @@
                 justify-content: center;
                 margin-top: 2rem;
             }
+
+            .interface-section {
+                padding: 5rem 1.5rem 1rem;
+            }
+
+            .interface-section h1 {
+                font-size: clamp(2.5rem, 8vw, 3.5rem);
+            }
+
+            .interface-scroll-area {
+                grid-template-columns: 1fr;
+                gap: 0;
+                padding: 0 1.5rem 4rem;
+            }
+
+            .interface-system-pin {
+                position: static;
+                margin-bottom: 2rem;
+            }
+
+            .interface-module-block {
+                min-height: auto;
+                padding: 3rem 0;
+                border-top: 1px solid var(--muted-border);
+            }
+
+            .interface-module-visual {
+                max-width: 100%;
+                height: 160px;
+            }
         }
 
         .hero h1 {
@@ -1299,136 +1329,338 @@
             border-top: 1px solid var(--muted-border);
         }
 
-        /* Interacciones específicas */
+        /* Interface Section */
         .interface-section {
-    padding: 8rem 2rem 6rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+            padding: 8rem 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-.interface-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
-}
+        .interface-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            display: block;
+        }
 
-.interface-eyebrow {
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-    margin-bottom: 2rem;
-    display: block;
-}
+        .interface-section h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.0;
+            letter-spacing: -0.03em;
+            color: var(--text-on-card);
+            margin-bottom: 1.5rem;
+        }
 
-.interface-left h1 {
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 900;
-    line-height: 1.0;
-    letter-spacing: -0.03em;
-    color: var(--text-on-card);
-    margin-bottom: 1.5rem;
-}
+        .interface-section p {
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 420px;
+        }
 
-.interface-left p {
-    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-    color: var(--text-secondary);
-    line-height: 1.7;
-    max-width: 420px;
-}
+        /* Scroll area: pin left, scroll right */
+        .interface-scroll-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 8rem;
+            align-items: start;
+        }
 
-.interface-system {
-    border: 1px solid var(--muted-border);
-}
+        .interface-system-pin {
+            position: sticky;
+            top: 5rem;
+            border: 1px solid var(--muted-border);
+            will-change: transform;
+        }
 
-.interface-system-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--muted-border);
-}
+        .interface-system-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--muted-border);
+        }
 
-.interface-system-header span:first-child {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: var(--text-primary);
-}
+        .interface-system-header span:first-child {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
 
-.interface-system-header span:last-child {
-    font-size: 0.55rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-}
+        .interface-system-header span:last-child {
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+        }
 
-.interface-attributes {
-    padding: 0 1.5rem;
-}
+        .interface-attributes {
+            padding: 0 1.5rem;
+        }
 
-.attribute-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--muted-border);
-}
+        .attribute-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--muted-border);
+        }
 
-.attribute-line:last-child {
-    border-bottom: none;
-}
+        .attribute-line:last-child {
+            border-bottom: none;
+        }
 
-.attribute-label {
-    font-size: 0.6rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-secondary);
-}
+        .attribute-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
 
-.attribute-value {
-    font-size: 0.6rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-on-card);
-}
+        .attribute-value {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-on-card);
+        }
 
-.interface-modules {
-    border-top: 1px solid var(--muted-border);
-}
+        .interface-modules-list {
+            border-top: 1px solid var(--muted-border);
+        }
 
-.interface-module {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--muted-border);
-}
+        .interface-module-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--muted-border);
+            transition: background 0.3s ease;
+        }
 
-.interface-module:last-child {
-    border-bottom: none;
-}
+        .interface-module-row:last-child {
+            border-bottom: none;
+        }
 
-.interface-module-label {
-    font-size: 0.6rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-secondary);
-}
+        .interface-module-row.active {
+            background: rgba(37, 99, 235, 0.04);
+        }
 
-.interface-module-status {
-    font-size: 0.55rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-}
+        .interface-module-row .interface-module-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .interface-module-row.active .interface-module-label {
+            color: var(--text-primary);
+        }
+
+        .interface-module-row .interface-module-status {
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .interface-module-row.active .interface-module-status {
+            color: var(--accent);
+        }
+
+        /* Module blocks (scroll) */
+        .interface-modules-scroll {
+            padding-top: 2rem;
+        }
+
+        .interface-module-block {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem 0;
+        }
+
+        .interface-module-block-label {
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .interface-module-block-name {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-on-card);
+            margin-bottom: 0.5rem;
+        }
+
+        .interface-module-block-status {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 2.5rem;
+        }
+
+        .interface-module-visual {
+            width: 100%;
+            max-width: 400px;
+            height: 220px;
+            border: 1px solid var(--muted-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Structure visualization */
+        .vis-structure {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .vis-struct-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--muted-border);
+        }
+
+        .vis-struct-line.vert {
+            width: 1px;
+            height: 100%;
+            top: 0;
+            bottom: auto;
+            right: auto;
+        }
+
+        .vis-struct-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 0;
+            transform: translate(-50%, -50%);
+            opacity: 0.6;
+        }
+
+        /* Interaction visualization */
+        .vis-interaction {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .vis-int-node {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 0;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        .vis-int-lines {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .vis-int-lines line {
+            stroke: var(--accent);
+            stroke-width: 0.3;
+            opacity: 0.3;
+        }
+
+        .vis-int-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            border: 1px solid var(--accent);
+            transform: translate(-50%, -50%);
+            animation: int-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes int-pulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.8); }
+        }
+
+        /* Performance visualization */
+        .vis-performance {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            gap: 1.5rem;
+        }
+
+        .vis-perf-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 40px;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .vis-perf-label {
+            font-size: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .vis-perf-bar {
+            height: 2px;
+            background: var(--muted-border);
+            position: relative;
+        }
+
+        .vis-perf-fill {
+            height: 100%;
+            background: var(--accent);
+            transition: width 0.8s ease;
+        }
+
+        .vis-perf-value {
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: var(--text-on-card);
+            text-align: right;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .vis-int-pulse {
+                animation: none;
+                opacity: 0.5;
+            }
+        }
 
 @media (max-width: 768px) {
     .interface-section {
@@ -1807,45 +2039,110 @@
 
         <section id="interface">
             <div class="interface-section">
-                <div class="interface-grid">
-                    <div class="interface-left">
-                        <div class="interface-eyebrow">01 / THE INTERFACE</div>
-                        <h1>DIGITAL EXPERIENCES ARE NOT DECORATION.</h1>
-                        <p>The way people experience a business digitally is part of the business itself.</p>
+                <div class="interface-eyebrow">01 / THE INTERFACE</div>
+                <h1>DIGITAL EXPERIENCES ARE NOT DECORATION.</h1>
+                <p>The way people experience a business digitally is part of the business itself.</p>
+            </div>
+
+            <div class="interface-scroll-area">
+                <div class="interface-system-pin">
+                    <div class="interface-system-header">
+                        <span>NOVA SYSTEM</span>
+                        <span id="iface-header-status">ACTIVE</span>
                     </div>
-                    <div class="interface-right">
-                        <div class="interface-system">
-                            <div class="interface-system-header">
-                                <span>NOVA SYSTEM</span>
-                                <span>ACTIVE</span>
+                    <div class="interface-attributes">
+                        <div class="attribute-line">
+                            <span class="attribute-label">SYSTEM STATUS</span>
+                            <span class="attribute-value">ONLINE</span>
+                        </div>
+                        <div class="attribute-line">
+                            <span class="attribute-label">INTERFACE CORE</span>
+                            <span class="attribute-value">CONNECTED</span>
+                        </div>
+                        <div class="attribute-line">
+                            <span class="attribute-label">MODULE</span>
+                            <span class="attribute-value" id="iface-module-num">01 / 03</span>
+                        </div>
+                    </div>
+                    <div class="interface-modules-list">
+                        <div class="interface-module-row active" id="iface-mod1">
+                            <span class="interface-module-label">STRUCTURE</span>
+                            <span class="interface-module-status">LOADED</span>
+                        </div>
+                        <div class="interface-module-row" id="iface-mod2">
+                            <span class="interface-module-label">INTERACTION</span>
+                            <span class="interface-module-status">PENDING</span>
+                        </div>
+                        <div class="interface-module-row" id="iface-mod3">
+                            <span class="interface-module-label">PERFORMANCE</span>
+                            <span class="interface-module-status">PENDING</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interface-modules-scroll">
+                    <div class="interface-module-block" id="iface-module-1">
+                        <div class="interface-module-block-label">MODULE 01 / 03</div>
+                        <div class="interface-module-block-name">STRUCTURE</div>
+                        <div class="interface-module-block-status">STATUS — LOADED</div>
+                        <div class="interface-module-visual vis-structure">
+                            <div class="vis-struct-line" style="top:20%"></div>
+                            <div class="vis-struct-line" style="top:40%"></div>
+                            <div class="vis-struct-line" style="top:60%"></div>
+                            <div class="vis-struct-line" style="top:80%"></div>
+                            <div class="vis-struct-line vert" style="left:25%"></div>
+                            <div class="vis-struct-line vert" style="left:50%"></div>
+                            <div class="vis-struct-line vert" style="left:75%"></div>
+                            <div class="vis-struct-dot" style="top:20%;left:25%"></div>
+                            <div class="vis-struct-dot" style="top:20%;left:75%"></div>
+                            <div class="vis-struct-dot" style="top:40%;left:50%"></div>
+                            <div class="vis-struct-dot" style="top:60%;left:25%"></div>
+                            <div class="vis-struct-dot" style="top:60%;left:75%"></div>
+                            <div class="vis-struct-dot" style="top:80%;left:50%"></div>
+                        </div>
+                    </div>
+
+                    <div class="interface-module-block" id="iface-module-2">
+                        <div class="interface-module-block-label">MODULE 02 / 03</div>
+                        <div class="interface-module-block-name">INTERACTION</div>
+                        <div class="interface-module-block-status">STATUS — ACTIVE</div>
+                        <div class="interface-module-visual vis-interaction">
+                            <div class="vis-int-node" style="top:25%;left:20%" data-id="a"></div>
+                            <div class="vis-int-node" style="top:25%;left:80%" data-id="b"></div>
+                            <div class="vis-int-node" style="top:75%;left:35%" data-id="c"></div>
+                            <div class="vis-int-node" style="top:75%;left:65%" data-id="d"></div>
+                            <div class="vis-int-node" style="top:50%;left:50%" data-id="e"></div>
+                            <svg class="vis-int-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <line x1="20" y1="25" x2="50" y2="50"/>
+                                <line x1="80" y1="25" x2="50" y2="50"/>
+                                <line x1="35" y1="75" x2="50" y2="50"/>
+                                <line x1="65" y1="75" x2="50" y2="50"/>
+                                <line x1="20" y1="25" x2="80" y2="25"/>
+                                <line x1="35" y1="75" x2="65" y2="75"/>
+                            </svg>
+                            <div class="vis-int-pulse"></div>
+                        </div>
+                    </div>
+
+                    <div class="interface-module-block" id="iface-module-3">
+                        <div class="interface-module-block-label">MODULE 03 / 03</div>
+                        <div class="interface-module-block-name">PERFORMANCE</div>
+                        <div class="interface-module-block-status">STATUS — OPTIMIZED</div>
+                        <div class="interface-module-visual vis-performance">
+                            <div class="vis-perf-row">
+                                <span class="vis-perf-label">RESPONSE</span>
+                                <div class="vis-perf-bar"><div class="vis-perf-fill" style="width:98%"></div></div>
+                                <span class="vis-perf-value">98%</span>
                             </div>
-                            <div class="interface-attributes">
-                                <div class="attribute-line">
-                                    <span class="attribute-label">SYSTEM STATUS</span>
-                                    <span class="attribute-value">ONLINE</span>
-                                </div>
-                                <div class="attribute-line">
-                                    <span class="attribute-label">INTERFACE CORE</span>
-                                    <span class="attribute-value">CONNECTED</span>
-                                </div>
-                                <div class="attribute-line">
-                                    <span class="attribute-label">MODULE</span>
-                                    <span class="attribute-value">01 / 03</span>
-                                </div>
+                            <div class="vis-perf-row">
+                                <span class="vis-perf-label">STRUCTURE</span>
+                                <div class="vis-perf-bar"><div class="vis-perf-fill" style="width:100%"></div></div>
+                                <span class="vis-perf-value">100%</span>
                             </div>
-                            <div class="interface-modules">
-                                <div class="interface-module">
-                                    <span class="interface-module-label">STRUCTURE</span>
-                                    <span class="interface-module-status">LOADED</span>
-                                </div>
-                                <div class="interface-module">
-                                    <span class="interface-module-label">INTERACTION</span>
-                                    <span class="interface-module-status">ACTIVE</span>
-                                </div>
-                                <div class="interface-module">
-                                    <span class="interface-module-label">PERFORMANCE</span>
-                                    <span class="interface-module-status">OPTIMIZED</span>
-                                </div>
+                            <div class="vis-perf-row">
+                                <span class="vis-perf-label">INTERACTION</span>
+                                <div class="vis-perf-bar"><div class="vis-perf-fill" style="width:96%"></div></div>
+                                <span class="vis-perf-value">96%</span>
                             </div>
                         </div>
                     </div>
@@ -2375,6 +2672,228 @@
                     onUpdate: function(self) {
                         window._heroScrollProgress = self.progress;
                     }
+                });
+            }
+        }
+
+        // Interface modules scroll experience
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            var ifaceReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var isMobileIface = window.innerWidth <= 768;
+
+            if (!ifaceReducedMotion && !isMobileIface) {
+                var mod1 = document.getElementById('iface-module-1');
+                var mod2 = document.getElementById('iface-module-2');
+                var mod3 = document.getElementById('iface-module-3');
+                var modRow1 = document.getElementById('iface-mod1');
+                var modRow2 = document.getElementById('iface-mod2');
+                var modRow3 = document.getElementById('iface-mod3');
+                var moduleNum = document.getElementById('iface-module-num');
+                var headerStatus = document.getElementById('iface-header-status');
+                var scrollArea = document.querySelector('.interface-scroll-area');
+
+                if (mod1 && mod2 && mod3 && scrollArea) {
+                    var structLines = mod1.querySelectorAll('.vis-struct-line');
+                    var structDots = mod1.querySelectorAll('.vis-struct-dot');
+                    var intNodes = mod2.querySelectorAll('.vis-int-node');
+                    var intLines = mod2.querySelectorAll('.vis-int-lines line');
+                    var intPulse = mod2.querySelector('.vis-int-pulse');
+                    var perfRows = mod3.querySelectorAll('.vis-perf-row');
+                    var perfFills = mod3.querySelectorAll('.vis-perf-fill');
+
+                    var perfTargets = [];
+                    perfFills.forEach(function(f) {
+                        perfTargets.push(f.style.width);
+                        f.style.width = '0%';
+                    });
+
+                    gsap.set(mod2, { opacity: 0 });
+                    gsap.set(mod3, { opacity: 0 });
+                    gsap.set(intNodes, { opacity: 0, scale: 0, transformOrigin: 'center center' });
+                    gsap.set(intLines, { opacity: 0 });
+                    gsap.set(perfRows, { opacity: 0, x: -10 });
+
+                    // TRANSITION 1: STRUCTURE → INTERACTION
+                    // Structure elements evolve: lines compress, dots shift to node positions
+                    ScrollTrigger.create({
+                        trigger: scrollArea,
+                        start: 'top top',
+                        end: '50% top',
+                        scrub: 0.5,
+                        onUpdate: function(self) {
+                            var p = self.progress;
+                            var t = Math.max(0, Math.min(1, (p - 0.25) / 0.25));
+                            var ease = t * t * (3 - 2 * t);
+
+                            structLines.forEach(function(line, i) {
+                                var isVert = line.classList.contains('vert');
+                                gsap.set(line, {
+                                    opacity: (1 - ease) * (isVert ? 0.4 : 0.6),
+                                    scaleY: isVert ? (1 - ease * 0.6) : (1 - ease * 0.3),
+                                    scaleX: isVert ? (1 - ease * 0.3) : 1,
+                                    transformOrigin: 'center center'
+                                });
+                            });
+
+                            structDots.forEach(function(dot, i) {
+                                gsap.set(dot, {
+                                    opacity: 0.7 * (1 - ease * 0.7),
+                                    scale: 1 + ease * 0.5
+                                });
+                            });
+
+                            gsap.set(mod1, { opacity: 1 - ease });
+                        }
+                    });
+
+                    // Interaction emerges from structure
+                    ScrollTrigger.create({
+                        trigger: scrollArea,
+                        start: '25% top',
+                        end: '55% top',
+                        scrub: 0.5,
+                        onUpdate: function(self) {
+                            var p = self.progress;
+                            var t = Math.max(0, Math.min(1, (p - 0.1) / 0.3));
+                            var ease = t * t * (3 - 2 * t);
+
+                            gsap.set(mod2, { opacity: Math.min(1, ease * 1.5) });
+
+                            intNodes.forEach(function(node, i) {
+                                var delay = i * 0.08;
+                                var nt = Math.max(0, Math.min(1, (ease - delay) / (1 - delay)));
+                                gsap.set(node, {
+                                    opacity: nt,
+                                    scale: nt,
+                                    transformOrigin: 'center center'
+                                });
+                            });
+
+                            intLines.forEach(function(line, i) {
+                                var lt = Math.max(0, Math.min(1, (ease - 0.2) / 0.8));
+                                gsap.set(line, { opacity: lt * 0.35 });
+                            });
+
+                            if (intPulse) gsap.set(intPulse, { opacity: ease });
+                        }
+                    });
+
+                    // TRANSITION 2: INTERACTION → PERFORMANCE
+                    // Interaction elements compress and realign into metrics
+                    ScrollTrigger.create({
+                        trigger: scrollArea,
+                        start: '55% top',
+                        end: 'bottom bottom',
+                        scrub: 0.5,
+                        onUpdate: function(self) {
+                            var p = self.progress;
+                            var t = Math.max(0, Math.min(1, (p - 0.15) / 0.25));
+                            var ease = t * t * (3 - 2 * t);
+
+                            intNodes.forEach(function(node, i) {
+                                gsap.set(node, {
+                                    opacity: 1 - ease,
+                                    scale: 1 - ease * 0.4,
+                                    transformOrigin: 'center center'
+                                });
+                            });
+
+                            intLines.forEach(function(line) {
+                                gsap.set(line, { opacity: (1 - ease) * 0.35 });
+                            });
+
+                            if (intPulse) gsap.set(intPulse, { opacity: 1 - ease });
+
+                            gsap.set(mod2, { opacity: 1 - ease });
+                        }
+                    });
+
+                    // Performance emerges from interaction
+                    ScrollTrigger.create({
+                        trigger: scrollArea,
+                        start: '65% top',
+                        end: 'bottom bottom',
+                        scrub: 0.5,
+                        onUpdate: function(self) {
+                            var p = self.progress;
+                            var t = Math.max(0, Math.min(1, (p - 0.15) / 0.3));
+                            var ease = t * t * (3 - 2 * t);
+
+                            gsap.set(mod3, { opacity: Math.min(1, ease * 1.5) });
+
+                            perfRows.forEach(function(row, i) {
+                                var delay = i * 0.12;
+                                var rt = Math.max(0, Math.min(1, (ease - delay) / (1 - delay)));
+                                gsap.set(row, {
+                                    opacity: rt,
+                                    x: (1 - rt) * -10
+                                });
+                            });
+
+                            perfFills.forEach(function(fill, i) {
+                                var delay = i * 0.12 + 0.1;
+                                var ft = Math.max(0, Math.min(1, (ease - delay) / (1 - delay)));
+                                if (perfTargets[i]) {
+                                    fill.style.width = ft * parseInt(perfTargets[i]) + '%';
+                                }
+                            });
+                        }
+                    });
+
+                    // System panel: synchronized state updates
+                    ScrollTrigger.create({
+                        trigger: scrollArea,
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        onUpdate: function(self) {
+                            var p = self.progress;
+                            if (p < 0.3) {
+                                if (moduleNum) moduleNum.textContent = '01 / 03';
+                                if (headerStatus) { headerStatus.textContent = 'ACTIVE'; headerStatus.style.color = ''; }
+                                if (modRow1) modRow1.classList.add('active');
+                                if (modRow2) modRow2.classList.remove('active');
+                                if (modRow3) modRow3.classList.remove('active');
+                                if (modRow1) modRow1.querySelector('.interface-module-status').textContent = 'LOADED';
+                                if (modRow2) modRow2.querySelector('.interface-module-status').textContent = 'PENDING';
+                                if (modRow3) modRow3.querySelector('.interface-module-status').textContent = 'PENDING';
+                            } else if (p < 0.7) {
+                                if (moduleNum) moduleNum.textContent = '02 / 03';
+                                if (headerStatus) { headerStatus.textContent = 'ACTIVE'; headerStatus.style.color = ''; }
+                                if (modRow1) modRow1.classList.remove('active');
+                                if (modRow2) modRow2.classList.add('active');
+                                if (modRow3) modRow3.classList.remove('active');
+                                if (modRow1) modRow1.querySelector('.interface-module-status').textContent = 'LOADED';
+                                if (modRow2) modRow2.querySelector('.interface-module-status').textContent = 'ACTIVE';
+                                if (modRow3) modRow3.querySelector('.interface-module-status').textContent = 'PENDING';
+                            } else {
+                                if (moduleNum) moduleNum.textContent = '03 / 03';
+                                if (headerStatus) { headerStatus.textContent = 'OPTIMIZED'; headerStatus.style.color = 'var(--accent)'; }
+                                if (modRow1) modRow1.classList.remove('active');
+                                if (modRow2) modRow2.classList.remove('active');
+                                if (modRow3) modRow3.classList.add('active');
+                                if (modRow1) modRow1.querySelector('.interface-module-status').textContent = 'LOADED';
+                                if (modRow2) modRow2.querySelector('.interface-module-status').textContent = 'ACTIVE';
+                                if (modRow3) modRow3.querySelector('.interface-module-status').textContent = 'OPTIMIZED';
+                            }
+                        }
+                    });
+                }
+            }
+
+            // Mobile: simple fade-in for each module
+            if (!ifaceReducedMotion && isMobileIface) {
+                document.querySelectorAll('.interface-module-block').forEach(function(block) {
+                    gsap.from(block, {
+                        opacity: 0,
+                        y: 30,
+                        duration: 0.6,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: block,
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
                 });
             }
         }
