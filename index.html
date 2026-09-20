@@ -134,6 +134,11 @@
             color: var(--text-on-card);
         }
 
+        nav a.active {
+            color: var(--text-on-card);
+            box-shadow: inset 0 -2px 0 var(--accent);
+        }
+
         nav a:focus-visible {
             outline: 2px solid var(--accent);
             outline-offset: 2px;
@@ -2002,6 +2007,36 @@
             link.addEventListener('click', () => {
                 navUl.classList.remove('active');
             });
+        });
+
+        // Active section detection
+        const sectionIds = ['interface','nova-lab','servicios','proceso','nosotros','work','contacto'];
+        const navLinks = sectionIds.map(id => document.querySelector(`a[href="#${id}"]`));
+        let activeId = null;
+
+        const observer = new IntersectionObserver(entries => {
+            // Pick the section closest to the top that is NOT above the header
+            let best = null;
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const top = e.target.getBoundingClientRect().top;
+                    if (top >= 0 && (!best || top < best.top)) {
+                        best = { el: e.target, top };
+                    }
+                }
+            });
+
+            if (best && best.el.id !== activeId) {
+                navLinks.forEach(l => l && l.classList.remove('active'));
+                const link = document.querySelector(`a[href="#${best.el.id}"]`);
+                if (link) link.classList.add('active');
+                activeId = best.el.id;
+            }
+        }, { rootMargin: '-64px 0px -55% 0px', threshold: 0 });
+
+        sectionIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
         });
     </script>
 </body>
