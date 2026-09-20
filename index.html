@@ -1741,8 +1741,8 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--accent);
-            border: 1px solid var(--accent);
+            color: var(--text-secondary);
+            border: 1px solid var(--muted-border);
             padding: 0.2rem 0.5rem;
         }
 
@@ -1755,86 +1755,172 @@
             margin-bottom: 2rem;
         }
 
-        .lab-experiment-mini {
-            border: 1px solid var(--muted-border);
-            padding: 2.5rem;
-            max-width: 700px;
+        .lab-object-container {
+            max-width: 500px;
         }
 
-        .lab-experiment-header-fictional {
+        .lab-status {
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--muted-border);
-            margin-bottom: 1.5rem;
-        }
-
-        .lab-experiment-fictional {
-            font-size: 0.65rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-secondary);
-        }
-
-        .lab-experiment-fictional-price {
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-            color: var(--text-primary);
-        }
-
-        .lab-experiment-content > p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 2rem;
-        }
-
-        .lab-experiment-details {
-            display: grid;
-            grid-template-columns: auto 1fr auto 1fr;
-            gap: 0.5rem 1rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--muted-border);
-            margin-bottom: 2rem;
-        }
-
-        .lab-experiment-details span {
+            gap: 0.5rem;
             font-size: 0.6rem;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
         }
 
-        .lab-experiment-details span:nth-child(odd) {
+        .lab-status-sep {
+            color: var(--muted-border);
+        }
+
+        .lab-status-value {
             color: var(--text-secondary);
         }
 
-        .lab-experiment-details span:nth-child(even) {
-            color: var(--text-primary);
-            font-weight: 600;
+        .lab-object {
+            position: relative;
+            display: flex;
+            border: 1px solid var(--muted-border);
+            cursor: pointer;
+            outline: none;
         }
 
-        .lab-button {
-            display: inline-block;
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--text-primary);
-            padding: 0.75rem 2rem;
+        .lab-object:hover {
+            border-color: var(--text-secondary);
+        }
+
+        .lab-object:focus-visible {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+        }
+
+        .lab-object-indicator {
+            width: 3px;
+            flex-shrink: 0;
+            background: var(--muted-border);
+        }
+
+        .lab-object-main {
+            flex: 1;
+            padding: 1.5rem;
+        }
+
+        .lab-object-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .lab-object-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .lab-object-id {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--muted-border);
+        }
+
+        .lab-object-visual {
+            position: relative;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .lab-visual-core {
+            width: 6px;
+            height: 6px;
+            border: 1px solid var(--text-secondary);
+            z-index: 2;
+            position: relative;
+        }
+
+        .lab-visual-line {
+            position: absolute;
+            background: var(--muted-border);
+            opacity: 0;
+        }
+
+        .lab-visual-line-left {
+            height: 1px;
+            right: 50%;
+            top: 50%;
+            width: 0;
+            transform: translateY(-50%);
+        }
+
+        .lab-visual-line-right {
+            height: 1px;
+            left: 50%;
+            top: 50%;
+            width: 0;
+            transform: translateY(-50%);
+        }
+
+        .lab-visual-line-top {
+            width: 1px;
+            left: 50%;
+            bottom: 50%;
+            height: 0;
+            transform: translateX(-50%);
+        }
+
+        .lab-visual-line-bottom {
+            width: 1px;
+            left: 50%;
+            top: 50%;
+            height: 0;
+            transform: translateX(-50%);
+        }
+
+        .lab-object-data {
+            display: flex;
+            gap: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--muted-border);
+        }
+
+        .lab-data-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .lab-data-label {
+            font-size: 0.55rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .lab-data-value {
             font-size: 0.65rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: background 0.2s ease, color 0.2s ease;
+            color: var(--muted-border);
         }
 
-        .lab-button:hover {
-            background: var(--text-primary);
-            color: var(--bg);
+        .lab-hint {
+            margin-top: 1rem;
+            font-size: 0.55rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            opacity: 0.6;
         }
 
         @media (max-width: 768px) {
@@ -1846,17 +1932,13 @@
                 font-size: clamp(2.5rem, 10vw, 4rem);
             }
 
-            .lab-experiment-mini {
-                padding: 1.5rem;
+            .lab-object-container {
+                max-width: 100%;
             }
 
-            .lab-experiment-header-fictional {
+            .lab-object-data {
+                flex-wrap: wrap;
                 gap: 1rem;
-            }
-
-            .lab-experiment-details {
-                grid-template-columns: auto 1fr;
-                gap: 0.4rem 0.75rem;
             }
         }
 
@@ -2164,28 +2246,50 @@
                 <div class="lab-experiment">
                     <div class="lab-experiment-header">
                         <span class="lab-experiment-number">EXPERIMENT 01</span>
-                        <span class="lab-experiment-state">ACTIVE</span>
+                        <span class="lab-experiment-state" id="lab-state">READY</span>
                     </div>
 
                     <h2>INTERACTIVE COMMERCE</h2>
 
-                    <div class="lab-experiment-mini">
-                        <div class="lab-experiment-content">
-                            <div class="lab-experiment-header-fictional">
-                                <span class="lab-experiment-fictional">NOVA / OBJECT 01</span>
-                                <span class="lab-experiment-fictional">ARCHIVE SERIES</span>
-                                <span class="lab-experiment-fictional-price">$240</span>
-                                <span class="lab-experiment-fictional">COMMERCE / INTERACTION / UI</span>
-                            </div>
-                            <p>A digital object designed for interaction.</p>
-                            <div class="lab-experiment-details">
-                                <span>SIZE</span>
-                                <span>01 / 03</span>
-                                <span>COLOR</span>
-                                <span>NOVA</span>
-                            </div>
-                            <button class="lab-button">ADD TO SYSTEM</button>
+                    <div class="lab-object-container">
+                        <div class="lab-status">
+                            <span class="lab-status-label">SYSTEM</span>
+                            <span class="lab-status-sep">/</span>
+                            <span class="lab-status-value" id="lab-status-value">READY</span>
                         </div>
+
+                        <div class="lab-object" id="lab-object" tabindex="0" role="button" aria-label="Interactive system object. Press Enter to activate.">
+                            <div class="lab-object-indicator" id="lab-indicator"></div>
+                            <div class="lab-object-main">
+                                <div class="lab-object-header">
+                                    <span class="lab-object-label">NOVA / OBJECT 01</span>
+                                    <span class="lab-object-id" id="lab-object-id">SYS:000</span>
+                                </div>
+                                <div class="lab-object-visual">
+                                    <div class="lab-visual-core" id="lab-core"></div>
+                                    <div class="lab-visual-line lab-visual-line-left" id="lab-line-l"></div>
+                                    <div class="lab-visual-line lab-visual-line-right" id="lab-line-r"></div>
+                                    <div class="lab-visual-line lab-visual-line-top" id="lab-line-t"></div>
+                                    <div class="lab-visual-line lab-visual-line-bottom" id="lab-line-b"></div>
+                                </div>
+                                <div class="lab-object-data">
+                                    <div class="lab-data-item">
+                                        <span class="lab-data-label">SIZE</span>
+                                        <span class="lab-data-value" id="lab-data-size">01 / 03</span>
+                                    </div>
+                                    <div class="lab-data-item">
+                                        <span class="lab-data-label">COLOR</span>
+                                        <span class="lab-data-value" id="lab-data-color">NOVA</span>
+                                    </div>
+                                    <div class="lab-data-item">
+                                        <span class="lab-data-label">STATUS</span>
+                                        <span class="lab-data-value" id="lab-data-status">STANDBY</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lab-hint" id="lab-hint"><span>INTERACT WITH THE OBJECT TO INITIALIZE</span></div>
                     </div>
                 </div>
             </div>
@@ -2897,6 +3001,135 @@
                 });
             }
         }
+
+        // NOVA LAB - Interactive System Object
+        (function() {
+            var obj = document.getElementById('lab-object');
+            var stateBadge = document.getElementById('lab-state');
+            var statusValue = document.getElementById('lab-status-value');
+            var objectId = document.getElementById('lab-object-id');
+            var indicator = document.getElementById('lab-indicator');
+            var core = document.getElementById('lab-core');
+            var hint = document.getElementById('lab-hint');
+            var dataSize = document.getElementById('lab-data-size');
+            var dataColor = document.getElementById('lab-data-color');
+            var dataStatus = document.getElementById('lab-data-status');
+            var lineL = document.getElementById('lab-line-l');
+            var lineR = document.getElementById('lab-line-r');
+            var lineT = document.getElementById('lab-line-t');
+            var lineB = document.getElementById('lab-line-b');
+
+            var currentState = 'ready';
+            var isAnimating = false;
+            var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            var stateMap = {
+                ready: {
+                    badge: 'READY', status: 'READY', id: 'SYS:000',
+                    statusColor: '', idColor: '', indicatorBg: 'var(--muted-border)',
+                    coreScale: 1, coreColor: 'var(--text-secondary)',
+                    lineW: '0%', lineH: '0%', lineOp: 0,
+                    objBorder: '', objScale: 1,
+                    hint: 'INTERACT WITH THE OBJECT TO INITIALIZE'
+                },
+                active: {
+                    badge: 'ACTIVE', status: 'ACTIVE', id: 'OBJ-01',
+                    statusColor: 'var(--accent)', idColor: 'var(--accent)', indicatorBg: 'var(--accent)',
+                    coreScale: 2, coreColor: 'var(--accent)',
+                    lineW: '30%', lineH: '0%', lineOp: 0.5,
+                    objBorder: 'var(--accent)', objScale: 1,
+                    hint: 'OBJECT RECOGNIZED — SELECT TO PROCEED'
+                },
+                selected: {
+                    badge: 'SELECTED', status: 'SELECTED', id: 'OBJ-01-A',
+                    statusColor: 'var(--accent)', idColor: 'var(--accent)', indicatorBg: 'var(--accent)',
+                    coreScale: 2.5, coreColor: 'var(--accent)',
+                    lineW: '45%', lineH: '25px', lineOp: 0.8,
+                    objBorder: 'var(--accent)', objScale: 1.015,
+                    hint: 'CONFIGURING SYSTEM PARAMETERS'
+                },
+                configured: {
+                    badge: 'CONFIGURED', status: 'CONFIGURED', id: 'OBJ-01-A-OK',
+                    statusColor: 'var(--text-primary)', idColor: 'var(--text-primary)',
+                    indicatorBg: 'var(--text-primary)',
+                    coreScale: 2, coreColor: 'var(--text-primary)',
+                    lineW: '50%', lineH: '35px', lineOp: 1,
+                    objBorder: 'var(--text-primary)', objScale: 1,
+                    hint: 'SYSTEM READY — CLICK TO RESET'
+                }
+            };
+
+            function applyState(s, animate) {
+                var c = stateMap[s];
+                var dur = 0.35;
+
+                stateBadge.textContent = c.badge;
+                statusValue.textContent = c.status;
+                objectId.textContent = c.id;
+                hint.querySelector('span').textContent = c.hint;
+
+                stateBadge.style.color = c.statusColor;
+                stateBadge.style.borderColor = c.statusColor || '';
+                statusValue.style.color = c.statusColor;
+                objectId.style.color = c.idColor;
+                indicator.style.background = c.indicatorBg;
+
+                if (!animate || reducedMotion) {
+                    gsap.set(core, { scale: c.coreScale, borderColor: c.coreColor });
+                    gsap.set(lineL, { width: c.lineW, opacity: c.lineOp });
+                    gsap.set(lineR, { width: c.lineW, opacity: c.lineOp });
+                    gsap.set(lineT, { height: c.lineH, opacity: c.lineOp });
+                    gsap.set(lineB, { height: c.lineH, opacity: c.lineOp });
+                    gsap.set(obj, { scale: c.objScale, borderColor: c.objBorder || 'var(--muted-border)' });
+                    return;
+                }
+
+                gsap.to(core, { scale: c.coreScale, borderColor: c.coreColor, duration: dur, ease: 'power2.out' });
+                gsap.to(obj, { scale: c.objScale, borderColor: c.objBorder || 'var(--muted-border)', duration: dur, ease: 'power2.out' });
+                gsap.to(lineL, { width: c.lineW, opacity: c.lineOp, duration: dur, ease: 'power2.out' });
+                gsap.to(lineR, { width: c.lineW, opacity: c.lineOp, duration: dur, ease: 'power2.out', delay: 0.05 });
+                gsap.to(lineT, { height: c.lineH, opacity: c.lineOp, duration: dur, ease: 'power2.out', delay: 0.1 });
+                gsap.to(lineB, { height: c.lineH, opacity: c.lineOp, duration: dur, ease: 'power2.out', delay: 0.1 });
+            }
+
+            function advance() {
+                if (isAnimating) return;
+                var next;
+                switch (currentState) {
+                    case 'ready': next = 'active'; break;
+                    case 'active': next = 'selected'; break;
+                    case 'selected': next = 'configured'; break;
+                    case 'configured': next = 'ready'; break;
+                }
+
+                if (next === 'ready' && currentState === 'configured') {
+                    isAnimating = true;
+                    applyState('ready', true);
+                    setTimeout(function() { isAnimating = false; }, 400);
+                    currentState = 'ready';
+                    return;
+                }
+
+                currentState = next;
+                isAnimating = true;
+                applyState(currentState, true);
+                setTimeout(function() { isAnimating = false; }, 400);
+            }
+
+            obj.addEventListener('click', function(e) {
+                e.stopPropagation();
+                advance();
+            });
+
+            obj.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    advance();
+                }
+            });
+
+            applyState('ready', false);
+        })();
 
         // NOVA FIELD
         (function() {
