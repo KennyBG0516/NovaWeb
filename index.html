@@ -756,38 +756,126 @@
             }
         }
 
-        .nosotros-grid {
+        /* NOVAWEB */
+        #nosotros {
+            padding: 8rem 2rem 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .novaweb-header {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 4rem;
         }
 
-        .nosotros-texto h2 {
+        .novaweb-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .novaweb-header-left h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
             color: var(--text-on-card);
-            margin-bottom: 1rem;
+            margin-bottom: 0;
         }
 
-        .nosotros-texto p {
+        .novaweb-header-left h2 span {
+            display: block;
+        }
+
+        .novaweb-header-left h2 span:last-child {
+            color: var(--accent);
+        }
+
+        .novaweb-header-right {
+            padding-top: 3.2rem;
+        }
+
+        .novaweb-header-right p {
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
             color: var(--text-secondary);
-            line-height: 1.8;
+            line-height: 1.7;
+            max-width: 420px;
         }
 
-        .nosotros-ico {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
+        .novaweb-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--muted-border);
+            margin-bottom: 0;
         }
 
-        .nosotros-ico svg {
-            width: 24px;
-            height: 24px;
-            fill: white;
+        .novaweb-system {
+            width: 100%;
+        }
+
+        .novaweb-system-row {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 2rem;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--muted-border);
+            align-items: baseline;
+        }
+
+        .novaweb-system-row:first-child {
+            border-top: 1px solid var(--muted-border);
+        }
+
+        .novaweb-system-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .novaweb-system-value {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-on-card);
+            transition: color 0.2s ease;
+        }
+
+        .novaweb-system-row:hover .novaweb-system-value {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            #nosotros {
+                padding: 5rem 1.5rem 4rem;
+            }
+
+            .novaweb-header {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .novaweb-header-left h2 {
+                font-size: clamp(2rem, 7vw, 3rem);
+            }
+
+            .novaweb-header-right {
+                padding-top: 0;
+            }
+
+            .novaweb-system-row {
+                grid-template-columns: 100px 1fr;
+                gap: 1rem;
+            }
         }
 
         /* Contacto */
@@ -1465,15 +1553,38 @@
         </section>
 
         <section id="nosotros">
-            <div class="nosotros-grid">
-                <div class="nosotros-texto">
-                    <h2>¿Qué es NovaWeb?</h2>
-                    <p>Somos un equipo de profesionales apasionados por el diseño y desarrollo web. Trabajamos con negocios que quieren crecer online, ofreciéndoles soluciones digitales personalizadas que generan resultados reales. No solo creamos páginas web, creamos herramientas que hacen crecer tu negocio.</p>
+            <div class="novaweb-header">
+                <div class="novaweb-header-left">
+                    <div class="novaweb-eyebrow">05 / NOVAWEB</div>
+                    <h2>
+                        <span>WE DON'T BUILD</span>
+                        <span>WEBSITES.</span>
+                        <span>WE BUILD</span>
+                        <span>INTERFACES</span>
+                        <span>FOR BUSINESS.</span>
+                    </h2>
                 </div>
-                <div class="nosotros-ico">
-                    <svg viewBox="0 0 24 24" fill="white">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 2l20 8L2 18z"/>
-                    </svg>
+                <div class="novaweb-header-right">
+                    <p>NovaWeb combines strategy, design, technology and interaction to create digital systems that help businesses move forward.</p>
+                </div>
+            </div>
+            <div class="novaweb-divider"></div>
+            <div class="novaweb-system">
+                <div class="novaweb-system-row">
+                    <span class="novaweb-system-label">SYSTEM</span>
+                    <span class="novaweb-system-value">DIGITAL EXPERIENCE STUDIO</span>
+                </div>
+                <div class="novaweb-system-row">
+                    <span class="novaweb-system-label">FOCUS</span>
+                    <span class="novaweb-system-value">WEB / E-COMMERCE / AI</span>
+                </div>
+                <div class="novaweb-system-row">
+                    <span class="novaweb-system-label">APPROACH</span>
+                    <span class="novaweb-system-value">STRATEGY / DESIGN / DEVELOPMENT</span>
+                </div>
+                <div class="novaweb-system-row">
+                    <span class="novaweb-system-label">STATUS</span>
+                    <span class="novaweb-system-value">BUILDING THE NEXT INTERFACE</span>
                 </div>
             </div>
         </section>
