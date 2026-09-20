@@ -25,6 +25,7 @@
         html {
             scroll-behavior: smooth;
             scroll-padding-top: 80px;
+            overflow-x: hidden;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -192,6 +193,7 @@
                 transform: translateX(100%);
                 transition: transform 0.3s ease;
                 align-items: flex-start;
+                z-index: 101;
             }
 
             nav ul.active {
@@ -494,22 +496,18 @@
             color: var(--accent);
         }
 
-        /* CAPABILITIES */
+        /* CAPABILITIES - System Architecture */
         #servicios {
             padding: 8rem 2rem 6rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .capabilities-header {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-            margin-bottom: 4rem;
+        .cap-header {
+            margin-bottom: 2rem;
         }
 
-        .capabilities-eyebrow {
+        .cap-eyebrow {
             font-size: 0.65rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -519,124 +517,226 @@
             display: block;
         }
 
-        .capabilities-header-left h2 {
+        .cap-header h2 {
             font-size: clamp(3rem, 6vw, 5rem);
             font-weight: 900;
             line-height: 1.0;
             letter-spacing: -0.03em;
-            color: var(--text-on-card);
-            margin-bottom: 0;
+            color: var(--text-primary);
         }
 
-        .capabilities-header-right {
-            padding-top: 3.2rem;
-        }
-
-        .capabilities-header-right p {
+        .cap-header-desc {
             font-size: clamp(0.95rem, 1.5vw, 1.1rem);
             color: var(--text-secondary);
             line-height: 1.7;
-            max-width: 420px;
+            max-width: 520px;
+            margin-top: 1.5rem;
         }
 
-        .capabilities-divider {
-            width: 100%;
-            height: 1px;
-            background: var(--muted-border);
-            margin-bottom: 0;
-        }
-
-        .capabilities-list {
-            width: 100%;
-        }
-
-        .capability-row {
-            display: grid;
-            grid-template-columns: 60px 1fr auto;
-            gap: 2rem;
-            align-items: center;
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--muted-border);
-            cursor: default;
-        }
-
-        .capability-row:first-child {
-            border-top: 1px solid var(--muted-border);
-        }
-
-        .capability-number {
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            letter-spacing: 0.05em;
-            transition: color 0.2s ease;
-        }
-
-        .capability-info {
+        .cap-arch-label {
             display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-top: 1px solid var(--muted-border);
+            border-bottom: 1px solid var(--muted-border);
+            margin-bottom: 3rem;
         }
 
-        .capability-title {
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
-            font-weight: 700;
-            letter-spacing: -0.01em;
-            color: var(--text-on-card);
-            transition: color 0.2s ease;
+        .cap-arch-title {
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
         }
 
-        .capability-meta {
+        .cap-arch-status {
+            font-size: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        /* Three Domains */
+        .cap-domains {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+        }
+
+        .cap-domain {
+            padding: 0 2rem;
+            border-left: 1px solid var(--muted-border);
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .cap-domain:focus-visible {
+            border-color: var(--accent);
+        }
+
+        .cap-domain:first-child {
+            padding-left: 0;
+            border-left: none;
+        }
+
+        .cap-domain:last-child {
+            padding-right: 0;
+        }
+
+        .cap-domain-num {
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .cap-domain-name {
+            font-size: clamp(1rem, 1.8vw, 1.3rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .cap-domain-cap {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(55, 55, 55, 0.4);
+        }
+
+        .cap-domain-cap:last-child {
+            border-bottom: none;
+        }
+
+        .cap-domain-cap-dot {
+            width: 3px;
+            height: 3px;
+            background: var(--muted-border);
+            flex-shrink: 0;
+        }
+
+        .cap-domain-cap-name {
             font-size: 0.6rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--text-secondary);
+            transition: color 0.2s ease;
         }
 
-        .capability-desc {
-            font-size: 0.85rem;
+        /* Domain Active State */
+        .cap-domain.active .cap-domain-num {
+            color: var(--accent);
+        }
+
+        .cap-domain.active .cap-domain-name {
+            color: var(--accent);
+        }
+
+        .cap-domain.active .cap-domain-cap-dot {
+            background: var(--accent);
+        }
+
+        .cap-domain.active .cap-domain-cap-name {
+            color: var(--text-primary);
+        }
+
+        .cap-domain.active {
+            border-left-color: var(--accent);
+        }
+
+        /* Active Configuration */
+        .cap-config {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--muted-border);
+        }
+
+        .cap-config-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .cap-config-label {
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
             color: var(--text-secondary);
-            line-height: 1.6;
-            margin-top: 0.5rem;
-            max-width: 500px;
-            display: none;
         }
 
-        .capability-arrow {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            transition: color 0.2s ease, transform 0.2s ease;
-            width: 24px;
-            text-align: right;
-        }
-
-        .capability-module-label {
-            font-size: 0.5rem;
+        .cap-config-domain {
+            font-size: 0.55rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--accent);
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            margin-top: 0.25rem;
         }
 
-        .capability-row:hover .capability-number {
-            color: var(--accent);
+        .cap-config-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
-        .capability-row:hover .capability-title {
-            color: var(--accent);
+        .cap-config-item {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.5rem 0.85rem;
+            border: 1px solid var(--accent);
+            color: var(--text-primary);
         }
 
-        .capability-row:hover .capability-arrow {
-            color: var(--accent);
-            transform: translateX(4px);
+        /* System Output */
+        .cap-output {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--muted-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .capability-row:hover .capability-module-label {
-            opacity: 1;
+        .cap-output-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .cap-output-label {
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+        }
+
+        .cap-output-value {
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        .cap-output-indicator {
+            font-size: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            border: 1px solid var(--muted-border);
+            padding: 0.3rem 0.6rem;
         }
 
         @media (max-width: 768px) {
@@ -644,281 +744,174 @@
                 padding: 5rem 1.5rem 4rem;
             }
 
-            .capabilities-header {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .capabilities-header-left h2 {
+            .cap-header h2 {
                 font-size: clamp(2.5rem, 8vw, 3.5rem);
             }
 
-            .capabilities-header-right {
+            .cap-arch-label {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .cap-domains {
+                grid-template-columns: 1fr;
+            }
+
+            .cap-domain {
+                padding: 1.5rem 0;
+                border-left: none;
+                border-bottom: 1px solid var(--muted-border);
+            }
+
+            .cap-domain:first-child {
                 padding-top: 0;
             }
 
-            .capability-row {
-                grid-template-columns: 40px 1fr;
+            .cap-domain:last-child {
+                border-bottom: none;
+            }
+
+            .cap-output {
+                flex-direction: column;
+                align-items: flex-start;
                 gap: 1rem;
-                padding: 1.5rem 0;
-            }
-
-            .capability-arrow {
-                display: none;
-            }
-
-            .capability-meta {
-                font-size: 0.55rem;
-            }
-
-            .capability-module-label {
-                opacity: 1;
             }
         }
 
         /* PROCESS */
-        #proceso {
-            padding: 8rem 2rem 6rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* SYSTEM - Process Pipeline */
+        .sys-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--muted-border);
+            margin: 4rem 0 0;
         }
 
-        .process-header {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-            margin-bottom: 4rem;
+        .sys-process {
+            padding: 4rem 0 0;
         }
 
-        .process-eyebrow {
+        .sys-process-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 3rem;
+        }
+
+        .sys-process-title {
             font-size: 0.65rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             color: var(--accent);
-            margin-bottom: 2rem;
-            display: block;
         }
 
-        .process-header-left h2 {
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 900;
-            line-height: 1.0;
-            letter-spacing: -0.03em;
-            color: var(--text-on-card);
-            margin-bottom: 0;
-        }
-
-        .process-header-right {
-            padding-top: 3.2rem;
-        }
-
-        .process-header-right p {
-            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+        .sys-process-subtitle {
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             color: var(--text-secondary);
-            line-height: 1.7;
-            max-width: 420px;
         }
 
-        .process-divider {
-            width: 100%;
-            height: 1px;
-            background: var(--muted-border);
-            margin-bottom: 0;
+        .sys-process-pipeline {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            overflow-x: auto;
+            padding-bottom: 1rem;
         }
 
-        .process-list {
-            width: 100%;
-        }
-
-        .process-step {
-            display: grid;
-            grid-template-columns: 80px 1fr;
-            gap: 2rem;
-            align-items: start;
-            padding: 2.5rem 0;
-            border-bottom: 1px solid var(--muted-border);
-            cursor: default;
-        }
-
-        .process-step:first-child {
-            border-top: 1px solid var(--muted-border);
-        }
-
-        .process-number {
-            font-size: clamp(2.5rem, 4vw, 3.5rem);
-            font-weight: 900;
-            color: var(--bg-subtle);
-            line-height: 1;
-            letter-spacing: -0.02em;
-            transition: color 0.2s ease;
-        }
-
-        .process-info {
+        .sys-process-step {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 0.5rem;
+            min-width: 100px;
+            flex-shrink: 0;
         }
 
-        .process-title {
-            font-size: clamp(1.2rem, 2vw, 1.5rem);
+        .sys-process-num {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--bg-subtle);
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
+
+        .sys-process-name {
+            font-size: 0.7rem;
             font-weight: 700;
-            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
             color: var(--text-on-card);
-            transition: color 0.2s ease;
         }
 
-        .process-desc {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            max-width: 500px;
-        }
-
-        .process-status {
-            font-size: 0.5rem;
+        .sys-process-status {
+            font-size: 0.45rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--accent);
             opacity: 0;
-            transition: opacity 0.2s ease;
-            margin-top: 0.25rem;
         }
 
-        .process-step:hover .process-number {
+        .sys-process-step:hover .sys-process-num {
             color: var(--accent);
         }
 
-        .process-step:hover .process-title {
-            color: var(--accent);
-        }
-
-        .process-step:hover .process-status {
+        .sys-process-step:hover .sys-process-status {
             opacity: 1;
         }
 
-        @media (max-width: 768px) {
-            #proceso {
-                padding: 5rem 1.5rem 4rem;
-            }
-
-            .process-header {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .process-header-left h2 {
-                font-size: clamp(2.5rem, 8vw, 3.5rem);
-            }
-
-            .process-header-right {
-                padding-top: 0;
-            }
-
-            .process-step {
-                grid-template-columns: 50px 1fr;
-                gap: 1.25rem;
-                padding: 2rem 0;
-            }
-
-            .process-number {
-                font-size: clamp(2rem, 6vw, 2.5rem);
-            }
-
-            .process-status {
-                opacity: 1;
-            }
+        .sys-process-connector {
+            flex: 1;
+            min-width: 20px;
+            height: 1px;
+            background: var(--muted-border);
+            margin: 0 0.5rem;
+            margin-bottom: 1.2rem;
         }
 
-        /* NOVAWEB */
-        #nosotros {
-            padding: 8rem 2rem 6rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* HERO IDENTITY */
+        .hero-identity {
+            margin-top: 4rem;
         }
 
-        .novaweb-header {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 4rem;
-            align-items: start;
-            margin-bottom: 4rem;
-        }
-
-        .novaweb-eyebrow {
-            font-size: 0.65rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent);
-            margin-bottom: 2rem;
-            display: block;
-        }
-
-        .novaweb-header-left h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
-            color: var(--text-on-card);
-            margin-bottom: 0;
-        }
-
-        .novaweb-header-left h2 span {
-            display: block;
-        }
-
-        .novaweb-header-left h2 span:last-child {
-            color: var(--accent);
-        }
-
-        .novaweb-header-right {
-            padding-top: 3.2rem;
-        }
-
-        .novaweb-header-right p {
-            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-            color: var(--text-secondary);
-            line-height: 1.7;
-            max-width: 420px;
-        }
-
-        .novaweb-divider {
+        .hero-identity-divider {
             width: 100%;
             height: 1px;
             background: var(--muted-border);
             margin-bottom: 0;
         }
 
-        .novaweb-system {
+        .hero-identity-grid {
             width: 100%;
         }
 
-        .novaweb-system-row {
+        .hero-identity-row {
             display: grid;
-            grid-template-columns: 140px 1fr;
+            grid-template-columns: 120px 1fr;
             gap: 2rem;
-            padding: 1.25rem 0;
+            padding: 1rem 0;
             border-bottom: 1px solid var(--muted-border);
             align-items: baseline;
         }
 
-        .novaweb-system-row:first-child {
-            border-top: 1px solid var(--muted-border);
+        .hero-identity-row:last-child {
+            border-bottom: none;
         }
 
-        .novaweb-system-label {
-            font-size: 0.6rem;
+        .hero-identity-label {
+            font-size: 0.55rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--text-secondary);
         }
 
-        .novaweb-system-value {
-            font-size: 0.7rem;
+        .hero-identity-value {
+            font-size: 0.6rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -926,31 +919,22 @@
             transition: color 0.2s ease;
         }
 
-        .novaweb-system-row:hover .novaweb-system-value {
+        .hero-identity-row:hover .hero-identity-value {
             color: var(--accent);
         }
 
         @media (max-width: 768px) {
-            #nosotros {
-                padding: 5rem 1.5rem 4rem;
-            }
-
-            .novaweb-header {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .novaweb-header-left h2 {
-                font-size: clamp(2rem, 7vw, 3rem);
-            }
-
-            .novaweb-header-right {
-                padding-top: 0;
-            }
-
-            .novaweb-system-row {
+            .hero-identity-row {
                 grid-template-columns: 100px 1fr;
                 gap: 1rem;
+            }
+
+            .sys-process-pipeline {
+                gap: 0;
+            }
+
+            .sys-process-step {
+                min-width: 80px;
             }
         }
 
@@ -1785,6 +1769,7 @@
             border: 1px solid var(--muted-border);
             cursor: pointer;
             outline: none;
+            touch-action: manipulation;
         }
 
         .lab-object:hover {
@@ -2049,11 +2034,9 @@
                 <ul>
                     <li><a href="#interface">01 / INTERFACE</a></li>
                     <li><a href="#nova-lab">02 / LAB</a></li>
-                    <li><a href="#servicios">03 / CAPABILITIES</a></li>
-                    <li><a href="#proceso">04 / PROCESS</a></li>
-                    <li><a href="#nosotros">05 / NOVAWEB</a></li>
-                    <li><a href="#work">06 / WORK</a></li>
-                    <li><a href="#contacto">07 / INITIALIZE</a></li>
+                    <li><a href="#servicios">03 / SYSTEM</a></li>
+                    <li><a href="#work">04 / PROVE</a></li>
+                    <li><a href="#contacto">05 / INITIALIZE</a></li>
                 </ul>
                 <button class="mobile-nav-btn" aria-label="Abrir menú">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -2114,6 +2097,28 @@
                             <span>INTERFACE CORE</span>
                             <span>CONNECTED</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-identity">
+                <div class="hero-identity-divider"></div>
+                <div class="hero-identity-grid">
+                    <div class="hero-identity-row">
+                        <span class="hero-identity-label">SYSTEM</span>
+                        <span class="hero-identity-value">DIGITAL EXPERIENCE STUDIO</span>
+                    </div>
+                    <div class="hero-identity-row">
+                        <span class="hero-identity-label">FOCUS</span>
+                        <span class="hero-identity-value">WEB / E-COMMERCE / AI</span>
+                    </div>
+                    <div class="hero-identity-row">
+                        <span class="hero-identity-label">APPROACH</span>
+                        <span class="hero-identity-value">STRATEGY / DESIGN / DEVELOPMENT</span>
+                    </div>
+                    <div class="hero-identity-row">
+                        <span class="hero-identity-label">STATUS</span>
+                        <span class="hero-identity-value">BUILDING THE NEXT INTERFACE</span>
                     </div>
                 </div>
             </div>
@@ -2296,146 +2301,162 @@
         </section>
 
         <section id="servicios">
-            <div class="capabilities-header">
-                <div class="capabilities-header-left">
-                    <div class="capabilities-eyebrow">03 / CAPABILITIES</div>
-                    <h2>WHAT<br>WE<br>BUILD.</h2>
-                </div>
-                <div class="capabilities-header-right">
-                    <p>Digital systems designed around experience, interaction and business.</p>
-                </div>
+            <div class="cap-header">
+                <div class="cap-eyebrow">03 / CAPABILITIES</div>
+                <h2>WHAT WE BUILD.</h2>
+                <p class="cap-header-desc">NovaWeb constructs digital experiences, e-commerce systems, and automation architectures — designed as integrated products, not isolated pages.</p>
             </div>
-            <div class="capabilities-divider"></div>
-            <div class="capabilities-list">
-                <div class="capability-row">
-                    <span class="capability-number">01</span>
-                    <div class="capability-info">
-                        <span class="capability-title">WEB EXPERIENCES</span>
-                        <span class="capability-meta">DESIGN / DEVELOPMENT</span>
-                        <p class="capability-desc">Diseño y desarrollo de experiencias web premium, rápidas y centradas en la interacción.</p>
-                        <span class="capability-module-label">OPEN MODULE</span>
-                    </div>
-                    <span class="capability-arrow">→</span>
-                </div>
-                <div class="capability-row">
-                    <span class="capability-number">02</span>
-                    <div class="capability-info">
-                        <span class="capability-title">E-COMMERCE SYSTEMS</span>
-                        <span class="capability-meta">UI / CONVERSION / EXPERIENCE</span>
-                        <p class="capability-desc">Experiencias de comercio digital diseñadas para convertir navegación en acción.</p>
-                        <span class="capability-module-label">OPEN MODULE</span>
-                    </div>
-                    <span class="capability-arrow">→</span>
-                </div>
-                <div class="capability-row">
-                    <span class="capability-number">03</span>
-                    <div class="capability-info">
-                        <span class="capability-title">AI & AUTOMATION</span>
-                        <span class="capability-meta">SYSTEMS / WORKFLOWS / INTEGRATION</span>
-                        <p class="capability-desc">Automatizaciones y sistemas digitales que reducen trabajo manual y conectan procesos.</p>
-                        <span class="capability-module-label">OPEN MODULE</span>
-                    </div>
-                    <span class="capability-arrow">→</span>
-                </div>
-            </div>
-        </section>
 
-        <section id="proceso">
-            <div class="process-header">
-                <div class="process-header-left">
-                    <div class="process-eyebrow">04 / PROCESS</div>
-                    <h2>FROM IDEA<br>TO INTERFACE.</h2>
-                </div>
-                <div class="process-header-right">
-                    <p>Every project moves through a clear system — from the first idea to the final interface.</p>
-                </div>
+            <div class="cap-arch-label">
+                <span class="cap-arch-title">CAPABILITY SYSTEM / ARCHITECTURE</span>
+                <span class="cap-arch-status">DOMAINS / 03</span>
             </div>
-            <div class="process-divider"></div>
-            <div class="process-list">
-                <div class="process-step">
-                    <span class="process-number">01</span>
-                    <div class="process-info">
-                        <span class="process-title">DISCOVER</span>
-                        <p class="process-desc">Understand the business, audience, goals and opportunity.</p>
-                        <span class="process-status">STEP ACTIVE</span>
-                    </div>
-                </div>
-                <div class="process-step">
-                    <span class="process-number">02</span>
-                    <div class="process-info">
-                        <span class="process-title">STRUCTURE</span>
-                        <p class="process-desc">Define the experience, content, architecture and interaction.</p>
-                        <span class="process-status">STEP ACTIVE</span>
-                    </div>
-                </div>
-                <div class="process-step">
-                    <span class="process-number">03</span>
-                    <div class="process-info">
-                        <span class="process-title">BUILD</span>
-                        <p class="process-desc">Design and develop the digital interface.</p>
-                        <span class="process-status">STEP ACTIVE</span>
-                    </div>
-                </div>
-                <div class="process-step">
-                    <span class="process-number">04</span>
-                    <div class="process-info">
-                        <span class="process-title">REFINE</span>
-                        <p class="process-desc">Test, improve and optimize the experience.</p>
-                        <span class="process-status">STEP ACTIVE</span>
-                    </div>
-                </div>
-                <div class="process-step">
-                    <span class="process-number">05</span>
-                    <div class="process-info">
-                        <span class="process-title">LAUNCH</span>
-                        <p class="process-desc">Prepare the final system for the real world.</p>
-                        <span class="process-status">STEP ACTIVE</span>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="nosotros">
-            <div class="novaweb-header">
-                <div class="novaweb-header-left">
-                    <div class="novaweb-eyebrow">05 / NOVAWEB</div>
-                    <h2>
-                        <span>WE DON'T BUILD</span>
-                        <span>WEBSITES.</span>
-                        <span>WE BUILD</span>
-                        <span>INTERFACES</span>
-                        <span>FOR BUSINESS.</span>
-                    </h2>
+            <div class="cap-domains" role="group" aria-label="Capability domains">
+                <div class="cap-domain active" tabindex="0" role="button" aria-selected="true" data-domain="0">
+                    <div class="cap-domain-num">01</div>
+                    <div class="cap-domain-name">WEB EXPERIENCE</div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">STRATEGY</span>
+                    </div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">STRUCTURE</span>
+                    </div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">INTERFACE</span>
+                    </div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">INTERACTION</span>
+                    </div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">DEVELOPMENT</span>
+                    </div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">PERFORMANCE</span>
+                    </div>
                 </div>
-                <div class="novaweb-header-right">
-                    <p>NovaWeb combines strategy, design, technology and interaction to create digital systems that help businesses move forward.</p>
+
+                <div class="cap-domain" tabindex="0" role="button" aria-selected="false" data-domain="1">
+                    <div class="cap-domain-num">02</div>
+                    <div class="cap-domain-name">E-COMMERCE SYSTEM</div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">UX</span>
+                    </div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">CONVERSION</span>
+                    </div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">COMMERCE</span>
+                    </div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">EXPERIENCE</span>
+                    </div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">PERFORMANCE</span>
+                    </div>
+                </div>
+
+                <div class="cap-domain" tabindex="0" role="button" aria-selected="false" data-domain="2">
+                    <div class="cap-domain-num">03</div>
+                    <div class="cap-domain-name">AI & AUTOMATION</div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">WORKFLOWS</span>
+                    </div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">INTEGRATION</span>
+                    </div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">AUTOMATION</span>
+                    </div>
+                    <div class="cap-domain-cap">
+                        <div class="cap-domain-cap-dot"></div>
+                        <span class="cap-domain-cap-name">AI</span>
+                    </div>
                 </div>
             </div>
-            <div class="novaweb-divider"></div>
-            <div class="novaweb-system">
-                <div class="novaweb-system-row">
-                    <span class="novaweb-system-label">SYSTEM</span>
-                    <span class="novaweb-system-value">DIGITAL EXPERIENCE STUDIO</span>
+
+            <div class="cap-config" id="cap-config">
+                <div class="cap-config-header">
+                    <span class="cap-config-label">ACTIVE CONFIGURATION</span>
+                    <span class="cap-config-domain" id="cap-config-domain">01 / WEB EXPERIENCE</span>
                 </div>
-                <div class="novaweb-system-row">
-                    <span class="novaweb-system-label">FOCUS</span>
-                    <span class="novaweb-system-value">WEB / E-COMMERCE / AI</span>
+                <div class="cap-config-items" id="cap-config-items">
+                    <span class="cap-config-item">STRATEGY</span>
+                    <span class="cap-config-item">STRUCTURE</span>
+                    <span class="cap-config-item">INTERFACE</span>
+                    <span class="cap-config-item">INTERACTION</span>
+                    <span class="cap-config-item">DEVELOPMENT</span>
+                    <span class="cap-config-item">PERFORMANCE</span>
                 </div>
-                <div class="novaweb-system-row">
-                    <span class="novaweb-system-label">APPROACH</span>
-                    <span class="novaweb-system-value">STRATEGY / DESIGN / DEVELOPMENT</span>
+            </div>
+
+            <div class="sys-divider"></div>
+
+            <div class="sys-process">
+                <div class="sys-process-header">
+                    <span class="sys-process-title">PROCESS ARCHITECTURE</span>
+                    <span class="sys-process-subtitle">HOW WE BUILD IT</span>
                 </div>
-                <div class="novaweb-system-row">
-                    <span class="novaweb-system-label">STATUS</span>
-                    <span class="novaweb-system-value">BUILDING THE NEXT INTERFACE</span>
+                <div class="sys-process-pipeline">
+                    <div class="sys-process-step">
+                        <span class="sys-process-num">01</span>
+                        <span class="sys-process-name">DISCOVER</span>
+                        <span class="sys-process-status">STEP ACTIVE</span>
+                    </div>
+                    <div class="sys-process-connector"></div>
+                    <div class="sys-process-step">
+                        <span class="sys-process-num">02</span>
+                        <span class="sys-process-name">STRUCTURE</span>
+                        <span class="sys-process-status">STEP ACTIVE</span>
+                    </div>
+                    <div class="sys-process-connector"></div>
+                    <div class="sys-process-step">
+                        <span class="sys-process-num">03</span>
+                        <span class="sys-process-name">BUILD</span>
+                        <span class="sys-process-status">STEP ACTIVE</span>
+                    </div>
+                    <div class="sys-process-connector"></div>
+                    <div class="sys-process-step">
+                        <span class="sys-process-num">04</span>
+                        <span class="sys-process-name">REFINE</span>
+                        <span class="sys-process-status">STEP ACTIVE</span>
+                    </div>
+                    <div class="sys-process-connector"></div>
+                    <div class="sys-process-step">
+                        <span class="sys-process-num">05</span>
+                        <span class="sys-process-name">LAUNCH</span>
+                        <span class="sys-process-status">STEP ACTIVE</span>
+                    </div>
                 </div>
+            </div>
+
+            <div class="cap-output">
+                <div class="cap-output-left">
+                    <span class="cap-output-label">SYSTEM OUTPUT</span>
+                    <span class="cap-output-value">DIGITAL EXPERIENCE</span>
+                </div>
+                <span class="cap-output-indicator">CONVERGENCE</span>
             </div>
         </section>
 
         <section id="work">
             <div class="work-header">
                 <div class="work-header-left">
-                    <div class="work-eyebrow">06 / WORK</div>
+                    <div class="work-eyebrow">04 / PROVE</div>
                     <h2>SELECTED<br>SYSTEMS.</h2>
                 </div>
                 <div class="work-header-right">
@@ -2477,7 +2498,7 @@
         <section id="contacto">
             <div class="contact-header">
                 <div class="contact-header-left">
-                    <div class="contact-eyebrow">07 / INITIALIZE</div>
+                    <div class="contact-eyebrow">05 / INITIALIZE</div>
                     <h2>
                         <span>LET'S BUILD</span>
                         <span>THE NEXT</span>
@@ -2553,7 +2574,7 @@
         });
 
         // Active section detection
-        const sectionIds = ['interface','nova-lab','servicios','proceso','nosotros','work','contacto'];
+        const sectionIds = ['interface','nova-lab','servicios','work','contacto'];
         const navLinks = sectionIds.map(id => document.querySelector(`a[href="#${id}"]`));
         let activeId = null;
         let clickedSection = null;
@@ -3105,7 +3126,7 @@
                 if (next === 'ready' && currentState === 'configured') {
                     isAnimating = true;
                     applyState('ready', true);
-                    setTimeout(function() { isAnimating = false; }, 400);
+                    setTimeout(function() { isAnimating = false; }, 600);
                     currentState = 'ready';
                     return;
                 }
@@ -3113,7 +3134,7 @@
                 currentState = next;
                 isAnimating = true;
                 applyState(currentState, true);
-                setTimeout(function() { isAnimating = false; }, 400);
+                setTimeout(function() { isAnimating = false; }, 600);
             }
 
             obj.addEventListener('click', function(e) {
@@ -3129,6 +3150,59 @@
             });
 
             applyState('ready', false);
+        })();
+
+        // CAPABILITIES - Domain Selection
+        (function() {
+            var domains = document.querySelectorAll('.cap-domain');
+            var archStatus = document.querySelector('.cap-arch-status');
+            var outputValue = document.querySelector('.cap-output-value');
+            var configDomain = document.getElementById('cap-config-domain');
+            var configItems = document.getElementById('cap-config-items');
+
+            var domainLabels = ['01 / WEB EXPERIENCE', '02 / E-COMMERCE SYSTEM', '03 / AI & AUTOMATION'];
+            var outputMap = ['DIGITAL EXPERIENCE', 'COMMERCE SYSTEM', 'AUTOMATION LAYER'];
+            var capsMap = [
+                ['STRATEGY', 'STRUCTURE', 'INTERFACE', 'INTERACTION', 'DEVELOPMENT', 'PERFORMANCE'],
+                ['UX', 'CONVERSION', 'COMMERCE', 'EXPERIENCE', 'PERFORMANCE'],
+                ['WORKFLOWS', 'INTEGRATION', 'AUTOMATION', 'AI']
+            ];
+
+            function selectDomain(index) {
+                domains.forEach(function(d, i) {
+                    var isActive = i === index;
+                    d.classList.toggle('active', isActive);
+                    d.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                });
+
+                if (archStatus) {
+                    archStatus.textContent = 'DOMAIN / 0' + (index + 1);
+                }
+                if (outputValue) {
+                    outputValue.textContent = outputMap[index];
+                }
+                if (configDomain) {
+                    configDomain.textContent = domainLabels[index];
+                }
+                if (configItems) {
+                    configItems.innerHTML = capsMap[index].map(function(cap) {
+                        return '<span class="cap-config-item">' + cap + '</span>';
+                    }).join('');
+                }
+            }
+
+            domains.forEach(function(domain, i) {
+                domain.addEventListener('click', function() {
+                    selectDomain(i);
+                });
+
+                domain.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        selectDomain(i);
+                    }
+                });
+            });
         })();
 
         // NOVA FIELD
