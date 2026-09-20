@@ -9,15 +9,11 @@
         :root {
             --bg: #0a0a0a;
             --bg-subtle: #141414;
-            --card: #111111;
             --text-primary: #e5e5e5;
             --text-secondary: #737373;
             --text-on-card: #fafafa;
             --accent: #2563eb;
-            --accent-hover: #1d4ed8;
             --muted-border: #262626;
-            --transition-fast: 0.15s ease;
-            --transition-smooth: 0.25s ease;
         }
 
         * {
@@ -41,13 +37,6 @@
             }
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
-
         /* Tipografía */
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -59,12 +48,10 @@
 
         h1 { font-size: clamp(3rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
         h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
-        h3 { font-size: clamp(1.75rem, 3.5vw, 2rem); font-weight: 600; line-height: 1.2; }
         p { font-size: clamp(1rem, 2vw, 1.125rem); line-height: 1.75; }
 
         h1 { color: var(--text-on-card); }
         h2 { color: var(--text-primary); }
-        h3 { color: var(--text-primary); }
 
         a { color: inherit; }
 
@@ -142,10 +129,6 @@
 
         nav a:hover {
             color: var(--text-on-card);
-        }
-
-        nav a.active {
-            color: var(--accent);
         }
 
         nav a:focus-visible {
@@ -1267,24 +1250,8 @@
             border-top: 1px solid var(--muted-border);
         }
 
-        /* Animaciones de aparición */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: var(--transition-smooth);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         /* Interacciones específicas */
-        .nav a { transition: color 0.2s ease; }
-        .hero .btn-primario { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.servicio-card { transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; }
-
-.interface-section {
+        .interface-section {
     padding: 8rem 2rem 6rem;
     max-width: 1200px;
     margin: 0 auto;
@@ -1428,12 +1395,6 @@
         font-size: clamp(2.5rem, 8vw, 3.5rem);
     }
 }
-        @media (prefers-reduced-motion: reduce) {
-            .reveal { transition: opacity 0.01ms ease; }
-            .hero .btn-primario { transition: none; }
-            .servicio-card { transition: none; }
-            .proyecto-card { transition: transform 0.2s ease; }
-        }
 
         /* NOVA LAB */
         #nova-lab {
@@ -1618,7 +1579,6 @@
             }
         }
 
-        #servicios {
 </style>
 </head>
 <body>
@@ -2024,22 +1984,6 @@
     </footer>
 
     <script>
-        // Header scroll effect
-        const header = document.querySelector('header');
-        let lastScroll = 0;
-        
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > lastScroll && currentScroll > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-            
-            lastScroll = currentScroll;
-        });
-
         // Mobile nav toggle
         const mobileNavBtn = document.querySelector('.mobile-nav-btn');
         const navUl = document.querySelector('nav ul');
