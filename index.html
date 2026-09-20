@@ -74,17 +74,10 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 1.5rem 2rem;
+            background: var(--bg);
+            padding: 0 2rem;
             border-bottom: 1px solid var(--muted-border);
             z-index: 100;
-            transition: background 0.2s ease;
-        }
-
-        header.scrolled {
-            background: rgba(10, 10, 10, 0.95);
         }
 
         .nav-container {
@@ -93,72 +86,73 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background 0.3s ease;
+            height: 64px;
         }
 
-        .logo {
-            font-size: 1.75rem;
+        .nav-brand {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .nav-brand-name {
+            font-size: 1rem;
             font-weight: 800;
             color: var(--text-on-card);
             text-decoration: none;
             letter-spacing: -0.02em;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: transform 0.2s ease;
         }
 
-        .logo:hover {
-            transform: translateY(-1px);
-        }
-
-        .logo svg {
-            width: 28px;
-            height: 28px;
-            flex-shrink: 0;
+        .nav-brand-sub {
+            font-size: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
         }
 
         nav ul {
             display: flex;
-            gap: 2rem;
+            gap: 0;
             list-style: none;
+            align-items: center;
+        }
+
+        nav ul li {
+            border-left: 1px solid var(--muted-border);
+        }
+
+        nav ul li:first-child {
+            border-left: none;
         }
 
         nav a {
             color: var(--text-secondary);
             text-decoration: none;
+            font-size: 0.6rem;
             font-weight: 500;
-            font-size: 0.875rem;
-            position: relative;
-            padding-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.5rem 1rem;
+            display: block;
             transition: color 0.2s ease;
+            white-space: nowrap;
         }
 
         nav a:hover {
-            color: var(--accent);
+            color: var(--text-on-card);
         }
 
         nav a.active {
-            color: var(--text-primary);
-        }
-
-        nav a.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
+            color: var(--accent);
         }
 
         nav a:focus-visible {
             outline: 2px solid var(--accent);
             outline-offset: 2px;
-            border-radius: 4px;
         }
 
-        /* Menú móvil */
         .mobile-nav-btn {
             display: none;
             background: none;
@@ -168,12 +162,27 @@
         }
 
         .mobile-nav-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--text-primary);
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-primary);
+        }
+
+        @media (max-width: 1024px) {
+            nav a {
+                font-size: 0.55rem;
+                padding: 0.5rem 0.6rem;
+            }
+
+            .nav-brand-sub {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
+            header {
+                padding: 0 1.5rem;
+            }
+
             .mobile-nav-btn {
                 display: block;
             }
@@ -183,28 +192,35 @@
                 top: 0;
                 right: 0;
                 bottom: 0;
-                left: 100%;
+                left: 0;
                 flex-direction: column;
-                background: rgba(10, 10, 10, 0.95);
-                backdrop-filter: blur(20px);
-                width: 60%;
-                max-width: 300px;
-                padding-top: 4rem;
-                transition: left 0.3s ease;
+                background: var(--bg);
+                width: 100%;
+                padding: 5rem 2rem 2rem;
+                gap: 0;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                align-items: flex-start;
             }
 
             nav ul.active {
-                left: 0;
+                transform: translateX(0);
             }
 
             nav ul li {
-                margin: 1rem 0;
+                border-left: none;
+                border-bottom: 1px solid var(--muted-border);
+                width: 100%;
+            }
+
+            nav ul li:first-child {
+                border-top: 1px solid var(--muted-border);
             }
 
             nav a {
-                font-size: 1rem;
+                font-size: 0.75rem;
+                padding: 1rem 0;
                 width: 100%;
-                text-align: center;
             }
         }
 
@@ -1610,24 +1626,26 @@
 <body>
     <header>
         <nav>
-            <a href="#" class="logo">
-                NovaWeb
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                    <path d="M2 2l20 8L2 18z"/>
-                </svg>
-            </a>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-            <button class="mobile-nav-btn" aria-label="Abrir menú">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="">
-                    <path d="M3 12l2.29 2.29M12 3l2.29 2.29M21 12l-2.29 2.29"/>
-                </svg>
-            </button>
+            <div class="nav-container">
+                <a href="#inicio" class="nav-brand">
+                    <span class="nav-brand-name">NOVA WEB</span>
+                    <span class="nav-brand-sub">DIGITAL EXPERIENCE STUDIO</span>
+                </a>
+                <ul>
+                    <li><a href="#interface">01 / INTERFACE</a></li>
+                    <li><a href="#nova-lab">02 / LAB</a></li>
+                    <li><a href="#servicios">03 / CAPABILITIES</a></li>
+                    <li><a href="#proceso">04 / PROCESS</a></li>
+                    <li><a href="#nosotros">05 / NOVAWEB</a></li>
+                    <li><a href="#work">06 / WORK</a></li>
+                    <li><a href="#contacto">07 / INITIALIZE</a></li>
+                </ul>
+                <button class="mobile-nav-btn" aria-label="Abrir menú">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 8h16M4 16h16"/>
+                    </svg>
+                </button>
+            </div>
         </nav>
     </header>
 
