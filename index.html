@@ -1051,51 +1051,196 @@
             }
         }
 
-        /* Contacto */
+        /* CONTACT */
         #contacto {
-            padding: 6rem 2rem;
+            padding: 8rem 2rem 6rem;
             max-width: 1200px;
             margin: 0 auto;
-            text-align: center;
         }
 
-        .contacto-cta {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 4px;
+        .contact-header {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 4rem;
+        }
+
+        .contact-eyebrow {
+            font-size: 0.65rem;
             font-weight: 600;
-            font-size: 0.875rem;
-            text-decoration: none;
-            transition: var(--transition-smooth);
-            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            display: block;
         }
 
-        .contacto-cta:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: var(--shadow-md);
+        .contact-header-left h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--text-on-card);
+            margin-bottom: 0;
         }
 
-        .contacto-cta:focus-visible {
-            outline: 2px solid white;
-            outline-offset: 2px;
+        .contact-header-left h2 span {
+            display: block;
         }
 
-        .contacto-info {
-            margin-top: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .contact-header-right {
+            padding-top: 3.2rem;
         }
 
-        .contacto-detalle {
-            margin-bottom: 1.5rem;
+        .contact-header-right p {
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 420px;
+        }
+
+        .contact-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--muted-border);
+            margin-bottom: 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-col-header {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid var(--muted-border);
+            margin-bottom: 0;
+        }
+
+        .contact-type {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--muted-border);
+        }
+
+        .contact-type:last-child {
+            border-bottom: none;
+        }
+
+        .contact-type-name {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-on-card);
+            letter-spacing: -0.01em;
+        }
+
+        .contact-type-id {
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             color: var(--text-secondary);
         }
 
-        .contacto-detalle strong {
+        .contact-channel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--muted-border);
+        }
+
+        .contact-channel:last-child {
+            border-bottom: none;
+        }
+
+        .contact-channel-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .contact-channel-value {
+            font-size: 0.8rem;
+            font-weight: 500;
             color: var(--text-on-card);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .contact-channel-value:hover {
+            color: var(--accent);
+        }
+
+        .contact-channel-action {
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: opacity 0.2s ease;
+        }
+
+        .contact-channel-action:hover {
+            opacity: 0.7;
+        }
+
+        .contact-status {
+            margin-top: 2rem;
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        @media (max-width: 768px) {
+            #contacto {
+                padding: 5rem 1.5rem 4rem;
+            }
+
+            .contact-header {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-header-left h2 {
+                font-size: clamp(2rem, 7vw, 3rem);
+            }
+
+            .contact-header-right {
+                padding-top: 0;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
         }
 
         /* Footer */
@@ -1805,17 +1950,54 @@
         </section>
 
         <section id="contacto">
-            <div class="contacto-cta" href="https://wa.me/573004593517?text=Hola%2C%20vi%20la%20página%20de%20NovaWeb%20y%20me%20gustaría%20recibir%20información%20sobre%20sus%20servicios%20de%20desarrollo%20web." target="_blank" rel="noopener noreferrer">
-                Hablar con NovaWeb
-            </div>
-            <div class="contacto-info">
-                <div class="contacto-detalle">
-                    <strong>Correo electrónico</strong>
-                    <span>hola@novaweb.com</span>
+            <div class="contact-header">
+                <div class="contact-header-left">
+                    <div class="contact-eyebrow">07 / INITIALIZE</div>
+                    <h2>
+                        <span>LET'S BUILD</span>
+                        <span>THE NEXT</span>
+                        <span>INTERFACE.</span>
+                    </h2>
                 </div>
-                <div class="contacto-detalle">
-                    <strong>Teléfono</strong>
-                    <span>+57 300 459 3517</span>
+                <div class="contact-header-right">
+                    <p>Have a project, an idea or a digital problem worth solving? Let's turn it into a system people want to use.</p>
+                </div>
+            </div>
+            <div class="contact-divider"></div>
+            <div class="contact-grid">
+                <div class="contact-col-left">
+                    <div class="contact-col-header">PROJECT TYPE</div>
+                    <div class="contact-type">
+                        <span class="contact-type-name">WEB EXPERIENCE</span>
+                        <span class="contact-type-id">TYPE 01</span>
+                    </div>
+                    <div class="contact-type">
+                        <span class="contact-type-name">E-COMMERCE</span>
+                        <span class="contact-type-id">TYPE 02</span>
+                    </div>
+                    <div class="contact-type">
+                        <span class="contact-type-name">AI & AUTOMATION</span>
+                        <span class="contact-type-id">TYPE 03</span>
+                    </div>
+                    <div class="contact-type">
+                        <span class="contact-type-name">OTHER</span>
+                        <span class="contact-type-id">TYPE 04</span>
+                    </div>
+                </div>
+                <div class="contact-col-right">
+                    <div class="contact-col-header">START A CONVERSATION</div>
+                    <div class="contact-channel">
+                        <span class="contact-channel-label">EMAIL</span>
+                        <a href="mailto:hola@novaweb.com" class="contact-channel-value">hola@novaweb.com</a>
+                    </div>
+                    <div class="contact-channel">
+                        <span class="contact-channel-label">WHATSAPP</span>
+                        <a href="https://wa.me/573004593517?text=Hola%2C%20vi%20la%20página%20de%20NovaWeb%20y%20me%20gustaría%20recibir%20información%20sobre%20sus%20servicios%20de%20desarrollo%20web." target="_blank" rel="noopener noreferrer" class="contact-channel-action">START CHAT →</a>
+                    </div>
+                    <div class="contact-status">
+                        <span class="contact-status-dot"></span>
+                        RESPONSE STATUS — AVAILABLE
+                    </div>
                 </div>
             </div>
         </section>
