@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -23,15 +23,11 @@
         }
 
         html {
-            scroll-behavior: smooth;
             scroll-padding-top: 80px;
             overflow-x: hidden;
         }
 
         @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
@@ -275,8 +271,8 @@
                 padding: 5rem 1.5rem 1rem;
             }
 
-            .interface-section h1 {
-                font-size: clamp(2.5rem, 8vw, 3.5rem);
+            .interface-section h2 {
+                font-size: clamp(2rem, 8vw, 3rem);
             }
 
             .interface-scroll-area {
@@ -294,6 +290,11 @@
                 min-height: auto;
                 padding: 3rem 0;
                 border-top: 1px solid var(--muted-border);
+                display: none;
+            }
+
+            .interface-module-block.active {
+                display: flex;
             }
 
             .interface-module-visual {
@@ -518,12 +519,12 @@
         }
 
         .cap-header h2 {
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 900;
-            line-height: 1.0;
-            letter-spacing: -0.03em;
-            color: var(--text-primary);
-        }
+                    font-size: clamp(2.5rem, 5vw, 4rem);
+                    font-weight: 900;
+                    line-height: 1.0;
+                    letter-spacing: -0.03em;
+                    color: var(--text-primary);
+                }
 
         .cap-header-desc {
             font-size: clamp(0.95rem, 1.5vw, 1.1rem);
@@ -745,7 +746,7 @@
             }
 
             .cap-header h2 {
-                font-size: clamp(2.5rem, 8vw, 3.5rem);
+                font-size: clamp(2rem, 8vw, 3rem);
             }
 
             .cap-arch-label {
@@ -964,13 +965,13 @@
         }
 
         .work-header-left h2 {
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 900;
-            line-height: 1.0;
-            letter-spacing: -0.03em;
-            color: var(--text-on-card);
-            margin-bottom: 0;
-        }
+                    font-size: clamp(2.5rem, 5vw, 3.5rem);
+                    font-weight: 900;
+                    line-height: 1.0;
+                    letter-spacing: -0.03em;
+                    color: var(--text-on-card);
+                    margin-bottom: 0;
+                }
 
         .work-header-right {
             padding-top: 3.2rem;
@@ -1092,7 +1093,7 @@
             }
 
             .work-header-left h2 {
-                font-size: clamp(2.5rem, 8vw, 3.5rem);
+                font-size: clamp(2rem, 8vw, 3rem);
             }
 
             .work-header-right {
@@ -1137,13 +1138,13 @@
         }
 
         .contact-header-left h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
-            color: var(--text-on-card);
-            margin-bottom: 0;
-        }
+                    font-size: clamp(2.2rem, 4vw, 3.2rem);
+                    font-weight: 900;
+                    line-height: 1.05;
+                    letter-spacing: -0.03em;
+                    color: var(--text-on-card);
+                    margin-bottom: 0;
+                }
 
         .contact-header-left h2 span {
             display: block;
@@ -1290,7 +1291,7 @@
             }
 
             .contact-header-left h2 {
-                font-size: clamp(2rem, 7vw, 3rem);
+                font-size: clamp(1.8rem, 7vw, 2.5rem);
             }
 
             .contact-header-right {
@@ -1330,21 +1331,22 @@
             display: block;
         }
 
-        .interface-section h1 {
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 900;
-            line-height: 1.0;
-            letter-spacing: -0.03em;
-            color: var(--text-on-card);
-            margin-bottom: 1.5rem;
-        }
+        .interface-section h2 {
+                    font-size: clamp(2.5rem, 5vw, 3.5rem);
+                    font-weight: 900;
+                    line-height: 1.0;
+                    letter-spacing: -0.03em;
+                    color: var(--text-on-card);
+                    margin-bottom: 1.5rem;
+                }
 
         .interface-section p {
-            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-            color: var(--text-secondary);
-            line-height: 1.7;
-            max-width: 420px;
-        }
+                    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+                    color: var(--text-secondary);
+                    line-height: 1.7;
+                    max-width: 420px;
+                    margin-top: 1rem;
+                }
 
         /* Scroll area: pin left, scroll right */
         .interface-scroll-area {
@@ -1430,6 +1432,17 @@
             padding: 1rem 1.5rem;
             border-bottom: 1px solid var(--muted-border);
             transition: background 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .interface-module-row:hover {
+            background: rgba(37, 99, 235, 0.04);
+        }
+
+        .interface-module-row:focus-visible {
+            outline: 1px solid var(--accent);
+            outline-offset: -1px;
         }
 
         .interface-module-row:last-child {
@@ -1497,13 +1510,51 @@
         }
 
         .interface-module-block-status {
-            font-size: 0.6rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            margin-bottom: 2.5rem;
-        }
+                    font-size: 0.6rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: var(--accent);
+                    margin-bottom: 2.5rem;
+                }
+
+        .interface-module-header {
+                    margin-bottom: 0;
+                }
+
+        .interface-module-desc {
+                    margin-bottom: 2rem;
+                }
+
+        .interface-module-desc p {
+                    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+                    color: var(--text-secondary);
+                    line-height: 1.7;
+                    max-width: 440px;
+                    margin-bottom: 1.25rem;
+                }
+
+        .interface-module-capabilities {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                }
+
+        .interface-cap-item {
+                    font-size: 0.6rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.08em;
+                    color: var(--text-secondary);
+                    padding: 0.4rem 0.75rem;
+                    border: 1px solid var(--muted-border);
+                    transition: color 0.2s ease, border-color 0.2s ease;
+                }
+
+        .interface-module-block.active .interface-cap-item {
+                    color: var(--text-primary);
+                    border-color: rgba(37, 99, 235, 0.3);
+                }
 
         .interface-module-visual {
             width: 100%;
@@ -1656,9 +1707,6 @@
         gap: 3rem;
     }
 
-    .interface-left h1 {
-        font-size: clamp(2.5rem, 8vw, 3.5rem);
-    }
 }
 
         /* NOVA LAB */
@@ -1678,26 +1726,6 @@
             border-bottom: 1px solid var(--muted-border);
             margin-bottom: 3rem;
             display: block;
-        }
-
-        .lab-header {
-            margin-bottom: 5rem;
-        }
-
-        .lab-header h2 {
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            font-weight: 900;
-            line-height: 1.0;
-            letter-spacing: -0.03em;
-            color: var(--text-primary);
-        }
-
-        .lab-header p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--text-secondary);
-            margin-top: 2rem;
-            max-width: 500px;
-            line-height: 1.7;
         }
 
         .lab-experiment {
@@ -1908,13 +1936,260 @@
             opacity: 0.6;
         }
 
+        /* Step Configuration */
+        .lab-step {
+            border: 1px solid var(--muted-border);
+            padding: 1.5rem;
+        }
+
+        .lab-step-question {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .lab-step-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .lab-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border: none;
+            border-top: 1px solid var(--muted-border);
+            background: none;
+            cursor: pointer;
+            outline: none;
+            text-align: left;
+            width: 100%;
+            font-family: inherit;
+            color: var(--text-secondary);
+            transition: color 0.2s ease;
+        }
+
+        .lab-option:first-child {
+            border-top: none;
+        }
+
+        .lab-option:hover,
+        .lab-option:focus-visible {
+            color: var(--text-primary);
+        }
+
+        .lab-option.selected {
+            color: var(--accent);
+        }
+
+        .lab-option-num {
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            min-width: 24px;
+        }
+
+        .lab-option-name {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            flex: 1;
+        }
+
+        .lab-option-arrow {
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .lab-option:hover .lab-option-arrow,
+        .lab-option:focus-visible .lab-option-arrow {
+            opacity: 1;
+        }
+
+        .lab-option.selected .lab-option-arrow {
+            opacity: 1;
+        }
+
+        .lab-option-desc {
+            font-size: 0.6rem;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0.02em;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            max-width: 420px;
+        }
+
+        .lab-option.selected .lab-option-desc {
+            color: var(--text-secondary);
+        }
+
+        .lab-option-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        /* Summary */
+        .lab-summary {
+            border: 1px solid var(--muted-border);
+            padding: 1.5rem;
+        }
+
+        .lab-summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--muted-border);
+        }
+
+        .lab-summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .lab-summary-label {
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .lab-summary-value {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-primary);
+        }
+
+        .lab-summary-value.accent {
+            color: var(--accent);
+        }
+
+        .lab-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--muted-border);
+            margin: 1.5rem 0;
+        }
+
+        .lab-arch-label {
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .lab-arch-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .lab-arch-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(55, 55, 55, 0.4);
+        }
+
+        .lab-arch-item:last-child {
+            border-bottom: none;
+        }
+
+        .lab-arch-item-name {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .lab-arch-item-desc {
+            font-size: 0.55rem;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0.02em;
+            color: var(--text-secondary);
+        }
+
+        .lab-summary-explanation {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--muted-border);
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 420px;
+        }
+
+        .lab-cta {
+            display: inline-block;
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+            padding: 0;
+            outline: none;
+        }
+
+        .lab-cta:hover {
+            opacity: 0.7;
+        }
+
+        .lab-cta:focus-visible {
+            outline: 1px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        .lab-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+            padding: 0;
+            outline: none;
+            transition: color 0.2s ease;
+        }
+
+        .lab-back:hover,
+        .lab-back:focus-visible {
+            color: var(--text-primary);
+        }
+
         @media (max-width: 768px) {
             #nova-lab {
                 padding: 5rem 1.5rem;
-            }
-
-            .lab-header h2 {
-                font-size: clamp(2.5rem, 10vw, 4rem);
             }
 
             .lab-object-container {
@@ -2126,9 +2401,9 @@
 
         <section id="interface">
             <div class="interface-section">
-                <div class="interface-eyebrow">01 / THE INTERFACE</div>
-                <h1>DIGITAL EXPERIENCES ARE NOT DECORATION.</h1>
-                <p>The way people experience a business digitally is part of the business itself.</p>
+                <div class="interface-eyebrow">01 / INTERFACE</div>
+                <h2>EXPERIENCIA DIGITAL.</h2>
+                <p>La forma en que las personas interactúan con tu negocio define tu negocio.</p>
             </div>
 
             <div class="interface-scroll-area">
@@ -2151,27 +2426,38 @@
                             <span class="attribute-value" id="iface-module-num">01 / 03</span>
                         </div>
                     </div>
-                    <div class="interface-modules-list">
-                        <div class="interface-module-row active" id="iface-mod1">
-                            <span class="interface-module-label">STRUCTURE</span>
+                    <div class="interface-modules-list" role="tablist" aria-label="Dimensiones de diseño">
+                        <div class="interface-module-row active" id="iface-mod1" role="tab" tabindex="0" aria-selected="true" aria-controls="iface-module-1" data-module="0">
+                            <span class="interface-module-label">01 / ESTRUCTURA</span>
                             <span class="interface-module-status">LOADED</span>
                         </div>
-                        <div class="interface-module-row" id="iface-mod2">
-                            <span class="interface-module-label">INTERACTION</span>
+                        <div class="interface-module-row" id="iface-mod2" role="tab" tabindex="-1" aria-selected="false" aria-controls="iface-module-2" data-module="1">
+                            <span class="interface-module-label">02 / INTERACCIÓN</span>
                             <span class="interface-module-status">PENDING</span>
                         </div>
-                        <div class="interface-module-row" id="iface-mod3">
-                            <span class="interface-module-label">PERFORMANCE</span>
+                        <div class="interface-module-row" id="iface-mod3" role="tab" tabindex="-1" aria-selected="false" aria-controls="iface-module-3" data-module="2">
+                            <span class="interface-module-label">03 / RENDIMIENTO</span>
                             <span class="interface-module-status">PENDING</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="interface-modules-scroll">
-                    <div class="interface-module-block" id="iface-module-1">
-                        <div class="interface-module-block-label">MODULE 01 / 03</div>
-                        <div class="interface-module-block-name">STRUCTURE</div>
-                        <div class="interface-module-block-status">STATUS — LOADED</div>
+                <div class="interface-modules-scroll" role="tabpanel" aria-label="Contenido del módulo">
+                    <div class="interface-module-block active" id="iface-module-1" data-module="0">
+                        <div class="interface-module-header">
+                            <div class="interface-module-block-label">MODULE 01 / 03</div>
+                            <div class="interface-module-block-name">ESTRUCTURA</div>
+                            <div class="interface-module-block-status">STATUS — LOADED</div>
+                        </div>
+                        <div class="interface-module-desc">
+                            <p>Cómo organizamos la información y el recorrido para que todo sea fácil de encontrar y navegar.</p>
+                            <div class="interface-module-capabilities">
+                                <span class="interface-cap-item">Arquitectura de información</span>
+                                <span class="interface-cap-item">Jerarquía de contenido</span>
+                                <span class="interface-cap-item">Navegación clara</span>
+                                <span class="interface-cap-item">Flujo de usuario</span>
+                            </div>
+                        </div>
                         <div class="interface-module-visual vis-structure">
                             <div class="vis-struct-line" style="top:20%"></div>
                             <div class="vis-struct-line" style="top:40%"></div>
@@ -2189,10 +2475,21 @@
                         </div>
                     </div>
 
-                    <div class="interface-module-block" id="iface-module-2">
-                        <div class="interface-module-block-label">MODULE 02 / 03</div>
-                        <div class="interface-module-block-name">INTERACTION</div>
-                        <div class="interface-module-block-status">STATUS — ACTIVE</div>
+                    <div class="interface-module-block" id="iface-module-2" data-module="1">
+                        <div class="interface-module-header">
+                            <div class="interface-module-block-label">MODULE 02 / 03</div>
+                            <div class="interface-module-block-name">INTERACCIÓN</div>
+                            <div class="interface-module-block-status">STATUS — PENDING</div>
+                        </div>
+                        <div class="interface-module-desc">
+                            <p>Cómo hacemos que la experiencia responda, guíe y conecte con el usuario en cada momento.</p>
+                            <div class="interface-module-capabilities">
+                                <span class="interface-cap-item">Microinteracciones</span>
+                                <span class="interface-cap-item">Estados visuales</span>
+                                <span class="interface-cap-item">Feedback inmediato</span>
+                                <span class="interface-cap-item">Conversión guiada</span>
+                            </div>
+                        </div>
                         <div class="interface-module-visual vis-interaction">
                             <div class="vis-int-node" style="top:25%;left:20%" data-id="a"></div>
                             <div class="vis-int-node" style="top:25%;left:80%" data-id="b"></div>
@@ -2211,10 +2508,21 @@
                         </div>
                     </div>
 
-                    <div class="interface-module-block" id="iface-module-3">
-                        <div class="interface-module-block-label">MODULE 03 / 03</div>
-                        <div class="interface-module-block-name">PERFORMANCE</div>
-                        <div class="interface-module-block-status">STATUS — OPTIMIZED</div>
+                    <div class="interface-module-block" id="iface-module-3" data-module="2">
+                        <div class="interface-module-header">
+                            <div class="interface-module-block-label">MODULE 03 / 03</div>
+                            <div class="interface-module-block-name">RENDIMIENTO</div>
+                            <div class="interface-module-block-status">STATUS — PENDING</div>
+                        </div>
+                        <div class="interface-module-desc">
+                            <p>Cómo hacemos que todo funcione rápido, se adapte a cualquier dispositivo y sea estable.</p>
+                            <div class="interface-module-capabilities">
+                                <span class="interface-cap-item">Velocidad de carga</span>
+                                <span class="interface-cap-item">Diseño responsive</span>
+                                <span class="interface-cap-item">Optimización continua</span>
+                                <span class="interface-cap-item">Estabilidad del sistema</span>
+                            </div>
+                        </div>
                         <div class="interface-module-visual vis-performance">
                             <div class="vis-perf-row">
                                 <span class="vis-perf-label">RESPONSE</span>
@@ -2241,60 +2549,25 @@
             <div class="lab-section">
                 <div class="lab-eyebrow">02 / NOVA LAB</div>
 
-                <div class="lab-header">
-                    <h2>EXPERIMENTS</h2>
-                    <h2>BUILT TO BE</h2>
-                    <h2>EXPERIENCED.</h2>
-                    <p>We build digital experiences that are meant to be explored, not simply viewed.</p>
-                </div>
-
                 <div class="lab-experiment">
                     <div class="lab-experiment-header">
-                        <span class="lab-experiment-number">EXPERIMENT 01</span>
-                        <span class="lab-experiment-state" id="lab-state">READY</span>
+                        <span class="lab-experiment-number">CONFIGURATION</span>
+                        <span class="lab-experiment-state" id="lab-state">STEP 01</span>
                     </div>
-
-                    <h2>INTERACTIVE COMMERCE</h2>
 
                     <div class="lab-object-container">
                         <div class="lab-status">
                             <span class="lab-status-label">SYSTEM</span>
                             <span class="lab-status-sep">/</span>
-                            <span class="lab-status-value" id="lab-status-value">READY</span>
+                            <span class="lab-status-value" id="lab-status-value">CONFIGURING</span>
                         </div>
 
-                        <div class="lab-object" id="lab-object" tabindex="0" role="button" aria-label="Interactive system object. Press Enter to activate.">
-                            <div class="lab-object-indicator" id="lab-indicator"></div>
-                            <div class="lab-object-main">
-                                <div class="lab-object-header">
-                                    <span class="lab-object-label">NOVA / OBJECT 01</span>
-                                    <span class="lab-object-id" id="lab-object-id">SYS:000</span>
-                                </div>
-                                <div class="lab-object-visual">
-                                    <div class="lab-visual-core" id="lab-core"></div>
-                                    <div class="lab-visual-line lab-visual-line-left" id="lab-line-l"></div>
-                                    <div class="lab-visual-line lab-visual-line-right" id="lab-line-r"></div>
-                                    <div class="lab-visual-line lab-visual-line-top" id="lab-line-t"></div>
-                                    <div class="lab-visual-line lab-visual-line-bottom" id="lab-line-b"></div>
-                                </div>
-                                <div class="lab-object-data">
-                                    <div class="lab-data-item">
-                                        <span class="lab-data-label">SIZE</span>
-                                        <span class="lab-data-value" id="lab-data-size">01 / 03</span>
-                                    </div>
-                                    <div class="lab-data-item">
-                                        <span class="lab-data-label">COLOR</span>
-                                        <span class="lab-data-value" id="lab-data-color">NOVA</span>
-                                    </div>
-                                    <div class="lab-data-item">
-                                        <span class="lab-data-label">STATUS</span>
-                                        <span class="lab-data-value" id="lab-data-status">STANDBY</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="lab-step" id="lab-step">
+                            <div class="lab-step-question" id="lab-step-question"></div>
+                            <div class="lab-step-options" id="lab-step-options"></div>
                         </div>
 
-                        <div class="lab-hint" id="lab-hint"><span>INTERACT WITH THE OBJECT TO INITIALIZE</span></div>
+                        <div class="lab-hint" id="lab-hint"><span></span></div>
                     </div>
                 </div>
             </div>
@@ -2303,8 +2576,8 @@
         <section id="servicios">
             <div class="cap-header">
                 <div class="cap-eyebrow">03 / CAPABILITIES</div>
-                <h2>WHAT WE BUILD.</h2>
-                <p class="cap-header-desc">NovaWeb constructs digital experiences, e-commerce systems, and automation architectures — designed as integrated products, not isolated pages.</p>
+                <h2>QUÉ CONSTRUIMOS.</h2>
+                <p class="cap-header-desc">NovaWeb diseña experiencias digitales, sistemas de comercio electrónico y arquitecturas de automatización — construidos como productos integrados, no como páginas aisladas.</p>
             </div>
 
             <div class="cap-arch-label">
@@ -2457,10 +2730,10 @@
             <div class="work-header">
                 <div class="work-header-left">
                     <div class="work-eyebrow">04 / PROVE</div>
-                    <h2>SELECTED<br>SYSTEMS.</h2>
+                    <h2>SISTEMAS<br>SELECCIONADOS.</h2>
                 </div>
                 <div class="work-header-right">
-                    <p>Interfaces, systems and experiments built around real digital problems.</p>
+                    <p>Interfaces, sistemas y experimentos construidos a partir de problemas digitales reales.</p>
                 </div>
             </div>
             <div class="work-divider"></div>
@@ -2468,29 +2741,29 @@
                 <div class="work-row">
                     <span class="work-number">01</span>
                     <div class="work-info">
-                        <span class="work-title">INTERACTIVE COMMERCE</span>
+                        <span class="work-title">COMERCIO INTERACTIVO</span>
                         <span class="work-meta">CONCEPT / UI / E-COMMERCE</span>
-                        <p class="work-desc">An interface experiment focused on product discovery, interaction and digital commerce.</p>
+                        <p class="work-desc">Un experimento de interfaz enfocado en descubrir productos, interactuar y convertir en el entorno digital.</p>
                     </div>
-                    <span class="work-action">VIEW SYSTEM <span class="work-action-arrow">→</span></span>
+                    <span class="work-action">VER SISTEMA <span class="work-action-arrow">&rarr;</span></span>
                 </div>
                 <div class="work-row">
                     <span class="work-number">02</span>
                     <div class="work-info">
-                        <span class="work-title">AI WORKFLOW</span>
+                        <span class="work-title">FLUJO DE TRABAJO CON IA</span>
                         <span class="work-meta">CONCEPT / AI / AUTOMATION</span>
-                        <p class="work-desc">A digital workflow concept designed to connect intelligent automation with everyday business operations.</p>
+                        <p class="work-desc">Un concepto de flujo digital diseñado para conectar la automatización inteligente con las operaciones diarias del negocio.</p>
                     </div>
-                    <span class="work-action">VIEW SYSTEM <span class="work-action-arrow">→</span></span>
+                    <span class="work-action">VER SISTEMA <span class="work-action-arrow">&rarr;</span></span>
                 </div>
                 <div class="work-row">
                     <span class="work-number">03</span>
                     <div class="work-info">
-                        <span class="work-title">DIGITAL PRESENCE</span>
+                        <span class="work-title">PRESENCIA DIGITAL</span>
                         <span class="work-meta">CONCEPT / WEB / EXPERIENCE</span>
-                        <p class="work-desc">A structured digital experience designed to turn a business presence into an interactive interface.</p>
+                        <p class="work-desc">Una experiencia digital estructurada para convertir la presencia de un negocio en una interfaz interactiva.</p>
                     </div>
-                    <span class="work-action">VIEW SYSTEM <span class="work-action-arrow">→</span></span>
+                    <span class="work-action">VER SISTEMA <span class="work-action-arrow">&rarr;</span></span>
                 </div>
             </div>
         </section>
@@ -2500,19 +2773,19 @@
                 <div class="contact-header-left">
                     <div class="contact-eyebrow">05 / INITIALIZE</div>
                     <h2>
-                        <span>LET'S BUILD</span>
-                        <span>THE NEXT</span>
-                        <span>INTERFACE.</span>
+                        <span>CONSTRUYAMOS</span>
+                        <span>LA PRÓXIMA</span>
+                        <span>INTERFAZ.</span>
                     </h2>
                 </div>
                 <div class="contact-header-right">
-                    <p>Have a project, an idea or a digital problem worth solving? Let's turn it into a system people want to use.</p>
+                    <p>Tienes un proyecto, una idea o un problema digital que vale la pena resolver. Transformémoslo en un sistema que la gente quiera usar.</p>
                 </div>
             </div>
             <div class="contact-divider"></div>
             <div class="contact-grid">
                 <div class="contact-col-left">
-                    <div class="contact-col-header">PROJECT TYPE</div>
+                    <div class="contact-col-header">TIPO DE PROYECTO</div>
                     <div class="contact-type">
                         <span class="contact-type-name">WEB EXPERIENCE</span>
                         <span class="contact-type-id">TYPE 01</span>
@@ -2526,23 +2799,23 @@
                         <span class="contact-type-id">TYPE 03</span>
                     </div>
                     <div class="contact-type">
-                        <span class="contact-type-name">OTHER</span>
+                        <span class="contact-type-name">OTRO</span>
                         <span class="contact-type-id">TYPE 04</span>
                     </div>
                 </div>
                 <div class="contact-col-right">
-                    <div class="contact-col-header">START A CONVERSATION</div>
+                    <div class="contact-col-header">INICIAR UNA CONVERSACIÓN</div>
                     <div class="contact-channel">
                         <span class="contact-channel-label">EMAIL</span>
                         <a href="mailto:hola@novaweb.com" class="contact-channel-value">hola@novaweb.com</a>
                     </div>
                     <div class="contact-channel">
                         <span class="contact-channel-label">WHATSAPP</span>
-                        <a href="https://wa.me/573004593517?text=Hola%2C%20vi%20la%20página%20de%20NovaWeb%20y%20me%20gustaría%20recibir%20información%20sobre%20sus%20servicios%20de%20desarrollo%20web." target="_blank" rel="noopener noreferrer" class="contact-channel-action">START CHAT →</a>
+                        <a href="https://wa.me/573004593517?text=Hola%2C%20vi%20la%20página%20de%20NovaWeb%20y%20me%20gustaría%20recibir%20información%20sobre%20sus%20servicios%20de%20desarrollo%20web." target="_blank" rel="noopener noreferrer" class="contact-channel-action">INICIAR CHAT →</a>
                     </div>
                     <div class="contact-status">
                         <span class="contact-status-dot"></span>
-                        RESPONSE STATUS — AVAILABLE
+                        ESTADO DE RESPUESTA — DISPONIBLE
                     </div>
                 </div>
             </div>
@@ -2577,74 +2850,54 @@
         const sectionIds = ['interface','nova-lab','servicios','work','contacto'];
         const navLinks = sectionIds.map(id => document.querySelector(`a[href="#${id}"]`));
         let activeId = null;
-        let clickedSection = null;
-        let rafId = null;
-        let stableFrames = 0;
-        const STABLE_REQUIRED = 3;
-        const ZONE_TOP = 40;
-        const ZONE_BOTTOM = 150;
 
-        // Click handler: immediate active state + RAF-based scroll completion
-        navLinks.forEach((link, i) => {
-            if (!link) return;
-            link.addEventListener('click', () => {
-                if (rafId) cancelAnimationFrame(rafId);
-                clickedSection = sectionIds[i];
-                navLinks.forEach(l => l && l.classList.remove('active'));
-                link.classList.add('active');
-                activeId = clickedSection;
-                stableFrames = 0;
-                const target = document.getElementById(clickedSection);
-                if (!target) return;
+        function updateActiveSection() {
+            const headerH = 80;
+            let bestId = null;
+            let bestDist = Infinity;
 
-                const top0 = target.getBoundingClientRect().top;
-                if (top0 >= ZONE_TOP && top0 <= ZONE_BOTTOM) {
-                    clickedSection = null;
-                    return;
+            for (var i = 0; i < sectionIds.length; i++) {
+                var el = document.getElementById(sectionIds[i]);
+                if (!el) continue;
+                var rect = el.getBoundingClientRect();
+                var dist = Math.abs(rect.top - headerH);
+                if (dist < bestDist) {
+                    bestDist = dist;
+                    bestId = sectionIds[i];
                 }
-                const poll = () => {
-                    if (!clickedSection) return;
-                    const top = target.getBoundingClientRect().top;
-                    if (top >= ZONE_TOP && top <= ZONE_BOTTOM) {
-                        stableFrames++;
-                    } else {
-                        stableFrames = 0;
-                    }
-                    if (stableFrames >= STABLE_REQUIRED) {
-                        stableFrames = 0;
-                        clickedSection = null;
-                        rafId = null;
-                        return;
-                    }
-                    rafId = requestAnimationFrame(poll);
-                };
-                rafId = requestAnimationFrame(poll);
-            });
-        });
-
-        const observer = new IntersectionObserver(entries => {
-            if (clickedSection) return;
-            let best = null;
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    const top = e.target.getBoundingClientRect().top;
-                    if (top >= 0 && (!best || top < best.top)) {
-                        best = { el: e.target, top };
-                    }
-                }
-            });
-            if (best && best.el.id !== activeId) {
-                navLinks.forEach(l => l && l.classList.remove('active'));
-                const link = document.querySelector(`a[href="#${best.el.id}"]`);
-                if (link) link.classList.add('active');
-                activeId = best.el.id;
             }
-        }, { rootMargin: '-64px 0px -55% 0px', threshold: 0 });
 
-        sectionIds.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) observer.observe(el);
+            if (bestId && bestId !== activeId) {
+                navLinks.forEach(function(l) { if (l) l.classList.remove('active'); });
+                var link = document.querySelector('a[href="#' + bestId + '"]');
+                if (link) link.classList.add('active');
+                activeId = bestId;
+            }
+        }
+
+        var scrollTicking = false;
+        window.addEventListener('scroll', function() {
+            if (!scrollTicking) {
+                requestAnimationFrame(function() {
+                    updateActiveSection();
+                    scrollTicking = false;
+                });
+                scrollTicking = true;
+            }
+        }, { passive: true });
+
+        // Click handler: immediate active state
+        navLinks.forEach(function(link, i) {
+            if (!link) return;
+            link.addEventListener('click', function() {
+                navLinks.forEach(function(l) { if (l) l.classList.remove('active'); });
+                link.classList.add('active');
+                activeId = sectionIds[i];
+            });
         });
+
+        // Initial state
+        updateActiveSection();
 
         // GSAP base
         if (typeof gsap !== 'undefined') {
@@ -2676,11 +2929,11 @@
                 const statusValue = document.querySelector('.hero-system-value.status-online');
 
                 if (heroSection && heroLeft && heroVisual) {
-                    // Text yields first: fades 15%-85% of hero scroll
+                    // Hero left: text fades and shifts as section scrolls out
                     gsap.to(heroLeft, {
                         y: -30,
                         opacity: 0,
-                        ease: 'power2.in',
+                        ease: 'none',
                         scrollTrigger: {
                             trigger: heroSection,
                             start: '15% top',
@@ -2689,27 +2942,16 @@
                         }
                     });
 
-                    // System panel holds presence: scales 10%-60%, fades 30%-90%
+                    // Hero visual: single coordinated animation for opacity, y, and scale
                     gsap.to(heroVisual, {
                         y: -12,
                         opacity: 0.08,
+                        scale: 0.96,
                         ease: 'none',
                         scrollTrigger: {
                             trigger: heroSection,
-                            start: '30% top',
+                            start: '15% top',
                             end: 'bottom top',
-                            scrub: 0.5,
-                        }
-                    });
-
-                    // Panel scale-down: staggered, starts later
-                    gsap.to(heroVisual, {
-                        scale: 0.96,
-                        ease: 'power1.in',
-                        scrollTrigger: {
-                            trigger: heroSection,
-                            start: '10% top',
-                            end: '60% top',
                             scrub: 0.5,
                         }
                     });
@@ -2801,20 +3043,81 @@
             }
         }
 
-        // Interface modules scroll experience
-        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-            var ifaceReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            var isMobileIface = window.innerWidth <= 768;
+                // Interface modules interactive experience
+        (function() {
+            var modRows = document.querySelectorAll('.interface-module-row');
+            var modBlocks = document.querySelectorAll('.interface-module-block');
+            var moduleNum = document.getElementById('iface-module-num');
+            var headerStatus = document.getElementById('iface-header-status');
+            var activeModule = 0;
+            var isMobile = window.innerWidth <= 768;
+            var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var statusLabels = ['LOADED', 'ACTIVE', 'OPTIMIZED'];
 
-            if (!ifaceReducedMotion && !isMobileIface) {
+            function setActiveModule(idx) {
+                if (idx < 0 || idx >= modRows.length) return;
+                activeModule = idx;
+
+                modRows.forEach(function(row, i) {
+                    row.classList.toggle('active', i === idx);
+                    row.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+                    row.setAttribute('tabindex', i === idx ? '0' : '-1');
+                    row.querySelector('.interface-module-status').textContent = statusLabels[i];
+                });
+
+                modBlocks.forEach(function(block, i) {
+                    block.classList.toggle('active', i === idx);
+                    var blockStatus = block.querySelector('.interface-module-block-status');
+                    if (blockStatus) {
+                        blockStatus.textContent = 'STATUS \u2014 ' + statusLabels[i];
+                    }
+                });
+
+                if (moduleNum) moduleNum.textContent = '0' + (idx + 1) + ' / 03';
+                if (headerStatus) {
+                    if (idx === 2) {
+                        headerStatus.textContent = 'OPTIMIZED';
+                        headerStatus.style.color = 'var(--accent)';
+                    } else {
+                        headerStatus.textContent = 'ACTIVE';
+                        headerStatus.style.color = '';
+                    }
+                }
+
+                if (isMobile) {
+                    modBlocks.forEach(function(block, i) {
+                        block.style.display = i === idx ? 'flex' : 'none';
+                    });
+                }
+            }
+
+            modRows.forEach(function(row, i) {
+                row.addEventListener('click', function() {
+                    setActiveModule(i);
+                });
+
+                row.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setActiveModule(i);
+                    } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        var next = (i + 1) % modRows.length;
+                        setActiveModule(next);
+                        modRows[next].focus();
+                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        var prev = (i - 1 + modRows.length) % modRows.length;
+                        setActiveModule(prev);
+                        modRows[prev].focus();
+                    }
+                });
+            });
+
+            if (!reducedMotion && !isMobile && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
                 var mod1 = document.getElementById('iface-module-1');
                 var mod2 = document.getElementById('iface-module-2');
                 var mod3 = document.getElementById('iface-module-3');
-                var modRow1 = document.getElementById('iface-mod1');
-                var modRow2 = document.getElementById('iface-mod2');
-                var modRow3 = document.getElementById('iface-mod3');
-                var moduleNum = document.getElementById('iface-module-num');
-                var headerStatus = document.getElementById('iface-header-status');
                 var scrollArea = document.querySelector('.interface-scroll-area');
 
                 if (mod1 && mod2 && mod3 && scrollArea) {
@@ -2838,8 +3141,6 @@
                     gsap.set(intLines, { opacity: 0 });
                     gsap.set(perfRows, { opacity: 0, x: -10 });
 
-                    // TRANSITION 1: STRUCTURE → INTERACTION
-                    // Structure elements evolve: lines compress, dots shift to node positions
                     ScrollTrigger.create({
                         trigger: scrollArea,
                         start: 'top top',
@@ -2850,7 +3151,7 @@
                             var t = Math.max(0, Math.min(1, (p - 0.25) / 0.25));
                             var ease = t * t * (3 - 2 * t);
 
-                            structLines.forEach(function(line, i) {
+                            structLines.forEach(function(line) {
                                 var isVert = line.classList.contains('vert');
                                 gsap.set(line, {
                                     opacity: (1 - ease) * (isVert ? 0.4 : 0.6),
@@ -2860,7 +3161,7 @@
                                 });
                             });
 
-                            structDots.forEach(function(dot, i) {
+                            structDots.forEach(function(dot) {
                                 gsap.set(dot, {
                                     opacity: 0.7 * (1 - ease * 0.7),
                                     scale: 1 + ease * 0.5
@@ -2871,7 +3172,6 @@
                         }
                     });
 
-                    // Interaction emerges from structure
                     ScrollTrigger.create({
                         trigger: scrollArea,
                         start: '25% top',
@@ -2887,14 +3187,10 @@
                             intNodes.forEach(function(node, i) {
                                 var delay = i * 0.08;
                                 var nt = Math.max(0, Math.min(1, (ease - delay) / (1 - delay)));
-                                gsap.set(node, {
-                                    opacity: nt,
-                                    scale: nt,
-                                    transformOrigin: 'center center'
-                                });
+                                gsap.set(node, { opacity: nt, scale: nt, transformOrigin: 'center center' });
                             });
 
-                            intLines.forEach(function(line, i) {
+                            intLines.forEach(function(line) {
                                 var lt = Math.max(0, Math.min(1, (ease - 0.2) / 0.8));
                                 gsap.set(line, { opacity: lt * 0.35 });
                             });
@@ -2903,8 +3199,6 @@
                         }
                     });
 
-                    // TRANSITION 2: INTERACTION → PERFORMANCE
-                    // Interaction elements compress and realign into metrics
                     ScrollTrigger.create({
                         trigger: scrollArea,
                         start: '55% top',
@@ -2915,12 +3209,8 @@
                             var t = Math.max(0, Math.min(1, (p - 0.15) / 0.25));
                             var ease = t * t * (3 - 2 * t);
 
-                            intNodes.forEach(function(node, i) {
-                                gsap.set(node, {
-                                    opacity: 1 - ease,
-                                    scale: 1 - ease * 0.4,
-                                    transformOrigin: 'center center'
-                                });
+                            intNodes.forEach(function(node) {
+                                gsap.set(node, { opacity: 1 - ease, scale: 1 - ease * 0.4, transformOrigin: 'center center' });
                             });
 
                             intLines.forEach(function(line) {
@@ -2928,12 +3218,10 @@
                             });
 
                             if (intPulse) gsap.set(intPulse, { opacity: 1 - ease });
-
                             gsap.set(mod2, { opacity: 1 - ease });
                         }
                     });
 
-                    // Performance emerges from interaction
                     ScrollTrigger.create({
                         trigger: scrollArea,
                         start: '65% top',
@@ -2949,10 +3237,7 @@
                             perfRows.forEach(function(row, i) {
                                 var delay = i * 0.12;
                                 var rt = Math.max(0, Math.min(1, (ease - delay) / (1 - delay)));
-                                gsap.set(row, {
-                                    opacity: rt,
-                                    x: (1 - rt) * -10
-                                });
+                                gsap.set(row, { opacity: rt, x: (1 - rt) * -10 });
                             });
 
                             perfFills.forEach(function(fill, i) {
@@ -2965,7 +3250,6 @@
                         }
                     });
 
-                    // System panel: synchronized state updates
                     ScrollTrigger.create({
                         trigger: scrollArea,
                         start: 'top top',
@@ -2973,183 +3257,252 @@
                         onUpdate: function(self) {
                             var p = self.progress;
                             if (p < 0.3) {
-                                if (moduleNum) moduleNum.textContent = '01 / 03';
-                                if (headerStatus) { headerStatus.textContent = 'ACTIVE'; headerStatus.style.color = ''; }
-                                if (modRow1) modRow1.classList.add('active');
-                                if (modRow2) modRow2.classList.remove('active');
-                                if (modRow3) modRow3.classList.remove('active');
-                                if (modRow1) modRow1.querySelector('.interface-module-status').textContent = 'LOADED';
-                                if (modRow2) modRow2.querySelector('.interface-module-status').textContent = 'PENDING';
-                                if (modRow3) modRow3.querySelector('.interface-module-status').textContent = 'PENDING';
+                                setActiveModule(0);
                             } else if (p < 0.7) {
-                                if (moduleNum) moduleNum.textContent = '02 / 03';
-                                if (headerStatus) { headerStatus.textContent = 'ACTIVE'; headerStatus.style.color = ''; }
-                                if (modRow1) modRow1.classList.remove('active');
-                                if (modRow2) modRow2.classList.add('active');
-                                if (modRow3) modRow3.classList.remove('active');
-                                if (modRow1) modRow1.querySelector('.interface-module-status').textContent = 'LOADED';
-                                if (modRow2) modRow2.querySelector('.interface-module-status').textContent = 'ACTIVE';
-                                if (modRow3) modRow3.querySelector('.interface-module-status').textContent = 'PENDING';
+                                setActiveModule(1);
                             } else {
-                                if (moduleNum) moduleNum.textContent = '03 / 03';
-                                if (headerStatus) { headerStatus.textContent = 'OPTIMIZED'; headerStatus.style.color = 'var(--accent)'; }
-                                if (modRow1) modRow1.classList.remove('active');
-                                if (modRow2) modRow2.classList.remove('active');
-                                if (modRow3) modRow3.classList.add('active');
-                                if (modRow1) modRow1.querySelector('.interface-module-status').textContent = 'LOADED';
-                                if (modRow2) modRow2.querySelector('.interface-module-status').textContent = 'ACTIVE';
-                                if (modRow3) modRow3.querySelector('.interface-module-status').textContent = 'OPTIMIZED';
+                                setActiveModule(2);
                             }
                         }
                     });
                 }
             }
 
-            // Mobile: simple fade-in for each module
-            if (!ifaceReducedMotion && isMobileIface) {
-                document.querySelectorAll('.interface-module-block').forEach(function(block) {
-                    gsap.from(block, {
-                        opacity: 0,
-                        y: 30,
-                        duration: 0.6,
-                        ease: 'power2.out',
-                        scrollTrigger: {
-                            trigger: block,
-                            start: 'top 85%',
-                            toggleActions: 'play none none none'
+            if (isMobile) {
+                modBlocks.forEach(function(block, i) {
+                    block.style.display = i === 0 ? 'flex' : 'none';
+                });
+            }
+        })();
+
+
+        // NOVA LAB - Digital System Configuration
+        (function() {
+            var stateBadge = document.getElementById('lab-state');
+            var statusValue = document.getElementById('lab-status-value');
+            var stepQuestion = document.getElementById('lab-step-question');
+            var stepOptions = document.getElementById('lab-step-options');
+            var hint = document.getElementById('lab-hint');
+            var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            var currentStep = 1;
+            var selectedProject = null;
+            var selectedObjective = null;
+
+            var projects = [
+                { id: 'web', label: 'EXPERIENCIA WEB', desc: 'Una presencia digital para presentar, comunicar y convertir.' },
+                { id: 'ecommerce', label: 'E-COMMERCE', desc: 'Una experiencia digital centrada en productos, compra y conversi\u00f3n.' },
+                { id: 'ai', label: 'IA Y AUTOMATIZACI\u00d3N', desc: 'Sistemas para automatizar procesos y reducir trabajo manual.' }
+            ];
+
+            var objectives = [
+                { id: 'conversion', label: 'CONVERTIR', desc: 'Conseguir m\u00e1s acciones, contactos o ventas.' },
+                { id: 'brand', label: 'POSICIONAR', desc: 'Construir una identidad digital m\u00e1s s\u00f3lida.' },
+                { id: 'experience', label: 'MEJORAR LA EXPERIENCIA', desc: 'Hacer que el producto o servicio sea m\u00e1s claro y f\u00e1cil de usar.' },
+                { id: 'automation', label: 'AUTOMATIZAR', desc: 'Reducir tareas repetitivas mediante sistemas.' }
+            ];
+
+            var recommendations = {
+                'web-conversion': 'EXPERIENCIA WEB ORIENTADA A CONVERSI\u00d3N',
+                'web-brand': 'SISTEMA DE IDENTIDAD DIGITAL',
+                'web-experience': 'EXPERIENCIA WEB INTERACTIVA',
+                'web-automation': 'EXPERIENCIA WEB CON AUTOMATIZACI\u00d3N',
+                'ecommerce-conversion': 'SISTEMA DE COMERCIO ORIENTADO A CONVERSI\u00d3N',
+                'ecommerce-brand': 'EXPERIENCIA DE COMERCIO DE MARCA',
+                'ecommerce-experience': 'SISTEMA UX PARA COMERCIO',
+                'ecommerce-automation': 'COMERCIO CON AUTOMATIZACI\u00d3N',
+                'ai-conversion': 'EXPERIENCIA DIGITAL POTENCIADA POR IA',
+                'ai-brand': 'SISTEMA DIGITAL INTELIGENTE',
+                'ai-experience': 'EXPERIENCIA DIGITAL INTELIGENTE',
+                'ai-automation': 'SISTEMA DE AUTOMATIZACI\u00d3N'
+            };
+
+            var explanations = {
+                'web-conversion': 'Dise\u00f1amos la experiencia para que cada visita tenga un camino claro hacia la acci\u00f3n que te interesa.',
+                'web-brand': 'Construimos una presencia digital capaz de comunicar el valor de la marca con claridad.',
+                'web-experience': 'Creamos una interfaz que conecta con el usuario a trav\u00e9s de interacci\u00f3n y diseño.',
+                'web-automation': 'Integramos procesos digitales que trabajan por ti mientras te enfocas en el negocio.',
+                'ecommerce-conversion': 'Reducimos la fricci\u00f3n entre descubrir un producto y completar la compra.',
+                'ecommerce-brand': 'Tu tienda comunica los valores de la marca en cada paso de la experiencia.',
+                'ecommerce-experience': 'Optimizamos cada interacci\u00f3n para que encontrar y comprar sea r\u00e1pido e intuitivo.',
+                'ecommerce-automation': 'Automatizamos inventario, pedidos y comunicaciones para que escale sin esfuerzo.',
+                'ai-conversion': 'Usamos inteligencia artificial para guiar al usuario hacia la conversi\u00f3n de forma personalizada.',
+                'ai-brand': 'Un sistema que aprende y comunica tu marca de forma consistente en cada touchpoint.',
+                'ai-experience': 'Interfaces que se adaptan al usuario en tiempo real haciendo todo m\u00e1s simple.',
+                'ai-automation': 'Identificamos procesos repetitivos que pueden convertirse en flujos autom\u00e1ticos.'
+            };
+
+            var archItems = [
+                { name: 'ESTRATEGIA', desc: 'Definir qu\u00e9 necesita realmente el proyecto.' },
+                { name: 'ESTRUCTURA', desc: 'Organizar la informaci\u00f3n y los recorridos.' },
+                { name: 'EXPERIENCIA', desc: 'Dise\u00f1ar c\u00f3mo interact\u00faa el usuario.' },
+                { name: 'DESARROLLO', desc: 'Convertir la experiencia en un sistema funcional.' },
+                { name: 'OPTIMIZACI\u00d3N', desc: 'Medir, mejorar y eliminar fricci\u00f3n.' }
+            ];
+
+            function getLabel(arr, id) {
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i].id === id) return arr[i].label;
+                }
+                return '';
+            }
+
+            function renderStep1() {
+                currentStep = 1;
+                selectedProject = null;
+                selectedObjective = null;
+
+                stateBadge.textContent = 'STEP 01';
+                stateBadge.style.color = '';
+                stateBadge.style.borderColor = '';
+                statusValue.textContent = 'CONFIGURING';
+                statusValue.style.color = '';
+                stepQuestion.textContent = '\u00bfQU\u00c9 EST\u00c1S CONSTRUYENDO?';
+                hint.querySelector('span').textContent = 'Selecciona un tipo de proyecto para comenzar';
+
+                var html = '<div class="lab-step-options" id="lab-step-options" role="listbox" aria-label="Tipo de proyecto">';
+                for (var i = 0; i < projects.length; i++) {
+                    html += '<button class="lab-option" role="option" aria-selected="false" tabindex="0" data-id="' + projects[i].id + '">' +
+                        '<span class="lab-option-num">0' + (i + 1) + '</span>' +
+                        '<div class="lab-option-content">' +
+                        '<span class="lab-option-name">' + projects[i].label + '</span>' +
+                        '<span class="lab-option-desc">' + projects[i].desc + '</span>' +
+                        '</div>' +
+                        '<span class="lab-option-arrow">&rarr;</span></button>';
+                }
+                html += '</div>';
+
+                stepOptions.innerHTML = '';
+                var frag = document.createDocumentFragment();
+                var temp = document.createElement('div');
+                temp.innerHTML = html;
+                while (temp.firstChild) frag.appendChild(temp.firstChild);
+                stepOptions.parentNode.replaceChild(frag, stepOptions);
+                stepOptions = document.getElementById('lab-step-options');
+
+                var btns = stepOptions.querySelectorAll('.lab-option');
+                btns.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        selectedProject = btn.getAttribute('data-id');
+                        renderStep2();
+                    });
+                    btn.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            selectedProject = btn.getAttribute('data-id');
+                            renderStep2();
                         }
                     });
                 });
             }
-        }
 
-        // NOVA LAB - Interactive System Object
-        (function() {
-            var obj = document.getElementById('lab-object');
-            var stateBadge = document.getElementById('lab-state');
-            var statusValue = document.getElementById('lab-status-value');
-            var objectId = document.getElementById('lab-object-id');
-            var indicator = document.getElementById('lab-indicator');
-            var core = document.getElementById('lab-core');
-            var hint = document.getElementById('lab-hint');
-            var dataSize = document.getElementById('lab-data-size');
-            var dataColor = document.getElementById('lab-data-color');
-            var dataStatus = document.getElementById('lab-data-status');
-            var lineL = document.getElementById('lab-line-l');
-            var lineR = document.getElementById('lab-line-r');
-            var lineT = document.getElementById('lab-line-t');
-            var lineB = document.getElementById('lab-line-b');
+            function renderStep2() {
+                currentStep = 2;
 
-            var currentState = 'ready';
-            var isAnimating = false;
-            var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                stateBadge.textContent = 'STEP 02';
+                hint.querySelector('span').textContent = 'Define tu objetivo principal';
 
-            var stateMap = {
-                ready: {
-                    badge: 'READY', status: 'READY', id: 'SYS:000',
-                    statusColor: '', idColor: '', indicatorBg: 'var(--muted-border)',
-                    coreScale: 1, coreColor: 'var(--text-secondary)',
-                    lineW: '0%', lineH: '0%', lineOp: 0,
-                    objBorder: '', objScale: 1,
-                    hint: 'INTERACT WITH THE OBJECT TO INITIALIZE'
-                },
-                active: {
-                    badge: 'ACTIVE', status: 'ACTIVE', id: 'OBJ-01',
-                    statusColor: 'var(--accent)', idColor: 'var(--accent)', indicatorBg: 'var(--accent)',
-                    coreScale: 2, coreColor: 'var(--accent)',
-                    lineW: '30%', lineH: '0%', lineOp: 0.5,
-                    objBorder: 'var(--accent)', objScale: 1,
-                    hint: 'OBJECT RECOGNIZED — SELECT TO PROCEED'
-                },
-                selected: {
-                    badge: 'SELECTED', status: 'SELECTED', id: 'OBJ-01-A',
-                    statusColor: 'var(--accent)', idColor: 'var(--accent)', indicatorBg: 'var(--accent)',
-                    coreScale: 2.5, coreColor: 'var(--accent)',
-                    lineW: '45%', lineH: '25px', lineOp: 0.8,
-                    objBorder: 'var(--accent)', objScale: 1.015,
-                    hint: 'CONFIGURING SYSTEM PARAMETERS'
-                },
-                configured: {
-                    badge: 'CONFIGURED', status: 'CONFIGURED', id: 'OBJ-01-A-OK',
-                    statusColor: 'var(--text-primary)', idColor: 'var(--text-primary)',
-                    indicatorBg: 'var(--text-primary)',
-                    coreScale: 2, coreColor: 'var(--text-primary)',
-                    lineW: '50%', lineH: '35px', lineOp: 1,
-                    objBorder: 'var(--text-primary)', objScale: 1,
-                    hint: 'SYSTEM READY — CLICK TO RESET'
+                var html = '<button class="lab-back" id="lab-back-2" aria-label="Volver al paso anterior">&larr; PASO 01</button>';
+                html += '<div class="lab-step-question">\u00bfQU\u00c9 QUIERES CONSEGUIR?</div>';
+                html += '<div class="lab-step-options" id="lab-step-options" role="listbox" aria-label="Objetivo principal">';
+                for (var i = 0; i < objectives.length; i++) {
+                    html += '<button class="lab-option" role="option" aria-selected="false" tabindex="0" data-id="' + objectives[i].id + '">' +
+                        '<span class="lab-option-num">0' + (i + 1) + '</span>' +
+                        '<div class="lab-option-content">' +
+                        '<span class="lab-option-name">' + objectives[i].label + '</span>' +
+                        '<span class="lab-option-desc">' + objectives[i].desc + '</span>' +
+                        '</div>' +
+                        '<span class="lab-option-arrow">&rarr;</span></button>';
                 }
-            };
+                html += '</div>';
 
-            function applyState(s, animate) {
-                var c = stateMap[s];
-                var dur = 0.35;
+                stepOptions.innerHTML = '';
+                var frag = document.createDocumentFragment();
+                var temp = document.createElement('div');
+                temp.innerHTML = html;
+                while (temp.firstChild) frag.appendChild(temp.firstChild);
+                stepOptions.parentNode.replaceChild(frag, stepOptions);
+                stepOptions = document.getElementById('lab-step-options');
 
-                stateBadge.textContent = c.badge;
-                statusValue.textContent = c.status;
-                objectId.textContent = c.id;
-                hint.querySelector('span').textContent = c.hint;
+                var backBtn = stepOptions.querySelector('.lab-back');
+                backBtn.addEventListener('click', function() {
+                    renderStep1();
+                });
+                stepOptions.parentNode.insertBefore(backBtn, stepOptions);
 
-                stateBadge.style.color = c.statusColor;
-                stateBadge.style.borderColor = c.statusColor || '';
-                statusValue.style.color = c.statusColor;
-                objectId.style.color = c.idColor;
-                indicator.style.background = c.indicatorBg;
-
-                if (!animate || reducedMotion) {
-                    gsap.set(core, { scale: c.coreScale, borderColor: c.coreColor });
-                    gsap.set(lineL, { width: c.lineW, opacity: c.lineOp });
-                    gsap.set(lineR, { width: c.lineW, opacity: c.lineOp });
-                    gsap.set(lineT, { height: c.lineH, opacity: c.lineOp });
-                    gsap.set(lineB, { height: c.lineH, opacity: c.lineOp });
-                    gsap.set(obj, { scale: c.objScale, borderColor: c.objBorder || 'var(--muted-border)' });
-                    return;
-                }
-
-                gsap.to(core, { scale: c.coreScale, borderColor: c.coreColor, duration: dur, ease: 'power2.out' });
-                gsap.to(obj, { scale: c.objScale, borderColor: c.objBorder || 'var(--muted-border)', duration: dur, ease: 'power2.out' });
-                gsap.to(lineL, { width: c.lineW, opacity: c.lineOp, duration: dur, ease: 'power2.out' });
-                gsap.to(lineR, { width: c.lineW, opacity: c.lineOp, duration: dur, ease: 'power2.out', delay: 0.05 });
-                gsap.to(lineT, { height: c.lineH, opacity: c.lineOp, duration: dur, ease: 'power2.out', delay: 0.1 });
-                gsap.to(lineB, { height: c.lineH, opacity: c.lineOp, duration: dur, ease: 'power2.out', delay: 0.1 });
+                var btns = stepOptions.querySelectorAll('.lab-option');
+                btns.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        selectedObjective = btn.getAttribute('data-id');
+                        renderStep3();
+                    });
+                    btn.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            selectedObjective = btn.getAttribute('data-id');
+                            renderStep3();
+                        }
+                    });
+                });
             }
 
-            function advance() {
-                if (isAnimating) return;
-                var next;
-                switch (currentState) {
-                    case 'ready': next = 'active'; break;
-                    case 'active': next = 'selected'; break;
-                    case 'selected': next = 'configured'; break;
-                    case 'configured': next = 'ready'; break;
-                }
+            function renderStep3() {
+                currentStep = 3;
 
-                if (next === 'ready' && currentState === 'configured') {
-                    isAnimating = true;
-                    applyState('ready', true);
-                    setTimeout(function() { isAnimating = false; }, 600);
-                    currentState = 'ready';
-                    return;
-                }
+                var projectLabel = getLabel(projects, selectedProject);
+                var objectiveLabel = getLabel(objectives, selectedObjective);
+                var coreSystem = recommendations[selectedProject + '-' + selectedObjective] || 'SISTEMA PERSONALIZADO';
+                var explanation = explanations[selectedProject + '-' + selectedObjective] || '';
 
-                currentState = next;
-                isAnimating = true;
-                applyState(currentState, true);
-                setTimeout(function() { isAnimating = false; }, 600);
+                stateBadge.textContent = 'CONFIGURADO';
+                stateBadge.style.color = 'var(--accent)';
+                stateBadge.style.borderColor = 'var(--accent)';
+                statusValue.textContent = 'READY';
+                statusValue.style.color = 'var(--accent)';
+                hint.querySelector('span').textContent = 'Sistema configurado \u2014 inicia tu proyecto';
+
+                var html = '<button class="lab-back" id="lab-back-3" aria-label="Volver a la selecci\u00f3n de objetivo">&larr; PASO 02</button>';
+                html += '<div class="lab-summary">';
+                html += '<div class="lab-summary-row"><span class="lab-summary-label">PROYECTO</span><span class="lab-summary-value">' + projectLabel + '</span></div>';
+                html += '<div class="lab-summary-row"><span class="lab-summary-label">OBJETIVO PRINCIPAL</span><span class="lab-summary-value accent">' + objectiveLabel + '</span></div>';
+                html += '<div class="lab-summary-row"><span class="lab-summary-label">SOLUCI\u00d3N RECOMENDADA</span><span class="lab-summary-value accent">' + coreSystem + '</span></div>';
+                html += '<div class="lab-summary-explanation">' + explanation + '</div>';
+                html += '<div class="lab-divider"></div>';
+                html += '<div class="lab-arch-label">EL SISTEMA SE CENTRAR\u00cdA EN</div>';
+                html += '<div class="lab-arch-items">';
+                for (var i = 0; i < archItems.length; i++) {
+                    html += '<div class="lab-arch-item"><span class="lab-arch-item-name">0' + (i + 1) + ' / ' + archItems[i].name + '</span><span class="lab-arch-item-desc">' + archItems[i].desc + '</span></div>';
+                }
+                html += '</div>';
+                html += '<button class="lab-cta" id="lab-cta" aria-label="Iniciar este proyecto">INICIAR ESTE PROYECTO &rarr;</button>';
+                html += '</div>';
+
+                stepOptions.innerHTML = '';
+                var frag = document.createDocumentFragment();
+                var temp = document.createElement('div');
+                temp.innerHTML = html;
+                while (temp.firstChild) frag.appendChild(temp.firstChild);
+                stepOptions.parentNode.replaceChild(frag, stepOptions);
+                stepOptions = document.getElementById('lab-step-options');
+
+                var backBtn = stepOptions.querySelector('.lab-back');
+                backBtn.addEventListener('click', function() {
+                    renderStep2();
+                });
+                stepOptions.parentNode.insertBefore(backBtn, stepOptions);
+
+                var ctaBtn = document.getElementById('lab-cta');
+                if (ctaBtn) {
+                    ctaBtn.addEventListener('click', function() {
+                        var contactSection = document.getElementById('contacto');
+                        if (contactSection) {
+                            contactSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
+                }
             }
 
-            obj.addEventListener('click', function(e) {
-                e.stopPropagation();
-                advance();
-            });
-
-            obj.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    advance();
-                }
-            });
-
-            applyState('ready', false);
+            renderStep1();
         })();
 
         // CAPABILITIES - Domain Selection
@@ -3205,105 +3558,845 @@
             });
         })();
 
-        // NOVA FIELD
+        // NOVA WORLD - Digital Infrastructure
         (function() {
-            const canvas = document.getElementById('nova-field');
-            const ctx = canvas.getContext('2d');
-            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const isMobile = window.innerWidth <= 768;
-            const SPACING = isMobile ? 160 : 100;
-            const CONNECTION_DIST = isMobile ? 120 : 180;
-            const MOUSE_RADIUS = 200;
+            var canvas = document.getElementById('nova-field');
+            var ctx = canvas.getContext('2d');
+            var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var isMobile = window.innerWidth <= 768;
+            var dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
 
-            let w, h, cols, rows, nodes, mouseX, mouseY, scrollY;
+            var MOUSE_RADIUS = 250;
+            var MOUSE_INFLUENCE = 0.5;
+            var FOV = 900;
 
-            function resize() {
-                w = canvas.width = window.innerWidth;
-                h = canvas.height = window.innerHeight;
-                cols = Math.ceil(w / SPACING) + 1;
-                rows = Math.ceil(h / SPACING) + 1;
+            var w, h, cw, ch, mouseX, mouseY, scrollY;
+            var sphereCX, sphereCY, sphereR;
+            var rings = [];
+            var nodes = [];
+            var ringConns = [];
+            var crossConns = [];
+            var pulses = [];
+            var streams = [];
+            var microLabels = [];
+            var activeNodeIdx = -1;
+            var corePulse = 0;
+            var currentState = { density: 1, activity: 0.5, energy: 0.6, highlights: 0, pulseSpeed: 0.8, connStrength: 1.0, streamCount: 5, streamSpeed: 0.6, streamInRatio: 1.0 };
+            var targetState = { density: 1, activity: 0.5, energy: 0.6, highlights: 0, pulseSpeed: 0.8, connStrength: 1.0, streamCount: 5, streamSpeed: 0.6, streamInRatio: 1.0 };
+            var currentLabel = 'SYSTEM / ONLINE';
+            var targetLabel = 'SYSTEM / ONLINE';
+            var prevActiveSection = '';
+
+            function srand(seed) {
+                var x = Math.sin(seed * 12.9898 + 78.233) * 43758.5453;
+                return x - Math.floor(x);
+            }
+
+            function lerp(a, b, t) { return a + (b - a) * t; }
+
+            var systemStates = {
+                'online':      { density: 1.0,  activity: 0.5,  energy: 0.6,  highlights: 0, pulseSpeed: 0.8,  connStrength: 1.0,  streamCount: 5,  streamSpeed: 0.6,  streamInRatio: 1.0,  label: 'SYSTEM / ONLINE' },
+                'structuring': { density: 1.1,  activity: 0.7,  energy: 0.75, highlights: 1, pulseSpeed: 1.0,  connStrength: 1.1,  streamCount: 8,  streamSpeed: 0.8,  streamInRatio: 0.9,  label: 'SYSTEM / STRUCTURING' },
+                'configuring': { density: 0.95, activity: 0.65, energy: 0.7,  highlights: 1, pulseSpeed: 0.9,  connStrength: 1.0,  streamCount: 10, streamSpeed: 0.9,  streamInRatio: 0.85, label: 'SYSTEM / CONFIGURING' },
+                'processing':  { density: 1.15, activity: 0.9,  energy: 0.95, highlights: 2, pulseSpeed: 1.3,  connStrength: 1.2,  streamCount: 14, streamSpeed: 1.2,  streamInRatio: 0.55, label: 'SYSTEM / PROCESSING' },
+                'output':      { density: 1.05, activity: 0.6,  energy: 0.8,  highlights: 1, pulseSpeed: 0.7,  connStrength: 1.1,  streamCount: 10, streamSpeed: 0.7,  streamInRatio: 0.15, label: 'SYSTEM / OUTPUT' },
+                'ready':       { density: 0.9,  activity: 0.4,  energy: 0.55, highlights: 0, pulseSpeed: 0.6,  connStrength: 0.9,  streamCount: 4,  streamSpeed: 0.5,  streamInRatio: 0.85, label: 'SYSTEM / READY' }
+            };
+
+            var sectionToState = {
+                '':          'online',
+                'interface': 'structuring',
+                'nova-lab':  'configuring',
+                'servicios': 'processing',
+                'work':      'output',
+                'contacto':  'ready'
+            };
+
+            var ringVisuals = {
+                primary:    { lw: 0.6,  aMul: 1.4 },
+                route:      { lw: 0.4,  aMul: 1.1 },
+                grid:       { lw: 0.25, aMul: 0.6 },
+                secondary:  { lw: 0.35, aMul: 0.75 }
+            };
+
+            var microTexts = [
+                'NODE 07', 'SYNC 84%', 'CORE / 03', 'LINK ACTIVE',
+                'NODE 12', 'SYNC 91%', 'CORE / 01', 'LAT 18.4',
+                'NODE 04', 'SYNC 77%', 'LON 73.8', 'LINK STABLE'
+            ];
+
+            function initRings() {
+                rings = [];
+                if (isMobile) {
+                    var defs = [
+                        { lat: -50, tilt: 0.12,  speed: 0.15,  par: 0.006, count: 14, type: 'grid' },
+                        { lat: -15, tilt: -0.08, speed: -0.12, par: 0.012, count: 18, type: 'primary' },
+                        { lat: 20,  tilt: 0.15,  speed: 0.18,  par: 0.02,  count: 16, type: 'route' },
+                        { lat: 55,  tilt: -0.05, speed: -0.1,  par: 0.03,  count: 12, type: 'secondary' }
+                    ];
+                } else {
+                    var defs = [
+                        { lat: -55, tilt: 0.12,  speed: 0.15,  par: 0.005, count: 20, type: 'grid' },
+                        { lat: -35, tilt: -0.06, speed: -0.08, par: 0.008, count: 22, type: 'secondary' },
+                        { lat: -18, tilt: -0.08, speed: -0.12, par: 0.01,  count: 28, type: 'primary' },
+                        { lat: 0,   tilt: 0.04,  speed: 0.06,  par: 0.014, count: 24, type: 'route' },
+                        { lat: 18,  tilt: 0.15,  speed: 0.18,  par: 0.025, count: 26, type: 'primary' },
+                        { lat: 40,  tilt: -0.1,  speed: -0.14, par: 0.033, count: 20, type: 'grid' },
+                        { lat: 62,  tilt: 0.13,  speed: 0.1,   par: 0.042, count: 16, type: 'secondary' }
+                    ];
+                }
+                for (var i = 0; i < defs.length; i++) {
+                    var d = defs[i];
+                    var nn = [];
+                    for (var j = 0; j < d.count; j++) nn.push(j / d.count * Math.PI * 2);
+                    rings.push({
+                        lat: d.lat * Math.PI / 180, tilt: d.tilt,
+                        rot: d.speed * 0.00012, par: d.par,
+                        lons: nn, count: d.count, type: d.type
+                    });
+                }
+            }
+
+            function createNodes() {
                 nodes = [];
-                for (let i = 0; i < cols; i++) {
-                    for (let j = 0; j < rows; j++) {
+                ringConns = [];
+                crossConns = [];
+                sphereR = Math.min(w, h) * (isMobile ? 0.55 : 0.65);
+                sphereCX = w * 0.52;
+                sphereCY = h * (isMobile ? 0.50 : 0.53);
+
+                for (var r = 0; r < rings.length; r++) {
+                    var ring = rings[r];
+                    for (var i = 0; i < ring.count; i++) {
+                        var lat = ring.lat;
+                        var lon = ring.lons[i];
+                        var cr = Math.cos(lat);
+                        var isInfra = (ring.type === 'primary' && i % 3 === 0) ||
+                                      (ring.type === 'route' && i % 4 === 0) ||
+                                      (ring.type === 'secondary' && i % 5 === 0);
                         nodes.push({
-                            x: i * SPACING,
-                            y: j * SPACING,
-                            ox: i * SPACING,
-                            oy: j * SPACING
+                            bx: sphereR * cr * Math.cos(lon),
+                            by: sphereR * Math.sin(lat),
+                            bz: sphereR * cr * Math.sin(lon),
+                            sx: 0, sy: 0, z: 0.5,
+                            ring: r, idx: i,
+                            sz: 1, alpha: 0,
+                            par: ring.par,
+                            type: ring.type,
+                            infra: isInfra
                         });
+                    }
+                    for (var i = 0; i < ring.count; i++) {
+                        ringConns.push({
+                            a: nodes.length - ring.count + i,
+                            b: nodes.length - ring.count + (i + 1) % ring.count,
+                            ringType: ring.type
+                        });
+                    }
+                }
+
+                for (var i = 0; i < nodes.length; i++) {
+                    for (var j = i + 1; j < nodes.length; j++) {
+                        if (nodes[i].ring === nodes[j].ring) continue;
+                        var dx = nodes[i].bx - nodes[j].bx;
+                        var dy = nodes[i].by - nodes[j].by;
+                        var dz = nodes[i].bz - nodes[j].bz;
+                        var d3 = Math.sqrt(dx * dx + dy * dy + dz * dz);
+                        if (d3 < sphereR * 0.35 && Math.abs(nodes[i].ring - nodes[j].ring) <= 1) {
+                            var involvesInfra = nodes[i].infra || nodes[j].infra;
+                            if (srand(i * 137 + j) > (involvesInfra ? 0.65 : 0.82)) {
+                                crossConns.push({ a: i, b: j });
+                            }
+                        }
                     }
                 }
             }
 
-            function draw() {
-                ctx.clearRect(0, 0, w, h);
-                const t = Date.now() * 0.00008;
-                const sy = (scrollY || 0) * 0.02;
-                const hp = window._heroScrollProgress || 0;
+            function initPulses() {
+                pulses = [];
+                var count = isMobile ? 4 : 7;
+                for (var i = 0; i < count; i++) {
+                    var useRing = srand(i * 73) > 0.35;
+                    var pool = useRing ? ringConns : crossConns;
+                    if (pool.length === 0) continue;
+                    pulses.push({
+                        useRing: useRing,
+                        connIdx: Math.floor(srand(i * 311) * pool.length),
+                        progress: srand(i * 97),
+                        speed: 0.0008 + srand(i * 53) * 0.0015
+                    });
+                }
+            }
 
-                for (let i = 0; i < nodes.length; i++) {
-                    const n = nodes[i];
-                    if (!reducedMotion) {
-                        n.x = n.ox + Math.sin(t + n.oy * 0.005) * 3;
-                        n.y = n.oy + Math.cos(t + n.ox * 0.005) * 2 + sy % SPACING;
-                    } else {
-                        n.x = n.ox;
-                        n.y = n.oy;
+            function initMicroLabels() {
+                microLabels = [];
+                var count = isMobile ? 2 : 5;
+                var infraNodes = [];
+                for (var i = 0; i < nodes.length; i++) {
+                    if (nodes[i].infra) infraNodes.push(i);
+                }
+                for (var i = 0; i < count; i++) {
+                    var nodeIdx = infraNodes.length > 0
+                        ? infraNodes[Math.floor(srand(i * 41) * infraNodes.length)]
+                        : Math.floor(srand(i * 41) * nodes.length);
+                    microLabels.push({
+                        text: microTexts[i % microTexts.length],
+                        nodeIdx: nodeIdx,
+                        alpha: 0
+                    });
+                }
+            }
+
+            function pickStreamTarget(seed) {
+                var infraNodes = [];
+                for (var j = 0; j < nodes.length; j++) {
+                    if (nodes[j].infra) infraNodes.push(j);
+                }
+                if (infraNodes.length > 0) {
+                    return infraNodes[Math.floor(srand(seed * 91) * infraNodes.length)];
+                }
+                return Math.floor(srand(seed * 91) * nodes.length);
+            }
+
+            function createStream(i, seed) {
+                var isInput = srand(seed) < currentState.streamInRatio;
+                var targetIdx = pickStreamTarget(i + seed);
+                var n = nodes[targetIdx];
+                var angle = srand(i * 77 + seed) * Math.PI * 2;
+                var dist = sphereR * (1.4 + srand(i * 33 + seed) * 0.5);
+                var ex = sphereCX + Math.cos(angle) * dist;
+                var ey = sphereCY + Math.sin(angle) * dist;
+                return {
+                    ex: ex, ey: ey,
+                    nodeIdx: targetIdx,
+                    isInput: isInput,
+                    progress: srand(i * 67 + seed),
+                    speed: 0.001 + srand(i * 43 + seed) * 0.002,
+                    alpha: 0,
+                    size: 1.2 + srand(i * 29 + seed) * 0.8
+                };
+            }
+
+            function initStreams() {
+                streams = [];
+                var maxCount = isMobile ? 6 : 14;
+                for (var i = 0; i < maxCount; i++) {
+                    streams.push(createStream(i, i * 13 + 7));
+                }
+            }
+
+            function recycleStream(s, i) {
+                var newTarget = pickStreamTarget(i * 13 + 7 + Date.now() * 0.0001);
+                var angle = srand(i * 77 + Date.now() * 0.0001) * Math.PI * 2;
+                var dist = sphereR * (1.4 + srand(i * 33 + Date.now() * 0.0001) * 0.5);
+                s.ex = sphereCX + Math.cos(angle) * dist;
+                s.ey = sphereCY + Math.sin(angle) * dist;
+                s.nodeIdx = newTarget;
+                s.isInput = srand(i * 11 + Date.now() * 0.0001) < currentState.streamInRatio;
+                s.progress = 0;
+                s.alpha = 0;
+            }
+
+            function resize() {
+                w = window.innerWidth;
+                h = window.innerHeight;
+                cw = w * dpr;
+                ch = h * dpr;
+                canvas.width = cw;
+                canvas.height = ch;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                initRings();
+                createNodes();
+                initPulses();
+                initMicroLabels();
+                initStreams();
+            }
+
+            function computePositions(t, sy) {
+                for (var r = 0; r < rings.length; r++) {
+                    var ring = rings[r];
+                    var angle = reducedMotion ? 0 : t * ring.rot * 1000;
+                    var cR = Math.cos(angle), sR = Math.sin(angle);
+                    var cT = Math.cos(ring.tilt), sT = Math.sin(ring.tilt);
+                    var pOff = reducedMotion ? 0 : sy * ring.par;
+
+                    for (var i = 0; i < ring.count; i++) {
+                        var n = nodes[r * ring.count + i];
+                        var x1 = n.bx * cR - n.bz * sR;
+                        var z1 = n.bx * sR + n.bz * cR;
+                        var y1 = n.by * cT - z1 * sT;
+                        var z2 = n.by * sT + z1 * cT;
+                        var sc = FOV / (FOV + z2 + sphereR);
+                        n.sx = sphereCX + x1 * sc;
+                        n.sy = sphereCY + (y1 - pOff) * sc;
+                        n.z = (z2 + sphereR) / (2 * sphereR);
+                        n.sz = (1.8 + (1 - n.z) * 3.0) * sc;
+                        n.alpha = 0.12 + (1 - n.z) * 0.28;
                     }
                 }
+            }
 
-                // Connections
-                const connBoost = 1 + hp * 0.6;
-                ctx.lineWidth = 0.5;
-                for (let i = 0; i < nodes.length; i++) {
-                    for (let j = i + 1; j < nodes.length; j++) {
-                        const dx = nodes[i].x - nodes[j].x;
-                        const dy = nodes[i].y - nodes[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < CONNECTION_DIST) {
-                            const alpha = 0.08 * (1 - dist / CONNECTION_DIST) * connBoost;
-                            ctx.strokeStyle = 'rgba(37, 99, 235, ' + Math.min(alpha, 0.2) + ')';
-                            ctx.beginPath();
-                            ctx.moveTo(nodes[i].x, nodes[i].y);
-                            ctx.lineTo(nodes[j].x, nodes[j].y);
-                            ctx.stroke();
+            var HC = 200;
+            var hg = {};
+            function hk(cx, cy) { return cx + ':' + cy; }
+            function buildHash() {
+                hg = {};
+                for (var i = 0; i < nodes.length; i++) {
+                    var n = nodes[i];
+                    var cx = Math.floor(n.sx / HC);
+                    var cy = Math.floor(n.sy / HC);
+                    var k = hk(cx, cy);
+                    if (!hg[k]) hg[k] = [];
+                    hg[k].push(n);
+                }
+            }
+            function getNb(node) {
+                var cx = Math.floor(node.sx / HC);
+                var cy = Math.floor(node.sy / HC);
+                var res = [];
+                for (var dx = -1; dx <= 1; dx++) {
+                    for (var dy = -1; dy <= 1; dy++) {
+                        var b = hg[hk(cx + dx, cy + dy)];
+                        if (b) for (var k = 0; k < b.length; k++) {
+                            if (b[k] !== node) res.push(b[k]);
                         }
                     }
                 }
+                return res;
+            }
 
-                // Nodes
-                const nodeBoost = 1 + hp * 0.5;
-                for (let i = 0; i < nodes.length; i++) {
-                    const n = nodes[i];
-                    let alpha = 0.12 * nodeBoost;
+            function drawRingOrbits(t) {
+                var hp = window._heroScrollProgress || 0;
+                var energy = currentState.energy;
+
+                for (var r = 0; r < rings.length; r++) {
+                    var ring = rings[r];
+                    var rv = ringVisuals[ring.type] || ringVisuals.secondary;
+                    var angle = reducedMotion ? 0 : t * ring.rot * 1000;
+                    var cR = Math.cos(angle), sR = Math.sin(angle);
+                    var cT = Math.cos(ring.tilt), sT = Math.sin(ring.tilt);
+                    var segs = isMobile ? 36 : 60;
+                    ctx.lineWidth = rv.lw;
+
+                    for (var i = 0; i < segs; i++) {
+                        var lonA = (i / segs) * Math.PI * 2;
+                        var lonB = ((i + 1) / segs) * Math.PI * 2;
+                        var crA = Math.cos(ring.lat);
+
+                        var ax3 = sphereR * crA * Math.cos(lonA);
+                        var ay3 = sphereR * Math.sin(ring.lat);
+                        var az3 = sphereR * crA * Math.sin(lonA);
+                        var bx3 = sphereR * crA * Math.cos(lonB);
+                        var by3 = sphereR * Math.sin(ring.lat);
+                        var bz3 = sphereR * crA * Math.sin(lonB);
+
+                        var ax1 = ax3 * cR - az3 * sR;
+                        var az1 = ax3 * sR + az3 * cR;
+                        var ay1 = ay3 * cT - az1 * sT;
+                        var az2 = ay3 * sT + az1 * cT;
+
+                        var bx1 = bx3 * cR - bz3 * sR;
+                        var bz1 = bx3 * sR + bz3 * cR;
+                        var by1 = by3 * cT - bz1 * sT;
+                        var bz2 = by3 * sT + bz1 * cT;
+
+                        var sA = FOV / (FOV + az2 + sphereR);
+                        var sB = FOV / (FOV + bz2 + sphereR);
+                        var pA = reducedMotion ? 0 : (scrollY || 0) * ring.par;
+
+                        var sxa = sphereCX + ax1 * sA;
+                        var sya = sphereCY + (ay1 - pA) * sA;
+                        var sxb = sphereCX + bx1 * sB;
+                        var syb = sphereCY + (by1 - pA) * sB;
+
+                        var avgZ = ((az2 + sphereR) / (2 * sphereR) + (bz2 + sphereR) / (2 * sphereR)) * 0.5;
+                        var alpha = (0.06 + (1 - avgZ) * 0.12 + hp * 0.03) * rv.aMul * energy;
+                        if (r === 0 || r === rings.length - 1) alpha *= 0.7;
+
+                        if (alpha < 0.003) continue;
+                        ctx.strokeStyle = 'rgba(37, 99, 235, ' + Math.min(alpha, 0.25) + ')';
+                        ctx.beginPath();
+                        ctx.moveTo(sxa, sya);
+                        ctx.lineTo(sxb, syb);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            function drawRingConns() {
+                var hp = window._heroScrollProgress || 0;
+                var energy = currentState.energy;
+                var density = currentState.density;
+                var cb = 1 + hp * 0.4;
+
+                for (var i = 0; i < ringConns.length; i++) {
+                    if (density < 1 && srand(i * 17) > density) continue;
+                    var rc = ringConns[i];
+                    var a = nodes[rc.a];
+                    var b = nodes[rc.b];
+                    var rv = ringVisuals[rc.ringType] || ringVisuals.secondary;
+                    var avgZ = (a.z + b.z) * 0.5;
+                    var alpha = (0.10 + (1 - avgZ) * 0.20) * cb * rv.aMul * energy * currentState.connStrength;
+                    if (corePulse > 0.01) {
+                        var avgX = (a.sx + b.sx) * 0.5;
+                        var avgY = (a.sy + b.sy) * 0.5;
+                        var dcx = avgX - sphereCX;
+                        var dcy = avgY - sphereCY;
+                        var dc = Math.sqrt(dcx * dcx + dcy * dcy);
+                        var coreDist = 1 - Math.min(dc / (sphereR * 0.6), 1);
+                        alpha += corePulse * coreDist * 0.15;
+                    }
+                    alpha = Math.min(alpha, 0.30);
+                    if (alpha < 0.004) continue;
+
+                    ctx.strokeStyle = 'rgba(37, 99, 235, ' + alpha + ')';
+                    ctx.lineWidth = rv.lw * 0.9;
+                    ctx.beginPath();
+                    ctx.moveTo(a.sx, a.sy);
+                    ctx.lineTo(b.sx, b.sy);
+                    ctx.stroke();
+                }
+            }
+
+            function drawCrossConns() {
+                var hp = window._heroScrollProgress || 0;
+                var energy = currentState.energy;
+                var density = currentState.density;
+                var cb = 1 + hp * 0.4;
+
+                for (var i = 0; i < crossConns.length; i++) {
+                    var a = nodes[crossConns[i].a];
+                    var b = nodes[crossConns[i].b];
+                    var dx = a.sx - b.sx;
+                    var dy = a.sy - b.sy;
+                    var d2 = Math.sqrt(dx * dx + dy * dy);
+                    if (d2 > 140) continue;
+
+                    var avgZ = (a.z + b.z) * 0.5;
+                    var dd = Math.abs(a.z - b.z);
+                    if (dd > 0.25) continue;
+
+                    var alpha = (0.06 + (1 - avgZ) * 0.12) * cb * energy * currentState.connStrength;
+                    alpha *= (1 - d2 / 140);
+                    if (density < 1 && srand(i * 23 + 5) > density) alpha *= 0.3;
+                    alpha = Math.min(alpha, 0.18);
+                    if (alpha < 0.004) continue;
+
+                    ctx.strokeStyle = 'rgba(37, 99, 235, ' + alpha + ')';
+                    ctx.lineWidth = 0.35;
+                    ctx.beginPath();
+                    ctx.moveTo(a.sx, a.sy);
+                    ctx.lineTo(b.sx, b.sy);
+                    ctx.stroke();
+                }
+            }
+
+            function drawNodes() {
+                var hp = window._heroScrollProgress || 0;
+                var nb = 1 + hp * 0.3;
+                var energy = currentState.energy;
+                var highlights = currentState.highlights;
+
+                activeNodeIdx = -1;
+                var closestDist = MOUSE_RADIUS;
+
+                for (var i = 0; i < nodes.length; i++) {
+                    var n = nodes[i];
+                    var alpha = n.alpha * nb * energy;
+
                     if (mouseX !== undefined) {
-                        const dx = n.x - mouseX;
-                        const dy = n.y - mouseY;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        var dx = n.sx - mouseX;
+                        var dy = n.sy - mouseY;
+                        var dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < closestDist && n.infra) {
+                            closestDist = dist;
+                            activeNodeIdx = i;
+                        }
                         if (dist < MOUSE_RADIUS) {
-                            alpha = (0.12 + 0.5 * (1 - dist / MOUSE_RADIUS)) * nodeBoost;
+                            alpha += (1 - dist / MOUSE_RADIUS) * MOUSE_INFLUENCE;
                         }
                     }
-                    ctx.fillStyle = 'rgba(37, 99, 235, ' + Math.min(alpha, 0.6) + ')';
-                    ctx.fillRect(n.x - 1, n.y - 1, 2, 2);
+
+                    if (n.infra) {
+                        n.sz *= 1.4;
+                        alpha *= 1.6;
+                    }
+
+                    if (highlights > 0 && n.infra && srand(i * 41) > (1 - highlights * 0.15)) {
+                        alpha *= 1.8;
+                        n.sz *= 1.3;
+                    }
+
+                    if (corePulse > 0.01) {
+                        var dxn = n.sx - sphereCX;
+                        var dyn = n.sy - sphereCY;
+                        var dn = Math.sqrt(dxn * dxn + dyn * dyn);
+                        var coreDist = 1 - Math.min(dn / (sphereR * 0.6), 1);
+                        var coreBoost = corePulse * coreDist * 0.5;
+                        alpha += coreBoost;
+                        if (coreDist > 0.3) n.sz *= (1 + coreBoost * 0.3);
+                    }
+
+                    alpha = Math.min(alpha, 0.6);
+                    if (alpha < 0.005) continue;
+
+                    ctx.fillStyle = n.infra
+                        ? 'rgba(37, 99, 235, ' + alpha + ')'
+                        : 'rgba(37, 99, 235, ' + (alpha * 0.75) + ')';
+                    ctx.fillRect(n.sx - n.sz * 0.5, n.sy - n.sz * 0.5, n.sz, n.sz);
+                }
+            }
+
+            function drawDataPulses(t) {
+                var activity = currentState.activity;
+                if (reducedMotion) return;
+
+                for (var i = 0; i < pulses.length; i++) {
+                    var p = pulses[i];
+                    var pool = p.useRing ? ringConns : crossConns;
+                    if (p.connIdx >= pool.length) continue;
+                    var conn = pool[p.connIdx];
+                    var a = nodes[conn.a];
+                    var b = nodes[conn.b];
+                    if (!a || !b) continue;
+
+                    p.progress += p.speed * activity * currentState.pulseSpeed;
+                    if (p.progress > 1) {
+                        p.progress = 0;
+                        if (srand(i * 59 + t * 1000) > 0.7) {
+                            p.connIdx = Math.floor(srand(i * 311 + t * 100) * pool.length);
+                        }
+                    }
+
+                    var px = a.sx + (b.sx - a.sx) * p.progress;
+                    var py = a.sy + (b.sy - a.sy) * p.progress;
+                    var avgZ = (a.z + b.z) * 0.5;
+                    var pulseAlpha = (0.25 + (1 - avgZ) * 0.30) * activity;
+                    pulseAlpha = Math.min(pulseAlpha, 0.50);
+                    if (pulseAlpha < 0.01) continue;
+
+                    var pulseSz = 1.8 + (1 - avgZ) * 1.5;
+
+                    // Subtle trail behind pulse
+                    var trailLen = 0.08;
+                    var tx = a.sx + (b.sx - a.sx) * Math.max(0, p.progress - trailLen);
+                    var ty = a.sy + (b.sy - a.sy) * Math.max(0, p.progress - trailLen);
+                    ctx.strokeStyle = 'rgba(37, 99, 235, ' + (pulseAlpha * 0.25) + ')';
+                    ctx.lineWidth = pulseSz * 0.6;
+                    ctx.beginPath();
+                    ctx.moveTo(tx, ty);
+                    ctx.lineTo(px, py);
+                    ctx.stroke();
+
+                    ctx.fillStyle = 'rgba(37, 99, 235, ' + pulseAlpha + ')';
+                    ctx.beginPath();
+                    ctx.arc(px, py, pulseSz, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function drawDataStreams(t) {
+                var energy = currentState.energy;
+                var speedMul = currentState.streamSpeed;
+                var activeCount = Math.round(currentState.streamCount);
+                if (isMobile) activeCount = Math.min(activeCount, 6);
+
+                for (var i = 0; i < activeCount && i < streams.length; i++) {
+                    var s = streams[i];
+                    var n = nodes[s.nodeIdx];
+                    if (!n) continue;
+
+                    // Update progress
+                    if (!reducedMotion) {
+                        s.progress += s.speed * speedMul;
+                    }
+
+                    // Fade in/out
+                    if (s.progress < 0.1) {
+                        s.alpha = s.progress / 0.1;
+                    } else if (s.progress > 0.85) {
+                        s.alpha = (1 - s.progress) / 0.15;
+                    } else {
+                        s.alpha = 1;
+                    }
+
+                    // Recycle when done
+                    if (s.progress >= 1) {
+                        if (s.isInput && srand(i * 71 + Date.now() * 0.001) < 0.35) {
+                            corePulse = Math.min(corePulse + 0.25, 1.0);
+                        }
+                        recycleStream(s, i);
+                        continue;
+                    }
+
+                    // Compute Bezier positions
+                    var sx, sy, tx, ty;
+                    if (s.isInput) {
+                        sx = s.ex; sy = s.ey;
+                        tx = n.sx; ty = n.sy;
+                    } else {
+                        sx = n.sx; sy = n.sy;
+                        tx = s.ex; ty = s.ey;
+                    }
+
+                    var dx = tx - sx;
+                    var dy = ty - sy;
+                    var perpX = -dy * 0.15;
+                    var perpY = dx * 0.15;
+                    var mx = (sx + tx) / 2 + perpX;
+                    var my = (sy + ty) / 2 + perpY;
+
+                    // Quadratic Bezier
+                    var p = s.progress;
+                    var q = 1 - p;
+                    var px = q * q * sx + 2 * q * p * mx + p * p * tx;
+                    var py = q * q * sy + 2 * q * p * my + p * p * ty;
+
+                    // Alpha
+                    var depthAlpha = 0.25 + (1 - n.z) * 0.35;
+                    var alpha = s.alpha * depthAlpha * energy;
+                    var drawSize = s.size;
+                    if (s.isInput && s.progress > 0.8) {
+                        var arrivalBoost = (s.progress - 0.8) / 0.2;
+                        alpha *= (1 + arrivalBoost * 0.6);
+                        drawSize = s.size * (1 + arrivalBoost * 0.5);
+                    }
+                    alpha = Math.min(alpha, 0.55);
+                    if (alpha < 0.01) continue;
+
+                    // Trail
+                    var tp = Math.max(0, p - 0.05);
+                    var tq = 1 - tp;
+                    var trailX = tq * tq * sx + 2 * tq * tp * mx + tp * tp * tx;
+                    var trailY = tq * tq * sy + 2 * tq * tp * my + tp * tp * ty;
+                    ctx.strokeStyle = 'rgba(37, 99, 235, ' + (alpha * 0.2) + ')';
+                    ctx.lineWidth = drawSize * 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(trailX, trailY);
+                    ctx.lineTo(px, py);
+                    ctx.stroke();
+
+                    // Dot
+                    ctx.fillStyle = 'rgba(37, 99, 235, ' + alpha + ')';
+                    ctx.beginPath();
+                    ctx.arc(px, py, drawSize, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function drawCore(t) {
+                var energy = currentState.energy;
+                var activity = currentState.activity;
+                var breath = reducedMotion ? 0 : Math.sin(t * 3) * 0.06;
+                var totalEnergy = energy * (1 + corePulse * 0.45 + breath);
+                totalEnergy = Math.min(totalEnergy, 1.4);
+
+                var baseR = isMobile ? sphereR * 0.10 : sphereR * 0.14;
+
+                // Layer 1: Outer atmosphere
+                var outerR = baseR * (5.0 + corePulse * 2.0);
+                var outerA = 0.045 * totalEnergy;
+                var g1 = ctx.createRadialGradient(sphereCX, sphereCY, 0, sphereCX, sphereCY, outerR);
+                g1.addColorStop(0, 'rgba(37, 99, 235, ' + (outerA * 0.6) + ')');
+                g1.addColorStop(0.3, 'rgba(37, 99, 235, ' + (outerA * 0.3) + ')');
+                g1.addColorStop(0.7, 'rgba(37, 99, 235, ' + (outerA * 0.08) + ')');
+                g1.addColorStop(1, 'rgba(37, 99, 235, 0)');
+                ctx.fillStyle = g1;
+                ctx.beginPath();
+                ctx.arc(sphereCX, sphereCY, outerR, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Layer 2: Mid halo
+                var midR = baseR * (3.0 + corePulse * 1.2);
+                var midA = 0.08 * totalEnergy;
+                var g2 = ctx.createRadialGradient(sphereCX, sphereCY, 0, sphereCX, sphereCY, midR);
+                g2.addColorStop(0, 'rgba(37, 99, 235, ' + (midA * 0.8) + ')');
+                g2.addColorStop(0.4, 'rgba(37, 99, 235, ' + (midA * 0.3) + ')');
+                g2.addColorStop(1, 'rgba(37, 99, 235, 0)');
+                ctx.fillStyle = g2;
+                ctx.beginPath();
+                ctx.arc(sphereCX, sphereCY, midR, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Layer 3: Inner halo
+                var innerR = baseR * (1.8 + corePulse * 0.8);
+                var innerA = 0.12 * totalEnergy;
+                var g3 = ctx.createRadialGradient(sphereCX, sphereCY, 0, sphereCX, sphereCY, innerR);
+                g3.addColorStop(0, 'rgba(37, 99, 235, ' + (innerA * 0.9) + ')');
+                g3.addColorStop(0.5, 'rgba(37, 99, 235, ' + (innerA * 0.25) + ')');
+                g3.addColorStop(1, 'rgba(37, 99, 235, 0)');
+                ctx.fillStyle = g3;
+                ctx.beginPath();
+                ctx.arc(sphereCX, sphereCY, innerR, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Layer 4: Core point
+                var coreR = baseR * (0.6 + corePulse * 0.3);
+                var coreA = 0.22 * totalEnergy;
+                coreA = Math.min(coreA, 0.32);
+                var g4 = ctx.createRadialGradient(sphereCX, sphereCY, 0, sphereCX, sphereCY, coreR);
+                g4.addColorStop(0, 'rgba(37, 99, 235, ' + coreA + ')');
+                g4.addColorStop(0.4, 'rgba(37, 99, 235, ' + (coreA * 0.5) + ')');
+                g4.addColorStop(0.7, 'rgba(37, 99, 235, ' + (coreA * 0.15) + ')');
+                g4.addColorStop(1, 'rgba(37, 99, 235, 0)');
+                ctx.fillStyle = g4;
+                ctx.beginPath();
+                ctx.arc(sphereCX, sphereCY, coreR, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            function drawActiveNode() {
+                if (activeNodeIdx < 0 || activeNodeIdx >= nodes.length) return;
+                var n = nodes[activeNodeIdx];
+
+                // Calculate mouse distance for 3-level reaction
+                var mouseDist = MOUSE_RADIUS;
+                if (mouseX !== undefined) {
+                    var dx = n.sx - mouseX;
+                    var dy = n.sy - mouseY;
+                    mouseDist = Math.sqrt(dx * dx + dy * dy);
                 }
 
-                // Coordinate labels (desktop only, sparse)
-                if (!isMobile) {
-                    ctx.font = '500 8px system-ui, sans-serif';
-                    ctx.fillStyle = 'rgba(115, 115, 115, 0.15)';
-                    for (let i = 0; i < nodes.length; i += 5) {
-                        const n = nodes[i];
-                        const gx = Math.floor(n.ox / SPACING);
-                        const gy = Math.floor(n.oy / SPACING);
-                        ctx.fillText(gx + '.' + gy, n.x + 4, n.y - 4);
-                    }
+                var veryNear = mouseDist < 100;
+                var near = mouseDist < 200;
+
+                if (!near) return;
+
+                var intensity = veryNear ? 1.0 : 0.5;
+                var ringAlpha = n.alpha * 2.5 * intensity;
+                ringAlpha = Math.min(ringAlpha, 0.4);
+                if (ringAlpha < 0.02) return;
+
+                var mono = '500 7px ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace';
+
+                // Outer ring
+                var outerSz = n.sz * (veryNear ? 4.5 : 3.5);
+                ctx.strokeStyle = 'rgba(37, 99, 235, ' + ringAlpha + ')';
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.arc(n.sx, n.sy, outerSz, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // Inner ring (only when very near)
+                if (veryNear) {
+                    var innerAlpha = ringAlpha * 0.7;
+                    var innerSz = n.sz * 2.5;
+                    ctx.strokeStyle = 'rgba(37, 99, 235, ' + innerAlpha + ')';
+                    ctx.lineWidth = 0.4;
+                    ctx.beginPath();
+                    ctx.arc(n.sx, n.sy, innerSz, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    // Center dot
+                    ctx.fillStyle = 'rgba(37, 99, 235, ' + Math.min(ringAlpha * 1.2, 0.5) + ')';
+                    ctx.beginPath();
+                    ctx.arc(n.sx, n.sy, n.sz * 0.8, 0, Math.PI * 2);
+                    ctx.fill();
                 }
+            }
+
+            function drawMicroLabels() {
+                if (isMobile) return;
+                var energy = currentState.energy;
+                var mono = '500 7.5px ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace';
+
+                for (var i = 0; i < microLabels.length; i++) {
+                    var ml = microLabels[i];
+                    if (ml.nodeIdx < 0 || ml.nodeIdx >= nodes.length) continue;
+                    var n = nodes[ml.nodeIdx];
+
+                    var targetAlpha = 0;
+                    if (n.z > 0.48 && n.alpha > 0.08) {
+                        targetAlpha = (n.z - 0.48) * 0.4 * energy;
+                        targetAlpha = Math.min(targetAlpha, 0.18);
+                    }
+                    ml.alpha += (targetAlpha - ml.alpha) * 0.06;
+                    if (ml.alpha < 0.01) continue;
+
+                    ctx.font = mono;
+                    ctx.fillStyle = 'rgba(115, 115, 115, ' + ml.alpha + ')';
+                    ctx.fillText(ml.text, n.sx + n.sz + 4, n.sy + 3);
+                }
+            }
+
+            function drawCoordHints() {
+                if (isMobile) return;
+                var energy = currentState.energy;
+                var alpha = 0.04 * energy;
+                if (alpha < 0.01) return;
+
+                var mono = '500 7px ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace';
+                ctx.font = mono;
+                ctx.fillStyle = 'rgba(80, 80, 80, ' + alpha + ')';
+                ctx.fillText('X', sphereCX + sphereR + 12, sphereCY + 3);
+                ctx.fillText('Y', sphereCX - 3, sphereCY - sphereR - 6);
+                ctx.fillText('Z', sphereCX - 10, sphereCY + sphereR + 16);
+            }
+
+            function drawSystemLabel() {
+                var section = window._activeSection || '';
+                var sysAlpha = 0.08 * currentState.energy;
+                if (section === 'interface') sysAlpha = 0.14;
+                else if (section === 'servicios') sysAlpha = 0.16;
+                else if (section === 'contacto') sysAlpha = 0.06;
+
+                var mono = '500 8.5px ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace';
+                ctx.font = mono;
+                ctx.fillStyle = 'rgba(115, 115, 115, ' + sysAlpha + ')';
+                ctx.fillText('NOVA // DIGITAL INFRASTRUCTURE', sphereCX - 60, sphereCY + sphereR + 28);
+
+                ctx.fillStyle = 'rgba(37, 99, 235, ' + (sysAlpha * 0.6) + ')';
+                ctx.fillText(currentLabel, sphereCX - 40, sphereCY + sphereR + 40);
+            }
+
+            function draw() {
+                var now = Date.now();
+                var t = now * 0.00008;
+                var sy = scrollY || 0;
+
+                // State interpolation
+                var section = window._activeSection || '';
+                if (section !== prevActiveSection) {
+                    prevActiveSection = section;
+                    var stateKey = sectionToState[section] || 'online';
+                    var s = systemStates[stateKey];
+                    targetState = s;
+                    targetLabel = s.label;
+                }
+
+                var lerpFactor = 0.035;
+                currentState.density = lerp(currentState.density, targetState.density, lerpFactor);
+                currentState.activity = lerp(currentState.activity, targetState.activity, lerpFactor);
+                currentState.energy = lerp(currentState.energy, targetState.energy, lerpFactor);
+                currentState.highlights = lerp(currentState.highlights, targetState.highlights, lerpFactor);
+                currentState.pulseSpeed = lerp(currentState.pulseSpeed, targetState.pulseSpeed, lerpFactor);
+                currentState.connStrength = lerp(currentState.connStrength, targetState.connStrength, lerpFactor);
+                currentState.streamCount = lerp(currentState.streamCount, targetState.streamCount, lerpFactor);
+                currentState.streamSpeed = lerp(currentState.streamSpeed, targetState.streamSpeed, lerpFactor);
+                currentState.streamInRatio = lerp(currentState.streamInRatio, targetState.streamInRatio, lerpFactor);
+                currentLabel = targetLabel;
+
+                corePulse = lerp(corePulse, 0, 0.018);
+
+                ctx.clearRect(0, 0, w, h);
+                computePositions(t, sy);
+                buildHash();
+                drawRingOrbits(t);
+                drawRingConns();
+                drawCrossConns();
+                drawNodes();
+                drawDataPulses(t);
+                drawDataStreams(t);
+                drawCore(t);
+                drawActiveNode();
+                drawMicroLabels();
+                drawCoordHints();
+                drawSystemLabel();
             }
 
             function animate() {
                 draw();
-                requestAnimationFrame(animate);
+                if (!reducedMotion) requestAnimationFrame(animate);
             }
 
             resize();
@@ -3312,14 +4405,17 @@
             window.addEventListener('mousemove', function(e) {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
+                if (reducedMotion) draw();
             }, { passive: true });
 
             window.addEventListener('scroll', function() {
                 scrollY = window.pageYOffset;
+                if (reducedMotion) draw();
             }, { passive: true });
 
             window.addEventListener('resize', function() {
                 resize();
+                if (reducedMotion) draw();
             }, { passive: true });
         })();
     </script>
