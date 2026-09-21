@@ -3581,8 +3581,15 @@
             var microLabels = [];
             var activeNodeIdx = -1;
             var corePulse = 0;
-            var currentState = { density: 1, activity: 0.5, energy: 0.6, highlights: 0, pulseSpeed: 0.8, connStrength: 1.0, streamCount: 5, streamSpeed: 0.6, streamInRatio: 1.0 };
-            var targetState = { density: 1, activity: 0.5, energy: 0.6, highlights: 0, pulseSpeed: 0.8, connStrength: 1.0, streamCount: 5, streamSpeed: 0.6, streamInRatio: 1.0 };
+            var coreWave = 0;
+            var coreReceipt = 0;
+            var coreOrbitAngle = 0;
+            var responsePulse = { active: false, progress: 0, nodeIdx: -1, strength: 0 };
+            var nodeZones = [];
+            var activeRoutes = [];
+            var processingChains = [];
+            var currentState = { density: 1, activity: 0.5, energy: 0.6, highlights: 0, pulseSpeed: 0.8, connStrength: 1.0, streamCount: 5, streamSpeed: 0.6, streamInRatio: 1.0, nodeActivity: 0.3, routeActivity: 0.2, coreActivity: 0.3, outputActivity: 0.1 };
+            var targetState = { density: 1, activity: 0.5, energy: 0.6, highlights: 0, pulseSpeed: 0.8, connStrength: 1.0, streamCount: 5, streamSpeed: 0.6, streamInRatio: 1.0, nodeActivity: 0.3, routeActivity: 0.2, coreActivity: 0.3, outputActivity: 0.1 };
             var currentLabel = 'SYSTEM / ONLINE';
             var targetLabel = 'SYSTEM / ONLINE';
             var prevActiveSection = '';
@@ -3595,12 +3602,12 @@
             function lerp(a, b, t) { return a + (b - a) * t; }
 
             var systemStates = {
-                'online':      { density: 1.0,  activity: 0.5,  energy: 0.6,  highlights: 0, pulseSpeed: 0.8,  connStrength: 1.0,  streamCount: 5,  streamSpeed: 0.6,  streamInRatio: 1.0,  label: 'SYSTEM / ONLINE' },
-                'structuring': { density: 1.1,  activity: 0.7,  energy: 0.75, highlights: 1, pulseSpeed: 1.0,  connStrength: 1.1,  streamCount: 8,  streamSpeed: 0.8,  streamInRatio: 0.9,  label: 'SYSTEM / STRUCTURING' },
-                'configuring': { density: 0.95, activity: 0.65, energy: 0.7,  highlights: 1, pulseSpeed: 0.9,  connStrength: 1.0,  streamCount: 10, streamSpeed: 0.9,  streamInRatio: 0.85, label: 'SYSTEM / CONFIGURING' },
-                'processing':  { density: 1.15, activity: 0.9,  energy: 0.95, highlights: 2, pulseSpeed: 1.3,  connStrength: 1.2,  streamCount: 14, streamSpeed: 1.2,  streamInRatio: 0.55, label: 'SYSTEM / PROCESSING' },
-                'output':      { density: 1.05, activity: 0.6,  energy: 0.8,  highlights: 1, pulseSpeed: 0.7,  connStrength: 1.1,  streamCount: 10, streamSpeed: 0.7,  streamInRatio: 0.15, label: 'SYSTEM / OUTPUT' },
-                'ready':       { density: 0.9,  activity: 0.4,  energy: 0.55, highlights: 0, pulseSpeed: 0.6,  connStrength: 0.9,  streamCount: 4,  streamSpeed: 0.5,  streamInRatio: 0.85, label: 'SYSTEM / READY' }
+                'online':      { density: 1.0,  activity: 0.5,  energy: 0.6,  highlights: 0, pulseSpeed: 0.8,  connStrength: 1.0,  streamCount: 5,  streamSpeed: 0.6,  streamInRatio: 1.0,  nodeActivity: 0.3,  routeActivity: 0.2,  coreActivity: 0.3,  outputActivity: 0.1,  label: 'SYSTEM / ONLINE' },
+                'structuring': { density: 1.1,  activity: 0.7,  energy: 0.75, highlights: 1, pulseSpeed: 1.0,  connStrength: 1.1,  streamCount: 8,  streamSpeed: 0.8,  streamInRatio: 0.9,  nodeActivity: 0.6,  routeActivity: 0.55, coreActivity: 0.45, outputActivity: 0.15, label: 'SYSTEM / STRUCTURING' },
+                'configuring': { density: 0.95, activity: 0.65, energy: 0.7,  highlights: 1, pulseSpeed: 0.9,  connStrength: 1.0,  streamCount: 10, streamSpeed: 0.9,  streamInRatio: 0.85, nodeActivity: 0.55, routeActivity: 0.5,  coreActivity: 0.5,  outputActivity: 0.2,  label: 'SYSTEM / CONFIGURING' },
+                'processing':  { density: 1.15, activity: 0.9,  energy: 0.95, highlights: 2, pulseSpeed: 1.3,  connStrength: 1.2,  streamCount: 14, streamSpeed: 1.2,  streamInRatio: 0.55, nodeActivity: 0.85, routeActivity: 0.8,  coreActivity: 0.9,  outputActivity: 0.3,  label: 'SYSTEM / PROCESSING' },
+                'output':      { density: 1.05, activity: 0.6,  energy: 0.8,  highlights: 1, pulseSpeed: 0.7,  connStrength: 1.1,  streamCount: 10, streamSpeed: 0.7,  streamInRatio: 0.15, nodeActivity: 0.5,  routeActivity: 0.45, coreActivity: 0.6,  outputActivity: 0.8,  label: 'SYSTEM / OUTPUT' },
+                'ready':       { density: 0.9,  activity: 0.4,  energy: 0.55, highlights: 0, pulseSpeed: 0.6,  connStrength: 0.9,  streamCount: 4,  streamSpeed: 0.5,  streamInRatio: 0.85, nodeActivity: 0.35, routeActivity: 0.25, coreActivity: 0.35, outputActivity: 0.1,  label: 'SYSTEM / READY' }
             };
 
             var sectionToState = {
@@ -3797,9 +3804,95 @@
                 s.alpha = 0;
             }
 
+            function initNodeZones() {
+                nodeZones = [];
+                for (var i = 0; i < nodes.length; i++) {
+                    nodeZones.push(Math.floor(srand(i * 7) * 4));
+                }
+            }
+
+            function initActiveRoutes() {
+                activeRoutes = [];
+                var count = isMobile ? 3 : 6;
+                for (var i = 0; i < count; i++) {
+                    activeRoutes.push({
+                        connIdx: Math.floor(srand(i * 47) * ringConns.length),
+                        useCross: srand(i * 31) > 0.6,
+                        progress: srand(i * 83),
+                        speed: 0.001 + srand(i * 59) * 0.002,
+                        active: false,
+                        intensity: 0
+                    });
+                }
+            }
+
+            function initProcessingChains() {
+                processingChains = [];
+                var count = isMobile ? 2 : 5;
+                for (var i = 0; i < count; i++) {
+                    processingChains.push({
+                        active: false,
+                        phase: 0,
+                        originNode: -1,
+                        currentNode: -1,
+                        targetNode: -1,
+                        connIdx: -1,
+                        useCross: false,
+                        forwardProgress: 0,
+                        coreProgress: 0,
+                        speed: 0,
+                        strength: 0
+                    });
+                }
+            }
+
+            function findNearbyConn(nodeIdx) {
+                var candidates = [];
+                for (var i = 0; i < ringConns.length; i++) {
+                    var rc = ringConns[i];
+                    if (rc.a === nodeIdx || rc.b === nodeIdx) {
+                        candidates.push({ idx: i, useCross: false, other: rc.a === nodeIdx ? rc.b : rc.a });
+                    }
+                }
+                for (var i = 0; i < crossConns.length; i++) {
+                    var cc = crossConns[i];
+                    if (cc.a === nodeIdx || cc.b === nodeIdx) {
+                        candidates.push({ idx: i, useCross: true, other: cc.a === nodeIdx ? cc.b : cc.a });
+                    }
+                }
+                if (candidates.length === 0) return null;
+                return candidates[Math.floor(Math.random() * candidates.length)];
+            }
+
+            function spawnProcessingChain(nodeIdx) {
+                for (var i = 0; i < processingChains.length; i++) {
+                    var ch = processingChains[i];
+                    if (ch.active) continue;
+
+                    var conn = findNearbyConn(nodeIdx);
+                    if (!conn) return;
+
+                    ch.active = true;
+                    ch.phase = 0;
+                    ch.originNode = nodeIdx;
+                    ch.currentNode = nodeIdx;
+                    ch.targetNode = conn.other;
+                    ch.connIdx = conn.idx;
+                    ch.useCross = conn.useCross;
+                    ch.forwardProgress = 0;
+                    ch.coreProgress = 0;
+                    ch.speed = 0.008 + Math.random() * 0.006;
+                    ch.strength = 0.25 + currentState.routeActivity * 0.3;
+                    return;
+                }
+            }
+
             function resize() {
-                w = window.innerWidth;
-                h = window.innerHeight;
+                var nw = window.innerWidth;
+                var nh = window.innerHeight;
+                if (!nw || !nh || !isFinite(nw) || !isFinite(nh)) return;
+                w = nw;
+                h = nh;
                 cw = w * dpr;
                 ch = h * dpr;
                 canvas.width = cw;
@@ -3807,12 +3900,18 @@
                 ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
                 initRings();
                 createNodes();
+                if (!isFinite(sphereR) || sphereR <= 0) return;
                 initPulses();
                 initMicroLabels();
                 initStreams();
+                initNodeZones();
+                initActiveRoutes();
+                initProcessingChains();
+                draw();
             }
 
             function computePositions(t, sy) {
+                var offset = 0;
                 for (var r = 0; r < rings.length; r++) {
                     var ring = rings[r];
                     var angle = reducedMotion ? 0 : t * ring.rot * 1000;
@@ -3821,7 +3920,7 @@
                     var pOff = reducedMotion ? 0 : sy * ring.par;
 
                     for (var i = 0; i < ring.count; i++) {
-                        var n = nodes[r * ring.count + i];
+                        var n = nodes[offset + i];
                         var x1 = n.bx * cR - n.bz * sR;
                         var z1 = n.bx * sR + n.bz * cR;
                         var y1 = n.by * cT - z1 * sT;
@@ -3833,6 +3932,7 @@
                         n.sz = (1.8 + (1 - n.z) * 3.0) * sc;
                         n.alpha = 0.12 + (1 - n.z) * 0.28;
                     }
+                    offset += ring.count;
                 }
             }
 
@@ -3946,6 +4046,19 @@
                         var coreDist = 1 - Math.min(dc / (sphereR * 0.6), 1);
                         alpha += corePulse * coreDist * 0.15;
                     }
+                    if (coreWave > 0.01) {
+                        var avgXw = (a.sx + b.sx) * 0.5;
+                        var avgYw = (a.sy + b.sy) * 0.5;
+                        var dcxw = avgXw - sphereCX;
+                        var dcyw = avgYw - sphereCY;
+                        var dcw = Math.sqrt(dcxw * dcxw + dcyw * dcyw);
+                        var waveDist = 1 - Math.min(dcw / (sphereR * 0.55), 1);
+                        alpha += coreWave * waveDist * 0.10;
+                    }
+                    if (currentState.routeActivity > 0.05) {
+                        var routePhase = Math.sin(i * 0.7 + Date.now() * 0.0004) * 0.5 + 0.5;
+                        alpha += currentState.routeActivity * routePhase * 0.08;
+                    }
                     alpha = Math.min(alpha, 0.30);
                     if (alpha < 0.004) continue;
 
@@ -3979,6 +4092,10 @@
                     var alpha = (0.06 + (1 - avgZ) * 0.12) * cb * energy * currentState.connStrength;
                     alpha *= (1 - d2 / 140);
                     if (density < 1 && srand(i * 23 + 5) > density) alpha *= 0.3;
+                    if (currentState.routeActivity > 0.05) {
+                        var routePhase = Math.sin(i * 1.1 + Date.now() * 0.0005) * 0.5 + 0.5;
+                        alpha += currentState.routeActivity * routePhase * 0.06;
+                    }
                     alpha = Math.min(alpha, 0.18);
                     if (alpha < 0.004) continue;
 
@@ -3988,6 +4105,138 @@
                     ctx.moveTo(a.sx, a.sy);
                     ctx.lineTo(b.sx, b.sy);
                     ctx.stroke();
+                }
+            }
+
+            function drawActiveRoutes(t) {
+                if (currentState.routeActivity < 0.05) return;
+                if (reducedMotion) return;
+
+                for (var i = 0; i < activeRoutes.length; i++) {
+                    var ar = activeRoutes[i];
+                    var pool = ar.useCross ? crossConns : ringConns;
+                    if (ar.connIdx >= pool.length) continue;
+
+                    ar.progress += ar.speed * currentState.routeActivity;
+                    if (ar.progress > 1) {
+                        ar.progress = 0;
+                        if (srand(i * 47 + t * 100) > 0.5) {
+                            ar.connIdx = Math.floor(srand(i * 31 + t * 100) * pool.length);
+                        }
+                        ar.intensity = 0.3 + srand(i * 59 + t * 10) * 0.3;
+                    }
+
+                    var conn = pool[ar.connIdx];
+                    var a = nodes[conn.a];
+                    var b = nodes[conn.b];
+                    if (!a || !b) continue;
+
+                    var p = ar.progress;
+                    var alpha = ar.intensity * currentState.routeActivity * (1 - Math.abs(p - 0.5) * 2);
+                    alpha = Math.min(alpha, 0.20);
+                    if (alpha < 0.01) continue;
+
+                    var px = a.sx + (b.sx - a.sx) * p;
+                    var py = a.sy + (b.sy - a.sy) * p;
+
+                    ctx.fillStyle = 'rgba(37, 99, 235, ' + alpha + ')';
+                    ctx.beginPath();
+                    ctx.arc(px, py, 1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function drawProcessingChains(t) {
+                for (var i = 0; i < processingChains.length; i++) {
+                    var ch = processingChains[i];
+                    if (!ch.active) continue;
+
+                    if (reducedMotion) {
+                        ch.phase = 5;
+                        ch.active = false;
+                        continue;
+                    }
+
+                    if (ch.phase === 0) {
+                        ch.forwardProgress += ch.speed;
+                        if (ch.forwardProgress >= 1) {
+                            ch.forwardProgress = 1;
+                            ch.phase = 1;
+                        }
+                    } else if (ch.phase === 1) {
+                        ch.phase = 2;
+                        ch.coreProgress = 0;
+                    } else if (ch.phase === 2) {
+                        ch.coreProgress += ch.speed * 0.8;
+                        if (ch.coreProgress >= 1) {
+                            corePulse = Math.min(corePulse + ch.strength * 0.40, 1.0);
+                            coreWave = Math.min(coreWave + ch.strength * 0.30, 1.0);
+                            coreReceipt = Math.max(coreReceipt, ch.strength);
+                            if (!responsePulse.active) {
+                                responsePulse.active = true;
+                                responsePulse.progress = 0;
+                                responsePulse.nodeIdx = ch.originNode;
+                                responsePulse.strength = ch.strength * 0.7;
+                            }
+                            ch.active = false;
+                            continue;
+                        }
+                    }
+
+                    var pool = ch.useCross ? crossConns : ringConns;
+                    if (ch.connIdx >= pool.length) { ch.active = false; continue; }
+                    var conn = pool[ch.connIdx];
+                    var nodeA = nodes[conn.a];
+                    var nodeB = nodes[conn.b];
+                    if (!nodeA || !nodeB) { ch.active = false; continue; }
+
+                    var originNode = nodes[ch.originNode];
+                    var targetNode = nodes[ch.targetNode];
+                    if (!originNode || !targetNode) { ch.active = false; continue; }
+
+                    var signalX, signalY, signalAlpha;
+                    var sigSz = 2.0;
+
+                    if (ch.phase === 0) {
+                        var p = ch.forwardProgress;
+                        signalX = nodeA.sx + (nodeB.sx - nodeA.sx) * p;
+                        signalY = nodeA.sy + (nodeB.sy - nodeA.sy) * p;
+                        signalAlpha = ch.strength * (1 - Math.abs(p - 0.5) * 1.5);
+                    } else if (ch.phase === 1 || ch.phase === 2) {
+                        var p = ch.phase === 1 ? 0 : ch.coreProgress;
+                        var fromX = nodeB.sx + (sphereCX - nodeB.sx) * p;
+                        var fromY = nodeB.sy + (sphereCY - nodeB.sy) * p;
+                        signalX = fromX;
+                        signalY = fromY;
+                        signalAlpha = ch.strength * 0.8;
+                        sigSz = 1.8;
+                    }
+
+                    if (signalAlpha < 0.01) continue;
+                    signalAlpha = Math.min(signalAlpha, 0.30);
+
+                    ctx.fillStyle = 'rgba(37, 99, 235, ' + signalAlpha + ')';
+                    ctx.beginPath();
+                    ctx.arc(signalX, signalY, sigSz, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    if (ch.phase === 0 && originNode) {
+                        var nodeBoost = ch.strength * 0.4 * (1 - ch.forwardProgress);
+                        if (nodeBoost > 0.01) {
+                            ctx.fillStyle = 'rgba(37, 99, 235, ' + Math.min(nodeBoost, 0.15) + ')';
+                            ctx.beginPath();
+                            ctx.arc(originNode.sx, originNode.sy, originNode.sz * 1.5, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+
+                    if ((ch.phase === 1 || ch.phase === 2) && targetNode) {
+                        var tBoost = ch.strength * 0.3;
+                        ctx.fillStyle = 'rgba(37, 99, 235, ' + Math.min(tBoost, 0.12) + ')';
+                        ctx.beginPath();
+                        ctx.arc(targetNode.sx, targetNode.sy, targetNode.sz * 1.3, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
                 }
             }
 
@@ -4037,12 +4286,27 @@
                         if (coreDist > 0.3) n.sz *= (1 + coreBoost * 0.3);
                     }
 
+                    if (coreWave > 0.01) {
+                        var dxw = n.sx - sphereCX;
+                        var dyw = n.sy - sphereCY;
+                        var dw = Math.sqrt(dxw * dxw + dyw * dyw);
+                        var waveDist = 1 - Math.min(dw / (sphereR * 0.55), 1);
+                        var waveBoost = coreWave * waveDist * 0.20;
+                        alpha += waveBoost;
+                        if (waveDist > 0.3) n.sz *= (1 + waveBoost * 0.10);
+                    }
+
+                    if (currentState.nodeActivity > 0.05 && nodeZones.length > i) {
+                        var zone = nodeZones[i];
+                        var zonePhase = Math.sin(zone * 1.8 + Date.now() * 0.0003) * 0.5 + 0.5;
+                        var zoneBoost = currentState.nodeActivity * zonePhase * 0.15;
+                        alpha += zoneBoost;
+                    }
+
                     alpha = Math.min(alpha, 0.6);
                     if (alpha < 0.005) continue;
 
-                    ctx.fillStyle = n.infra
-                        ? 'rgba(37, 99, 235, ' + alpha + ')'
-                        : 'rgba(37, 99, 235, ' + (alpha * 0.75) + ')';
+                    ctx.fillStyle = 'rgba(37, 99, 235, ' + alpha + ')';
                     ctx.fillRect(n.sx - n.sz * 0.5, n.sy - n.sz * 0.5, n.sz, n.sz);
                 }
             }
@@ -4124,6 +4388,15 @@
                     if (s.progress >= 1) {
                         if (s.isInput && srand(i * 71 + Date.now() * 0.001) < 0.35) {
                             corePulse = Math.min(corePulse + 0.25, 1.0);
+                            if (!responsePulse.active) {
+                                responsePulse.active = true;
+                                responsePulse.progress = 0;
+                                responsePulse.nodeIdx = s.nodeIdx;
+                                responsePulse.strength = 0.3 + srand(i * 37) * 0.2;
+                            }
+                            if (currentState.routeActivity > 0.3 && Math.random() < currentState.routeActivity * 0.5) {
+                                spawnProcessingChain(s.nodeIdx);
+                            }
                         }
                         recycleStream(s, i);
                         continue;
@@ -4188,10 +4461,11 @@
                 var energy = currentState.energy;
                 var activity = currentState.activity;
                 var breath = reducedMotion ? 0 : Math.sin(t * 3) * 0.06;
-                var totalEnergy = energy * (1 + corePulse * 0.45 + breath);
+                var totalEnergy = energy * (1 + corePulse * 0.45 + breath + currentState.coreActivity * 0.3);
                 totalEnergy = Math.min(totalEnergy, 1.4);
 
                 var baseR = isMobile ? sphereR * 0.10 : sphereR * 0.14;
+                if (!isFinite(baseR) || baseR <= 0) return;
 
                 // Layer 1: Outer atmosphere
                 var outerR = baseR * (5.0 + corePulse * 2.0);
@@ -4231,9 +4505,9 @@
                 ctx.fill();
 
                 // Layer 4: Core point
-                var coreR = baseR * (0.6 + corePulse * 0.3);
-                var coreA = 0.22 * totalEnergy;
-                coreA = Math.min(coreA, 0.32);
+                var coreR = baseR * (0.6 + corePulse * 0.3 + coreReceipt * 0.4);
+                var coreA = 0.22 * totalEnergy + coreReceipt * 0.25;
+                coreA = Math.min(coreA, 0.45);
                 var g4 = ctx.createRadialGradient(sphereCX, sphereCY, 0, sphereCX, sphereCY, coreR);
                 g4.addColorStop(0, 'rgba(37, 99, 235, ' + coreA + ')');
                 g4.addColorStop(0.4, 'rgba(37, 99, 235, ' + (coreA * 0.5) + ')');
@@ -4243,6 +4517,78 @@
                 ctx.beginPath();
                 ctx.arc(sphereCX, sphereCY, coreR, 0, Math.PI * 2);
                 ctx.fill();
+
+                // Layer 4b: Receipt flash (concentrated, short-lived)
+                if (coreReceipt > 0.01) {
+                    var recR = baseR * (0.8 + coreReceipt * 0.5);
+                    var recA = coreReceipt * 0.35;
+                    recA = Math.min(recA, 0.35);
+                    var gRec = ctx.createRadialGradient(sphereCX, sphereCY, 0, sphereCX, sphereCY, recR);
+                    gRec.addColorStop(0, 'rgba(37, 99, 235, ' + recA + ')');
+                    gRec.addColorStop(0.5, 'rgba(37, 99, 235, ' + (recA * 0.3) + ')');
+                    gRec.addColorStop(1, 'rgba(37, 99, 235, 0)');
+                    ctx.fillStyle = gRec;
+                    ctx.beginPath();
+                    ctx.arc(sphereCX, sphereCY, recR, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // Layer 5: Orbital ring
+                if (!reducedMotion) coreOrbitAngle += 0.002 * totalEnergy;
+                var orbitR = baseR * (2.2 + corePulse * 0.6);
+                var orbitA = 0.06 * totalEnergy;
+                ctx.strokeStyle = 'rgba(37, 99, 235, ' + orbitA + ')';
+                ctx.lineWidth = 0.4;
+                ctx.beginPath();
+                ctx.ellipse(sphereCX, sphereCY, orbitR, orbitR * 0.35, coreOrbitAngle, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            function drawResponsePulse(t) {
+                if (!responsePulse.active) return;
+                var n = nodes[responsePulse.nodeIdx];
+                if (!n) { responsePulse.active = false; return; }
+
+                if (!reducedMotion) {
+                    responsePulse.progress += 0.025;
+                }
+
+                if (responsePulse.progress >= 1) {
+                    responsePulse.active = false;
+                    coreWave = Math.min(coreWave + responsePulse.strength, 1.0);
+                    return;
+                }
+
+                var p = responsePulse.progress;
+                var q = 1 - p;
+                var px = n.sx + (sphereCX - n.sx) * q * q;
+                var py = n.sy + (sphereCY - n.sy) * q * q;
+
+                var alpha = responsePulse.strength * (1 - p * 0.4);
+                alpha = Math.min(alpha, 0.35);
+                if (alpha < 0.01) return;
+
+                ctx.fillStyle = 'rgba(37, 99, 235, ' + alpha + ')';
+                ctx.beginPath();
+                ctx.arc(px, py, 2.0 + (1 - p) * 1.2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            function drawCoreWave(t) {
+                if (coreWave < 0.01) return;
+
+                var baseR = isMobile ? sphereR * 0.10 : sphereR * 0.14;
+                if (!isFinite(baseR) || baseR <= 0) return;
+                var waveProgress = 1 - coreWave;
+                var waveR = baseR * (0.8 + waveProgress * 1.7);
+                var waveA = coreWave * 0.14;
+                waveA = Math.min(waveA, 0.14);
+
+                ctx.strokeStyle = 'rgba(37, 99, 235, ' + waveA + ')';
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.arc(sphereCX, sphereCY, waveR, 0, Math.PI * 2);
+                ctx.stroke();
             }
 
             function drawActiveNode() {
@@ -4350,6 +4696,7 @@
             }
 
             function draw() {
+                if (!w || !h || !isFinite(sphereR) || sphereR <= 0) return;
                 var now = Date.now();
                 var t = now * 0.00008;
                 var sy = scrollY || 0;
@@ -4374,9 +4721,15 @@
                 currentState.streamCount = lerp(currentState.streamCount, targetState.streamCount, lerpFactor);
                 currentState.streamSpeed = lerp(currentState.streamSpeed, targetState.streamSpeed, lerpFactor);
                 currentState.streamInRatio = lerp(currentState.streamInRatio, targetState.streamInRatio, lerpFactor);
+                currentState.nodeActivity = lerp(currentState.nodeActivity, targetState.nodeActivity, lerpFactor);
+                currentState.routeActivity = lerp(currentState.routeActivity, targetState.routeActivity, lerpFactor);
+                currentState.coreActivity = lerp(currentState.coreActivity, targetState.coreActivity, lerpFactor);
+                currentState.outputActivity = lerp(currentState.outputActivity, targetState.outputActivity, lerpFactor);
                 currentLabel = targetLabel;
 
                 corePulse = lerp(corePulse, 0, 0.018);
+                coreWave = lerp(coreWave, 0, 0.015);
+                coreReceipt = lerp(coreReceipt, 0, 0.06);
 
                 ctx.clearRect(0, 0, w, h);
                 computePositions(t, sy);
@@ -4384,9 +4737,13 @@
                 drawRingOrbits(t);
                 drawRingConns();
                 drawCrossConns();
+                drawActiveRoutes(t);
+                drawProcessingChains(t);
                 drawNodes();
                 drawDataPulses(t);
                 drawDataStreams(t);
+                drawResponsePulse(t);
+                drawCoreWave(t);
                 drawCore(t);
                 drawActiveNode();
                 drawMicroLabels();
