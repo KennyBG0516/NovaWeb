@@ -2187,6 +2187,185 @@
             color: var(--text-primary);
         }
 
+        .lab-process {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .lab-process-step {
+            font-size: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        .lab-process-step.active {
+            color: var(--accent);
+        }
+
+        .lab-process-arrow {
+            font-size: 0.5rem;
+            color: var(--muted-border);
+            margin: 0 0.4rem;
+        }
+
+        .lab-arch-title {
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .lab-arch-modules {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-bottom: 2rem;
+        }
+
+        .lab-arch-module {
+            display: grid;
+            grid-template-columns: 2rem 1fr auto;
+            gap: 1rem;
+            align-items: start;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--muted-border);
+            cursor: default;
+            outline: none;
+        }
+
+        .lab-arch-module:last-child {
+            border-bottom: none;
+        }
+
+        .lab-arch-module:hover,
+        .lab-arch-module:focus-visible {
+            background: rgba(37, 99, 235, 0.03);
+        }
+
+        .lab-arch-module:focus-visible {
+            outline: 1px solid var(--accent);
+            outline-offset: -1px;
+        }
+
+        .lab-arch-module-num {
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            padding-top: 0.1rem;
+        }
+
+        .lab-arch-module-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .lab-arch-module-name {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+        }
+
+        .lab-arch-module-desc {
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            text-transform: none;
+            letter-spacing: 0.02em;
+        }
+
+        .lab-arch-module-type {
+            font-size: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            border: 1px solid var(--muted-border);
+            padding: 0.15rem 0.4rem;
+            white-space: nowrap;
+            margin-top: 0.05rem;
+        }
+
+        .lab-system-analysis {
+            border: 1px solid var(--muted-border);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .lab-system-analysis-label {
+            font-size: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .lab-analysis-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(55, 55, 55, 0.4);
+        }
+
+        .lab-analysis-row:last-child {
+            border-bottom: none;
+        }
+
+        .lab-analysis-key {
+            font-size: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .lab-analysis-val {
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-primary);
+        }
+
+        .lab-analysis-val.accent {
+            color: var(--accent);
+        }
+
+        .lab-output-section {
+            border: 1px solid var(--muted-border);
+            padding: 1.5rem;
+        }
+
+        .lab-output-label {
+            font-size: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .lab-output-explanation {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 480px;
+        }
+
         @media (max-width: 768px) {
             #nova-lab {
                 padding: 5rem 1.5rem;
@@ -2199,6 +2378,27 @@
             .lab-object-data {
                 flex-wrap: wrap;
                 gap: 1rem;
+            }
+
+            .lab-arch-module {
+                grid-template-columns: 1.5rem 1fr;
+                gap: 0.5rem;
+            }
+
+            .lab-arch-module-type {
+                grid-column: 2;
+            }
+
+            .lab-process {
+                gap: 0;
+            }
+
+            .lab-process-step {
+                font-size: 0.45rem;
+            }
+
+            .lab-process-arrow {
+                margin: 0 0.2rem;
             }
         }
 
@@ -2847,7 +3047,7 @@
         });
 
         // Active section detection
-        const sectionIds = ['interface','nova-lab','servicios','work','contacto'];
+        const sectionIds = ['inicio','interface','nova-lab','servicios','work','contacto'];
         const navLinks = sectionIds.map(id => document.querySelector(`a[href="#${id}"]`));
         let activeId = null;
 
@@ -2872,6 +3072,12 @@
                 var link = document.querySelector('a[href="#' + bestId + '"]');
                 if (link) link.classList.add('active');
                 activeId = bestId;
+                window._activeSection = bestId;
+
+                var sysEl = document.querySelector('.system-status span:last-child');
+                if (sysEl && window._sectionLabel) {
+                    sysEl.textContent = window._sectionLabel(bestId);
+                }
             }
         }
 
@@ -2893,6 +3099,7 @@
                 navLinks.forEach(function(l) { if (l) l.classList.remove('active'); });
                 link.classList.add('active');
                 activeId = sectionIds[i];
+                window._activeSection = sectionIds[i];
             });
         });
 
@@ -2925,7 +3132,6 @@
                 const heroLeft = document.querySelector('.hero-left');
                 const heroVisual = document.querySelector('.hero-visual');
                 const systemHeader = document.querySelector('.hero-system-header');
-                const systemStatus = document.querySelector('.system-status span:last-child');
                 const statusValue = document.querySelector('.hero-system-value.status-online');
 
                 if (heroSection && heroLeft && heroVisual) {
@@ -2955,21 +3161,6 @@
                             scrub: 0.5,
                         }
                     });
-
-                    // System status text transition
-                    if (systemStatus) {
-                        ScrollTrigger.create({
-                            trigger: heroSection,
-                            start: 'top top',
-                            end: '65% top',
-                            onLeave: function() {
-                                systemStatus.textContent = 'SYSTEM / TRANSITION';
-                            },
-                            onEnterBack: function() {
-                                systemStatus.textContent = 'SYSTEM / ONLINE';
-                            }
-                        });
-                    }
 
                     // Hero system panel "ACTIVE" -> "HANDING OFF"
                     if (systemHeader) {
@@ -3282,6 +3473,7 @@
             var statusValue = document.getElementById('lab-status-value');
             var stepQuestion = document.getElementById('lab-step-question');
             var stepOptions = document.getElementById('lab-step-options');
+            var labStep = document.getElementById('lab-step');
             var hint = document.getElementById('lab-hint');
             var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -3340,6 +3532,117 @@
                 { name: 'OPTIMIZACI\u00d3N', desc: 'Medir, mejorar y eliminar fricci\u00f3n.' }
             ];
 
+            var processFlow = ['INPUT', 'ANALYSIS', 'STRUCTURE', 'EXPERIENCE', 'TECHNOLOGY', 'OUTPUT'];
+
+            var architectures = {
+                'web-conversion': [
+                    { name: 'DISCOVERY', desc: 'An\u00e1lisis de embudo y puntos de decisi\u00f3n del usuario.', type: 'STRATEGY' },
+                    { name: 'FRAMEWORK', desc: 'Arquitectura de p\u00e1ginas y flujos de conversi\u00f3n.', type: 'ARCHITECTURE' },
+                    { name: 'UI SYSTEM', desc: 'Sistema de interfaz orientado a acci\u00f3n y claridad.', type: 'UX / UI' },
+                    { name: 'BUILD', desc: 'Desarrollo front-end con integraci\u00f3n de formularios y m\u00e9tricas.', type: 'ENGINEERING' },
+                    { name: 'CONVERSION LAYER', desc: 'Implementaci\u00f3n de CTAs, landing pages y tracking.', type: 'PERFORMANCE' }
+                ],
+                'web-brand': [
+                    { name: 'IDENTITY', desc: 'Definici\u00f3n de identidad visual y tono comunicacional.', type: 'STRATEGY' },
+                    { name: 'CONTENT ARCH', desc: 'Estructura de contenidos para posicionamiento de marca.', type: 'ARCHITECTURE' },
+                    { name: 'VISUAL SYSTEM', desc: 'Sistema de diseño con paleta, tipograf\u00eda y composici\u00f3n.', type: 'UX / UI' },
+                    { name: 'BUILD', desc: 'Desarrollo del sitio conCMS headless o est\u00e1tico.', type: 'ENGINEERING' },
+                    { name: 'SEO LAYER', desc: 'Optimizaci\u00f3n de estructura, meta datos y rendimiento.', type: 'PERFORMANCE' }
+                ],
+                'web-experience': [
+                    { name: 'RESEARCH', desc: 'An\u00e1lisis de usuarios, necesidades y contexto de uso.', type: 'STRATEGY' },
+                    { name: 'NAVIGATION', desc: 'Arquitectura de informaci\u00f3n y mapa de navegaci\u00f3n.', type: 'ARCHITECTURE' },
+                    { name: 'INTERACTION', desc: 'Dise\u00f1o de interacciones, transiciones y micro-animaciones.', type: 'UX / UI' },
+                    { name: 'BUILD', desc: 'Desarrollo front-end con componentes reutilizables.', type: 'ENGINEERING' },
+                    { name: 'USABILITY', desc: 'Testing de usabilidad y optimizaci\u00f3n de flujo.', type: 'PERFORMANCE' }
+                ],
+                'web-automation': [
+                    { name: 'PROCESS MAP', desc: 'Mapeo de procesos manuales automatizables.', type: 'STRATEGY' },
+                    { name: 'SYSTEM ARCH', desc: 'Arquitectura de integraciones y flujos de datos.', type: 'ARCHITECTURE' },
+                    { name: 'DASHBOARD', desc: 'Interfaz de control y monitoreo de automatizaciones.', type: 'UX / UI' },
+                    { name: 'BUILD', desc: 'Desarrollo con APIs, webhooks y l\u00f3gica serverless.', type: 'ENGINEERING' },
+                    { name: 'MONITORING', desc: 'Sistema de alertas, logs y m\u00e9tricas de ejecuci\u00f3n.', type: 'PERFORMANCE' }
+                ],
+                'ecommerce-conversion': [
+                    { name: 'FRICTION AUDIT', desc: 'An\u00e1lisis del recorrido de compra y puntos de abandono.', type: 'STRATEGY' },
+                    { name: 'CATALOG ARCH', desc: 'Estructura de categor\u00edas, filtros y p\u00e1ginas de producto.', type: 'ARCHITECTURE' },
+                    { name: 'CHECKOUT UI', desc: 'Dise\u00f1o del flujo de compra optimizado para conversi\u00f3n.', type: 'UX / UI' },
+                    { name: 'BUILD', desc: 'Integraci\u00f3n de pasarela de pago y gesti\u00f3n de inventario.', type: 'ENGINEERING' },
+                    { name: 'CONVERSION TRACKING', desc: 'Implementaci\u00f3n de analytics, pixel y embudo de ventas.', type: 'PERFORMANCE' }
+                ],
+                'ecommerce-brand': [
+                    { name: 'BRAND STRATEGY', desc: 'Posicionamiento de marca dentro del contexto de compra.', type: 'STRATEGY' },
+                    { name: 'STORY ARCH', desc: 'Arquitectura narrativa del recorrido del producto.', type: 'ARCHITECTURE' },
+                    { name: 'VISUAL IDENTITY', desc: 'Sistema visual diferenciador para el cat\u00e1logo.', type: 'UX / UI' },
+                    { name: 'BUILD', desc: 'Desarrollo de tienda con identidad de marca integrada.', type: 'ENGINEERING' },
+                    { name: 'CONTENT STRATEGY', desc: 'Optimizaci\u00f3n de descripciones, im\u00e1genes y storytelling.', type: 'PERFORMANCE' }
+                ],
+                'ecommerce-experience': [
+                    { name: 'USER JOURNEY', desc: 'Mapeo del recorrido completo de descubrimiento a compra.', type: 'STRATEGY' },
+                    { name: 'FINDABILITY', desc: 'Sistema de b\u00fasqueda, filtros y recomendaciones.', type: 'ARCHITECTURE' },
+                    { name: 'PRODUCT UI', desc: 'Dise\u00f1o de fichas de producto y experiencia de exploraci\u00f3n.', type: 'UX / UI' },
+                    { name: 'BUILD', desc: 'Desarrollo con cache, preloading y rendering optimizado.', type: 'ENGINEERING' },
+                    { name: 'UX METRICS', desc: 'Tracking de comportamiento, heatmaps y sesiones.', type: 'PERFORMANCE' }
+                ],
+                'ecommerce-automation': [
+                    { name: 'INVENTORY AUDIT', desc: 'An\u00e1lisis de procesos de stock, pedidos y log\u00edstica.', type: 'STRATEGY' },
+                    { name: 'FLOW ARCH', desc: 'Arquitectura de automatizaciones de compra y entrega.', type: 'ARCHITECTURE' },
+                    { name: 'OPERATIONS UI', desc: 'Panel de control para gesti\u00f3n de pedidos y clientes.', type: 'UX / UI' },
+                    { name: 'BUILD', desc: 'Integraci\u00f3n con ERPs, CRMs y servicios de env\u00edo.', type: 'ENGINEERING' },
+                    { name: 'AUTO LOGIC', desc: 'Automatizaci\u00f3n de emails, inventario y reabastecimiento.', type: 'PERFORMANCE' }
+                ],
+                'ai-conversion': [
+                    { name: 'DATA STRATEGY', desc: 'Definici\u00f3n de datos de entrada y modelo de decisi\u00f3n.', type: 'STRATEGY' },
+                    { name: 'AI ARCH', desc: 'Arquitectura del modelo predictivo y pipeline de datos.', type: 'ARCHITECTURE' },
+                    { name: 'Smart UI', desc: 'Interfaz que adapta contenido seg\u00fan comportamiento del usuario.', type: 'UX / UI' },
+                    { name: 'BUILD', desc: 'Implementaci\u00f3n de modelo ML y API de recomendaciones.', type: 'ENGINEERING' },
+                    { name: 'LEARNING LOOP', desc: 'Sistema de retroalimentaci\u00f3n y reentrenamiento del modelo.', type: 'PERFORMANCE' }
+                ],
+                'ai-brand': [
+                    { name: 'BRAND AI MAP', desc: 'Definici\u00f3n de personalidad de marca para IA generativa.', type: 'STRATEGY' },
+                    { name: 'CONTENT PIPE', desc: 'Pipeline de generaci\u00f3n de contenido alineado a la marca.', type: 'ARCHITECTURE' },
+                    { name: 'Brand Interface', desc: 'Interfaz de interacci\u00f3n con personalidad de marca consistente.', type: 'UX / UI' },
+                    { name: 'BUILD', desc: 'Integraci\u00f3n de LLM con fine-tuning y RAG contextual.', type: 'ENGINEERING' },
+                    { name: 'QUALITY LAYER', desc: 'Filtros de calidad, coherencia y alineaci\u00f3n de marca.', type: 'PERFORMANCE' },
+                    { name: 'ANALYTICS', desc: 'M\u00e9tricas de interacci\u00f3n, satisfacci\u00f3n y consistencia.', type: 'PERFORMANCE' }
+                ],
+                'ai-experience': [
+                    { name: 'BEHAVIOR MAP', desc: 'An\u00e1lisis de patrones de uso para personalizaci\u00f3n.', type: 'STRATEGY' },
+                    { name: 'ADAPTIVE ARCH', desc: 'Arquitectura de sistemas adaptativos en tiempo real.', type: 'ARCHITECTURE' },
+                    { name: 'CONTEXTUAL UI', desc: 'Interfaz que se transforma seg\u00fan contexto y preferencias.', type: 'UX / UI' },
+                    { name: 'BUILD', desc: 'Implementaci\u00f3n de modelos de recomendaci\u00f3n y personalizaci\u00f3n.', type: 'ENGINEERING' },
+                    { name: 'ADAPT LAYER', desc: 'Sistema de aprendizaje continuo y ajuste de experiencias.', type: 'PERFORMANCE' }
+                ],
+                'ai-automation': [
+                    { name: 'PROCESS AUDIT', desc: 'Identificaci\u00f3n de procesos candidatos a automatizaci\u00f3n IA.', type: 'STRATEGY' },
+                    { name: 'WORKFLOW ARCH', desc: 'Arquitectura de flujos automatizados con nodos de decisi\u00f3n.', type: 'ARCHITECTURE' },
+                    { name: 'CONTROL UI', desc: 'Panel de supervisi\u00f3n y control de automatizaciones activas.', type: 'UX / UI' },
+                    { name: 'BUILD', desc: 'Desarrollo de pipelines con IA, triggers y orquestaci\u00f3n.', type: 'ENGINEERING' },
+                    { name: 'INTELLIGENCE', desc: 'Capa de aprendizaje que optimiza flujos autom\u00e1ticamente.', type: 'PERFORMANCE' }
+                ]
+            };
+
+            var worldProfiles = {
+                'web': {
+                    'conversion': { processing: 0.35, flow: 0.45, output: 0.50, interaction: 0.55 },
+                    'brand':      { processing: 0.20, flow: 0.20, output: 0.20, interaction: 0.30 },
+                    'experience': { processing: 0.25, flow: 0.40, output: 0.15, interaction: 0.90 },
+                    'automation': { processing: 0.55, flow: 0.75, output: 0.50, interaction: 0.25 }
+                },
+                'ecommerce': {
+                    'conversion': { processing: 0.45, flow: 0.60, output: 0.55, interaction: 0.50 },
+                    'brand':      { processing: 0.30, flow: 0.30, output: 0.30, interaction: 0.35 },
+                    'experience': { processing: 0.35, flow: 0.50, output: 0.25, interaction: 0.85 },
+                    'automation': { processing: 0.60, flow: 0.80, output: 0.85, interaction: 0.25 }
+                },
+                'ai': {
+                    'conversion': { processing: 0.80, flow: 0.70, output: 0.55, interaction: 0.50 },
+                    'brand':      { processing: 0.70, flow: 0.55, output: 0.60, interaction: 0.40 },
+                    'experience': { processing: 0.75, flow: 0.65, output: 0.40, interaction: 0.85 },
+                    'automation': { processing: 0.90, flow: 0.90, output: 0.65, interaction: 0.20 }
+                }
+            };
+
             function getLabel(arr, id) {
                 for (var i = 0; i < arr.length; i++) {
                     if (arr[i].id === id) return arr[i].label;
@@ -3351,6 +3654,7 @@
                 currentStep = 1;
                 selectedProject = null;
                 selectedObjective = null;
+                window._worldConfiguration = null;
 
                 stateBadge.textContent = 'STEP 01';
                 stateBadge.style.color = '';
@@ -3372,12 +3676,14 @@
                 }
                 html += '</div>';
 
-                stepOptions.innerHTML = '';
                 var frag = document.createDocumentFragment();
                 var temp = document.createElement('div');
                 temp.innerHTML = html;
                 while (temp.firstChild) frag.appendChild(temp.firstChild);
-                stepOptions.parentNode.replaceChild(frag, stepOptions);
+                var q1 = document.getElementById('lab-step-question');
+                labStep.innerHTML = '';
+                if (q1) { labStep.appendChild(q1); }
+                labStep.appendChild(frag);
                 stepOptions = document.getElementById('lab-step-options');
 
                 var btns = stepOptions.querySelectorAll('.lab-option');
@@ -3416,19 +3722,22 @@
                 }
                 html += '</div>';
 
-                stepOptions.innerHTML = '';
                 var frag = document.createDocumentFragment();
                 var temp = document.createElement('div');
                 temp.innerHTML = html;
                 while (temp.firstChild) frag.appendChild(temp.firstChild);
-                stepOptions.parentNode.replaceChild(frag, stepOptions);
+                var q2 = document.getElementById('lab-step-question');
+                labStep.innerHTML = '';
+                if (q2) { labStep.appendChild(q2); }
+                labStep.appendChild(frag);
                 stepOptions = document.getElementById('lab-step-options');
 
-                var backBtn = stepOptions.querySelector('.lab-back');
-                backBtn.addEventListener('click', function() {
-                    renderStep1();
-                });
-                stepOptions.parentNode.insertBefore(backBtn, stepOptions);
+                var backBtn = labStep.querySelector('.lab-back');
+                if (backBtn) {
+                    backBtn.addEventListener('click', function() {
+                        renderStep1();
+                    });
+                }
 
                 var btns = stepOptions.querySelectorAll('.lab-option');
                 btns.forEach(function(btn) {
@@ -3453,43 +3762,103 @@
                 var objectiveLabel = getLabel(objectives, selectedObjective);
                 var coreSystem = recommendations[selectedProject + '-' + selectedObjective] || 'SISTEMA PERSONALIZADO';
                 var explanation = explanations[selectedProject + '-' + selectedObjective] || '';
+                var arch = architectures[selectedProject + '-' + selectedObjective] || archItems.map(function(a) { return { name: a.name, desc: a.desc, type: 'SYSTEM' }; });
+
+                window._worldConfiguration = {
+                    project: selectedProject,
+                    objective: selectedObjective,
+                    system: coreSystem,
+                    moduleCount: arch.length,
+                    moduleTypes: arch.map(function(m) {
+                        return m.type;
+                    }),
+                    worldProfile: worldProfiles[selectedProject] && worldProfiles[selectedProject][selectedObjective]
+                        ? worldProfiles[selectedProject][selectedObjective]
+                        : { processing: 0.50, flow: 0.50, output: 0.50, interaction: 0.50 }
+                };
 
                 stateBadge.textContent = 'CONFIGURADO';
                 stateBadge.style.color = 'var(--accent)';
                 stateBadge.style.borderColor = 'var(--accent)';
                 statusValue.textContent = 'READY';
                 statusValue.style.color = 'var(--accent)';
-                hint.querySelector('span').textContent = 'Sistema configurado \u2014 inicia tu proyecto';
+                hint.querySelector('span').textContent = 'Arquitectura generada \u2014 inicia tu proyecto';
 
                 var html = '<button class="lab-back" id="lab-back-3" aria-label="Volver a la selecci\u00f3n de objetivo">&larr; PASO 02</button>';
-                html += '<div class="lab-summary">';
-                html += '<div class="lab-summary-row"><span class="lab-summary-label">PROYECTO</span><span class="lab-summary-value">' + projectLabel + '</span></div>';
-                html += '<div class="lab-summary-row"><span class="lab-summary-label">OBJETIVO PRINCIPAL</span><span class="lab-summary-value accent">' + objectiveLabel + '</span></div>';
-                html += '<div class="lab-summary-row"><span class="lab-summary-label">SOLUCI\u00d3N RECOMENDADA</span><span class="lab-summary-value accent">' + coreSystem + '</span></div>';
-                html += '<div class="lab-summary-explanation">' + explanation + '</div>';
-                html += '<div class="lab-divider"></div>';
-                html += '<div class="lab-arch-label">EL SISTEMA SE CENTRAR\u00cdA EN</div>';
-                html += '<div class="lab-arch-items">';
-                for (var i = 0; i < archItems.length; i++) {
-                    html += '<div class="lab-arch-item"><span class="lab-arch-item-name">0' + (i + 1) + ' / ' + archItems[i].name + '</span><span class="lab-arch-item-desc">' + archItems[i].desc + '</span></div>';
-                }
-                html += '</div>';
-                html += '<button class="lab-cta" id="lab-cta" aria-label="Iniciar este proyecto">INICIAR ESTE PROYECTO &rarr;</button>';
+
+                html += '<div class="lab-system-analysis">';
+                html += '<div class="lab-system-analysis-label">SYSTEM ANALYSIS</div>';
+                html += '<div class="lab-analysis-row"><span class="lab-analysis-key">PROJECT</span><span class="lab-analysis-val">' + projectLabel + '</span></div>';
+                html += '<div class="lab-analysis-row"><span class="lab-analysis-key">OBJECTIVE</span><span class="lab-analysis-val accent">' + objectiveLabel + '</span></div>';
+                html += '<div class="lab-analysis-row"><span class="lab-analysis-key">RECOMMENDED SYSTEM</span><span class="lab-analysis-val accent">' + coreSystem + '</span></div>';
                 html += '</div>';
 
-                stepOptions.innerHTML = '';
+                html += '<div class="lab-divider"></div>';
+
+                html += '<div class="lab-process" role="list" aria-label="Proceso de generaci\u00f3n">';
+                for (var p = 0; p < processFlow.length; p++) {
+                    html += '<span class="lab-process-step" role="listitem">' + processFlow[p] + '</span>';
+                    if (p < processFlow.length - 1) html += '<span class="lab-process-arrow" aria-hidden="true">&rarr;</span>';
+                }
+                html += '</div>';
+
+                html += '<div class="lab-arch-title">ARCHITECTURE GENERATED</div>';
+
+                html += '<div class="lab-arch-modules" role="list" aria-label="M\u00f3dulos de arquitectura">';
+                for (var i = 0; i < arch.length; i++) {
+                    var num = (i + 1) < 10 ? '0' + (i + 1) : '' + (i + 1);
+                    html += '<div class="lab-arch-module" role="listitem" tabindex="0">';
+                    html += '<span class="lab-arch-module-num">' + num + '</span>';
+                    html += '<div class="lab-arch-module-content">';
+                    html += '<span class="lab-arch-module-name">' + arch[i].name + '</span>';
+                    html += '<span class="lab-arch-module-desc">' + arch[i].desc + '</span>';
+                    html += '</div>';
+                    html += '<span class="lab-arch-module-type">' + arch[i].type + '</span>';
+                    html += '</div>';
+                }
+                html += '</div>';
+
+                html += '<div class="lab-divider"></div>';
+
+                html += '<div class="lab-output-section">';
+                html += '<div class="lab-output-label">SYSTEM OUTPUT</div>';
+                html += '<div class="lab-output-explanation">' + explanation + '</div>';
+                html += '</div>';
+
+                html += '<button class="lab-cta" id="lab-cta" aria-label="Iniciar este proyecto">INICIAR ESTE PROYECTO &rarr;</button>';
+
                 var frag = document.createDocumentFragment();
                 var temp = document.createElement('div');
                 temp.innerHTML = html;
                 while (temp.firstChild) frag.appendChild(temp.firstChild);
-                stepOptions.parentNode.replaceChild(frag, stepOptions);
-                stepOptions = document.getElementById('lab-step-options');
+                var q3 = document.getElementById('lab-step-question');
+                labStep.innerHTML = '';
+                if (q3) { labStep.appendChild(q3); }
+                labStep.appendChild(frag);
+                stepOptions = null;
 
-                var backBtn = stepOptions.querySelector('.lab-back');
-                backBtn.addEventListener('click', function() {
-                    renderStep2();
+                var backBtn = labStep.querySelector('.lab-back');
+                if (backBtn) {
+                    backBtn.addEventListener('click', function() {
+                        renderStep2();
+                    });
+                }
+
+                var modules = labStep.querySelectorAll('.lab-arch-module');
+                modules.forEach(function(mod) {
+                    mod.addEventListener('mouseenter', function() {
+                        modules.forEach(function(m) { m.style.opacity = m === mod ? '1' : '0.5'; });
+                    });
+                    mod.addEventListener('mouseleave', function() {
+                        modules.forEach(function(m) { m.style.opacity = '1'; });
+                    });
+                    mod.addEventListener('focus', function() {
+                        modules.forEach(function(m) { m.style.opacity = m === mod ? '1' : '0.5'; });
+                    });
+                    mod.addEventListener('blur', function() {
+                        modules.forEach(function(m) { m.style.opacity = '1'; });
+                    });
                 });
-                stepOptions.parentNode.insertBefore(backBtn, stepOptions);
 
                 var ctaBtn = document.getElementById('lab-cta');
                 if (ctaBtn) {
@@ -3593,6 +3962,10 @@
             var currentLabel = 'SYSTEM / ONLINE';
             var targetLabel = 'SYSTEM / ONLINE';
             var prevActiveSection = '';
+            var stateShift = 0;
+            var shiftKey = null;
+            var secEl = null;
+            var secProg = 0.5;
 
             function srand(seed) {
                 var x = Math.sin(seed * 12.9898 + 78.233) * 43758.5453;
@@ -3603,10 +3976,10 @@
 
             var systemStates = {
                 'online':      { density: 1.0,  activity: 0.5,  energy: 0.6,  highlights: 0, pulseSpeed: 0.8,  connStrength: 1.0,  streamCount: 5,  streamSpeed: 0.6,  streamInRatio: 1.0,  nodeActivity: 0.3,  routeActivity: 0.2,  coreActivity: 0.3,  outputActivity: 0.1,  label: 'SYSTEM / ONLINE' },
-                'structuring': { density: 1.1,  activity: 0.7,  energy: 0.75, highlights: 1, pulseSpeed: 1.0,  connStrength: 1.1,  streamCount: 8,  streamSpeed: 0.8,  streamInRatio: 0.9,  nodeActivity: 0.6,  routeActivity: 0.55, coreActivity: 0.45, outputActivity: 0.15, label: 'SYSTEM / STRUCTURING' },
-                'configuring': { density: 0.95, activity: 0.65, energy: 0.7,  highlights: 1, pulseSpeed: 0.9,  connStrength: 1.0,  streamCount: 10, streamSpeed: 0.9,  streamInRatio: 0.85, nodeActivity: 0.55, routeActivity: 0.5,  coreActivity: 0.5,  outputActivity: 0.2,  label: 'SYSTEM / CONFIGURING' },
-                'processing':  { density: 1.15, activity: 0.9,  energy: 0.95, highlights: 2, pulseSpeed: 1.3,  connStrength: 1.2,  streamCount: 14, streamSpeed: 1.2,  streamInRatio: 0.55, nodeActivity: 0.85, routeActivity: 0.8,  coreActivity: 0.9,  outputActivity: 0.3,  label: 'SYSTEM / PROCESSING' },
-                'output':      { density: 1.05, activity: 0.6,  energy: 0.8,  highlights: 1, pulseSpeed: 0.7,  connStrength: 1.1,  streamCount: 10, streamSpeed: 0.7,  streamInRatio: 0.15, nodeActivity: 0.5,  routeActivity: 0.45, coreActivity: 0.6,  outputActivity: 0.8,  label: 'SYSTEM / OUTPUT' },
+                'structuring': { density: 1.1,  activity: 0.7,  energy: 0.75, highlights: 1, pulseSpeed: 1.0,  connStrength: 1.2,  streamCount: 8,  streamSpeed: 0.8,  streamInRatio: 0.9,  nodeActivity: 0.6,  routeActivity: 0.70, coreActivity: 0.45, outputActivity: 0.15, label: 'SYSTEM / STRUCTURING' },
+                'configuring': { density: 0.95, activity: 0.70, energy: 0.7,  highlights: 1.5, pulseSpeed: 0.9,  connStrength: 1.0,  streamCount: 10, streamSpeed: 0.9,  streamInRatio: 0.85, nodeActivity: 0.70, routeActivity: 0.5,  coreActivity: 0.6,  outputActivity: 0.2,  label: 'SYSTEM / CONFIGURING' },
+                'processing':  { density: 1.15, activity: 1.0,  energy: 1.0,  highlights: 2, pulseSpeed: 1.45, connStrength: 1.2,  streamCount: 14, streamSpeed: 1.2,  streamInRatio: 0.55, nodeActivity: 0.85, routeActivity: 0.9,  coreActivity: 1.0,  outputActivity: 0.3,  label: 'SYSTEM / PROCESSING' },
+                'output':      { density: 1.05, activity: 0.6,  energy: 0.85, highlights: 1, pulseSpeed: 0.7,  connStrength: 1.1,  streamCount: 14, streamSpeed: 1.05, streamInRatio: 0.10, nodeActivity: 0.5,  routeActivity: 0.40, coreActivity: 0.5,  outputActivity: 1.0,  label: 'SYSTEM / OUTPUT' },
                 'ready':       { density: 0.9,  activity: 0.4,  energy: 0.55, highlights: 0, pulseSpeed: 0.6,  connStrength: 0.9,  streamCount: 4,  streamSpeed: 0.5,  streamInRatio: 0.85, nodeActivity: 0.35, routeActivity: 0.25, coreActivity: 0.35, outputActivity: 0.1,  label: 'SYSTEM / READY' }
             };
 
@@ -3617,6 +3990,11 @@
                 'servicios': 'processing',
                 'work':      'output',
                 'contacto':  'ready'
+            };
+
+            window._sectionLabel = function(id) {
+                var key = sectionToState[id] || 'online';
+                return systemStates[key] ? systemStates[key].label : 'SYSTEM / ONLINE';
             };
 
             var ringVisuals = {
@@ -3636,20 +4014,20 @@
                 rings = [];
                 if (isMobile) {
                     var defs = [
-                        { lat: -50, tilt: 0.12,  speed: 0.15,  par: 0.006, count: 14, type: 'grid' },
-                        { lat: -15, tilt: -0.08, speed: -0.12, par: 0.012, count: 18, type: 'primary' },
-                        { lat: 20,  tilt: 0.15,  speed: 0.18,  par: 0.02,  count: 16, type: 'route' },
-                        { lat: 55,  tilt: -0.05, speed: -0.1,  par: 0.03,  count: 12, type: 'secondary' }
+                        { lat: -50, tilt: 0.12,  speed: 0.15,  par: 0.001, count: 14, type: 'grid' },
+                        { lat: -15, tilt: -0.08, speed: -0.12, par: 0.003, count: 18, type: 'primary' },
+                        { lat: 20,  tilt: 0.15,  speed: 0.18,  par: 0.005,  count: 16, type: 'route' },
+                        { lat: 55,  tilt: -0.05, speed: -0.1,  par: 0.007,  count: 12, type: 'secondary' }
                     ];
                 } else {
                     var defs = [
-                        { lat: -55, tilt: 0.12,  speed: 0.15,  par: 0.005, count: 20, type: 'grid' },
-                        { lat: -35, tilt: -0.06, speed: -0.08, par: 0.008, count: 22, type: 'secondary' },
-                        { lat: -18, tilt: -0.08, speed: -0.12, par: 0.01,  count: 28, type: 'primary' },
-                        { lat: 0,   tilt: 0.04,  speed: 0.06,  par: 0.014, count: 24, type: 'route' },
-                        { lat: 18,  tilt: 0.15,  speed: 0.18,  par: 0.025, count: 26, type: 'primary' },
-                        { lat: 40,  tilt: -0.1,  speed: -0.14, par: 0.033, count: 20, type: 'grid' },
-                        { lat: 62,  tilt: 0.13,  speed: 0.1,   par: 0.042, count: 16, type: 'secondary' }
+                        { lat: -55, tilt: 0.12,  speed: 0.15,  par: 0.001, count: 20, type: 'grid' },
+                        { lat: -35, tilt: -0.06, speed: -0.08, par: 0.002, count: 22, type: 'secondary' },
+                        { lat: -18, tilt: -0.08, speed: -0.12, par: 0.002,  count: 28, type: 'primary' },
+                        { lat: 0,   tilt: 0.04,  speed: 0.06,  par: 0.003, count: 24, type: 'route' },
+                        { lat: 18,  tilt: 0.15,  speed: 0.18,  par: 0.005, count: 26, type: 'primary' },
+                        { lat: 40,  tilt: -0.1,  speed: -0.14, par: 0.007, count: 20, type: 'grid' },
+                        { lat: 62,  tilt: 0.13,  speed: 0.1,   par: 0.009, count: 16, type: 'secondary' }
                     ];
                 }
                 for (var i = 0; i < defs.length; i++) {
@@ -3668,9 +4046,9 @@
                 nodes = [];
                 ringConns = [];
                 crossConns = [];
-                sphereR = Math.min(w, h) * (isMobile ? 0.55 : 0.65);
-                sphereCX = w * 0.52;
-                sphereCY = h * (isMobile ? 0.50 : 0.53);
+                sphereR = Math.min(w, h) * (isMobile ? 0.70 : 1.1);
+                sphereCX = w * 0.50;
+                sphereCY = h * (isMobile ? 0.50 : 0.50);
 
                 for (var r = 0; r < rings.length; r++) {
                     var ring = rings[r];
@@ -3912,6 +4290,12 @@
 
             function computePositions(t, sy) {
                 var offset = 0;
+                // Observer orbit: slow camera drift around the static structure.
+                // Oscillating only (never a full rotation); identity when reducedMotion.
+                var camYaw = reducedMotion ? 0 : 0.035 * Math.sin(t * 1.5);
+                var camPitch = reducedMotion ? 0 : 0.025 * Math.sin(t * 1.1 + 1.3);
+                var cYaw = Math.cos(camYaw), sYaw = Math.sin(camYaw);
+                var cPit = Math.cos(camPitch), sPit = Math.sin(camPitch);
                 for (var r = 0; r < rings.length; r++) {
                     var ring = rings[r];
                     var angle = reducedMotion ? 0 : t * ring.rot * 1000;
@@ -3925,10 +4309,14 @@
                         var z1 = n.bx * sR + n.bz * cR;
                         var y1 = n.by * cT - z1 * sT;
                         var z2 = n.by * sT + z1 * cT;
-                        var sc = FOV / (FOV + z2 + sphereR);
-                        n.sx = sphereCX + x1 * sc;
-                        n.sy = sphereCY + (y1 - pOff) * sc;
-                        n.z = (z2 + sphereR) / (2 * sphereR);
+                        var x2 = x1 * cYaw - z2 * sYaw;
+                        var z3 = x1 * sYaw + z2 * cYaw;
+                        var y2 = y1 * cPit - z3 * sPit;
+                        var z4 = y1 * sPit + z3 * cPit;
+                        var sc = FOV / (FOV + z4 + sphereR);
+                        n.sx = sphereCX + x2 * sc;
+                        n.sy = sphereCY + (y2 - pOff) * sc;
+                        n.z = (z4 + sphereR) / (2 * sphereR);
                         n.sz = (1.8 + (1 - n.z) * 3.0) * sc;
                         n.alpha = 0.12 + (1 - n.z) * 0.28;
                     }
@@ -3969,6 +4357,10 @@
                 var hp = window._heroScrollProgress || 0;
                 var energy = currentState.energy;
 
+                var oYaw = reducedMotion ? 0 : 0.035 * Math.sin(t * 1.5);
+                var oPitch = reducedMotion ? 0 : 0.025 * Math.sin(t * 1.1 + 1.3);
+                var oCYaw = Math.cos(oYaw), oSYaw = Math.sin(oYaw);
+                var oCPit = Math.cos(oPitch), oSPit = Math.sin(oPitch);
                 for (var r = 0; r < rings.length; r++) {
                     var ring = rings[r];
                     var rv = ringVisuals[ring.type] || ringVisuals.secondary;
@@ -4000,16 +4392,25 @@
                         var by1 = by3 * cT - bz1 * sT;
                         var bz2 = by3 * sT + bz1 * cT;
 
-                        var sA = FOV / (FOV + az2 + sphereR);
-                        var sB = FOV / (FOV + bz2 + sphereR);
+                        var ax2 = ax1 * oCYaw - az2 * oSYaw;
+                        var az3 = ax1 * oSYaw + az2 * oCYaw;
+                        var ay2 = ay1 * oCPit - az3 * oSPit;
+                        var az4 = ay1 * oSPit + az3 * oCPit;
+                        var bx2 = bx1 * oCYaw - bz2 * oSYaw;
+                        var bz3 = bx1 * oSYaw + bz2 * oCYaw;
+                        var by2 = by1 * oCPit - bz3 * oSPit;
+                        var bz4 = by1 * oSPit + bz3 * oCPit;
+
+                        var sA = FOV / (FOV + az4 + sphereR);
+                        var sB = FOV / (FOV + bz4 + sphereR);
                         var pA = reducedMotion ? 0 : (scrollY || 0) * ring.par;
 
-                        var sxa = sphereCX + ax1 * sA;
-                        var sya = sphereCY + (ay1 - pA) * sA;
-                        var sxb = sphereCX + bx1 * sB;
-                        var syb = sphereCY + (by1 - pA) * sB;
+                        var sxa = sphereCX + ax2 * sA;
+                        var sya = sphereCY + (ay2 - pA) * sA;
+                        var sxb = sphereCX + bx2 * sB;
+                        var syb = sphereCY + (by2 - pA) * sB;
 
-                        var avgZ = ((az2 + sphereR) / (2 * sphereR) + (bz2 + sphereR) / (2 * sphereR)) * 0.5;
+                        var avgZ = ((az4 + sphereR) / (2 * sphereR) + (bz4 + sphereR) / (2 * sphereR)) * 0.5;
                         var alpha = (0.06 + (1 - avgZ) * 0.12 + hp * 0.03) * rv.aMul * energy;
                         if (r === 0 || r === rings.length - 1) alpha *= 0.7;
 
@@ -4083,14 +4484,14 @@
                     var dx = a.sx - b.sx;
                     var dy = a.sy - b.sy;
                     var d2 = Math.sqrt(dx * dx + dy * dy);
-                    if (d2 > 140) continue;
+                    if (d2 > 240) continue;
 
                     var avgZ = (a.z + b.z) * 0.5;
                     var dd = Math.abs(a.z - b.z);
                     if (dd > 0.25) continue;
 
                     var alpha = (0.06 + (1 - avgZ) * 0.12) * cb * energy * currentState.connStrength;
-                    alpha *= (1 - d2 / 140);
+                    alpha *= (1 - d2 / 240);
                     if (density < 1 && srand(i * 23 + 5) > density) alpha *= 0.3;
                     if (currentState.routeActivity > 0.05) {
                         var routePhase = Math.sin(i * 1.1 + Date.now() * 0.0005) * 0.5 + 0.5;
@@ -4112,12 +4513,19 @@
                 if (currentState.routeActivity < 0.05) return;
                 if (reducedMotion) return;
 
+                var flow = 0.50;
+                if (window._worldConfiguration && window._worldConfiguration.worldProfile && typeof window._worldConfiguration.worldProfile.flow === 'number') {
+                    flow = window._worldConfiguration.worldProfile.flow;
+                }
+                flow = Math.max(0, Math.min(1, flow));
+                var flowMul = 0.55 + flow * 0.90;
+
                 for (var i = 0; i < activeRoutes.length; i++) {
                     var ar = activeRoutes[i];
                     var pool = ar.useCross ? crossConns : ringConns;
                     if (ar.connIdx >= pool.length) continue;
 
-                    ar.progress += ar.speed * currentState.routeActivity;
+                    ar.progress += ar.speed * currentState.routeActivity * flowMul;
                     if (ar.progress > 1) {
                         ar.progress = 0;
                         if (srand(i * 47 + t * 100) > 0.5) {
@@ -4132,8 +4540,8 @@
                     if (!a || !b) continue;
 
                     var p = ar.progress;
-                    var alpha = ar.intensity * currentState.routeActivity * (1 - Math.abs(p - 0.5) * 2);
-                    alpha = Math.min(alpha, 0.20);
+                    var alpha = ar.intensity * currentState.routeActivity * flowMul * (1 - Math.abs(p - 0.5) * 2);
+                    alpha = Math.min(alpha, 0.06 + 0.14 * flowMul);
                     if (alpha < 0.01) continue;
 
                     var px = a.sx + (b.sx - a.sx) * p;
@@ -4147,6 +4555,13 @@
             }
 
             function drawProcessingChains(t) {
+                var flow = 0.50;
+                if (window._worldConfiguration && window._worldConfiguration.worldProfile && typeof window._worldConfiguration.worldProfile.flow === 'number') {
+                    flow = window._worldConfiguration.worldProfile.flow;
+                }
+                flow = Math.max(0, Math.min(1, flow));
+                var flowMul = 0.55 + flow * 0.90;
+
                 for (var i = 0; i < processingChains.length; i++) {
                     var ch = processingChains[i];
                     if (!ch.active) continue;
@@ -4158,7 +4573,7 @@
                     }
 
                     if (ch.phase === 0) {
-                        ch.forwardProgress += ch.speed;
+                        ch.forwardProgress += ch.speed * flowMul;
                         if (ch.forwardProgress >= 1) {
                             ch.forwardProgress = 1;
                             ch.phase = 1;
@@ -4167,7 +4582,7 @@
                         ch.phase = 2;
                         ch.coreProgress = 0;
                     } else if (ch.phase === 2) {
-                        ch.coreProgress += ch.speed * 0.8;
+                        ch.coreProgress += ch.speed * 0.8 * flowMul;
                         if (ch.coreProgress >= 1) {
                             corePulse = Math.min(corePulse + ch.strength * 0.40, 1.0);
                             coreWave = Math.min(coreWave + ch.strength * 0.30, 1.0);
@@ -4201,19 +4616,19 @@
                         var p = ch.forwardProgress;
                         signalX = nodeA.sx + (nodeB.sx - nodeA.sx) * p;
                         signalY = nodeA.sy + (nodeB.sy - nodeA.sy) * p;
-                        signalAlpha = ch.strength * (1 - Math.abs(p - 0.5) * 1.5);
+                        signalAlpha = ch.strength * (1 - Math.abs(p - 0.5) * 1.5) * flowMul;
                     } else if (ch.phase === 1 || ch.phase === 2) {
                         var p = ch.phase === 1 ? 0 : ch.coreProgress;
                         var fromX = nodeB.sx + (sphereCX - nodeB.sx) * p;
                         var fromY = nodeB.sy + (sphereCY - nodeB.sy) * p;
                         signalX = fromX;
                         signalY = fromY;
-                        signalAlpha = ch.strength * 0.8;
+                        signalAlpha = ch.strength * 0.8 * flowMul;
                         sigSz = 1.8;
                     }
 
                     if (signalAlpha < 0.01) continue;
-                    signalAlpha = Math.min(signalAlpha, 0.30);
+                    signalAlpha = Math.min(signalAlpha, 0.10 + 0.20 * flowMul);
 
                     ctx.fillStyle = 'rgba(37, 99, 235, ' + signalAlpha + ')';
                     ctx.beginPath();
@@ -4246,6 +4661,13 @@
                 var energy = currentState.energy;
                 var highlights = currentState.highlights;
 
+                var interaction = 0.50;
+                if (window._worldConfiguration && window._worldConfiguration.worldProfile && typeof window._worldConfiguration.worldProfile.interaction === 'number') {
+                    interaction = window._worldConfiguration.worldProfile.interaction;
+                }
+                interaction = Math.max(0, Math.min(1, interaction));
+                var interactionMul = 0.60 + interaction * 0.80;
+
                 activeNodeIdx = -1;
                 var closestDist = MOUSE_RADIUS;
 
@@ -4272,7 +4694,7 @@
                     }
 
                     if (highlights > 0 && n.infra && srand(i * 41) > (1 - highlights * 0.15)) {
-                        alpha *= 1.8;
+                        alpha *= 1.8 * interactionMul;
                         n.sz *= 1.3;
                     }
 
@@ -4299,7 +4721,7 @@
                     if (currentState.nodeActivity > 0.05 && nodeZones.length > i) {
                         var zone = nodeZones[i];
                         var zonePhase = Math.sin(zone * 1.8 + Date.now() * 0.0003) * 0.5 + 0.5;
-                        var zoneBoost = currentState.nodeActivity * zonePhase * 0.15;
+                        var zoneBoost = currentState.nodeActivity * zonePhase * 0.15 * interactionMul;
                         alpha += zoneBoost;
                     }
 
@@ -4315,6 +4737,13 @@
                 var activity = currentState.activity;
                 if (reducedMotion) return;
 
+                var interaction = 0.50;
+                if (window._worldConfiguration && window._worldConfiguration.worldProfile && typeof window._worldConfiguration.worldProfile.interaction === 'number') {
+                    interaction = window._worldConfiguration.worldProfile.interaction;
+                }
+                interaction = Math.max(0, Math.min(1, interaction));
+                var interactionMul = 0.60 + interaction * 0.80;
+
                 for (var i = 0; i < pulses.length; i++) {
                     var p = pulses[i];
                     var pool = p.useRing ? ringConns : crossConns;
@@ -4324,7 +4753,7 @@
                     var b = nodes[conn.b];
                     if (!a || !b) continue;
 
-                    p.progress += p.speed * activity * currentState.pulseSpeed;
+                    p.progress += p.speed * activity * currentState.pulseSpeed * interactionMul;
                     if (p.progress > 1) {
                         p.progress = 0;
                         if (srand(i * 59 + t * 1000) > 0.7) {
@@ -4335,7 +4764,7 @@
                     var px = a.sx + (b.sx - a.sx) * p.progress;
                     var py = a.sy + (b.sy - a.sy) * p.progress;
                     var avgZ = (a.z + b.z) * 0.5;
-                    var pulseAlpha = (0.25 + (1 - avgZ) * 0.30) * activity;
+                    var pulseAlpha = (0.25 + (1 - avgZ) * 0.30) * activity * interactionMul;
                     pulseAlpha = Math.min(pulseAlpha, 0.50);
                     if (pulseAlpha < 0.01) continue;
 
@@ -4365,6 +4794,13 @@
                 var activeCount = Math.round(currentState.streamCount);
                 if (isMobile) activeCount = Math.min(activeCount, 6);
 
+                var output = 0.50;
+                if (window._worldConfiguration && window._worldConfiguration.worldProfile && typeof window._worldConfiguration.worldProfile.output === 'number') {
+                    output = window._worldConfiguration.worldProfile.output;
+                }
+                output = Math.max(0, Math.min(1, output));
+                var outputMul = 0.55 + output * 0.90;
+
                 for (var i = 0; i < activeCount && i < streams.length; i++) {
                     var s = streams[i];
                     var n = nodes[s.nodeIdx];
@@ -4372,7 +4808,7 @@
 
                     // Update progress
                     if (!reducedMotion) {
-                        s.progress += s.speed * speedMul;
+                        s.progress += s.speed * speedMul * outputMul;
                     }
 
                     // Fade in/out
@@ -4427,7 +4863,8 @@
 
                     // Alpha
                     var depthAlpha = 0.25 + (1 - n.z) * 0.35;
-                    var alpha = s.alpha * depthAlpha * energy;
+                    var alpha = s.alpha * depthAlpha * energy * outputMul;
+                    if (!s.isInput) { alpha *= 0.4 + currentState.outputActivity; }
                     var drawSize = s.size;
                     if (s.isInput && s.progress > 0.8) {
                         var arrivalBoost = (s.progress - 0.8) / 0.2;
@@ -4438,12 +4875,12 @@
                     if (alpha < 0.01) continue;
 
                     // Trail
-                    var tp = Math.max(0, p - 0.05);
+                    var tp = Math.max(0, p - 0.05 * outputMul);
                     var tq = 1 - tp;
                     var trailX = tq * tq * sx + 2 * tq * tp * mx + tp * tp * tx;
                     var trailY = tq * tq * sy + 2 * tq * tp * my + tp * tp * ty;
                     ctx.strokeStyle = 'rgba(37, 99, 235, ' + (alpha * 0.2) + ')';
-                    ctx.lineWidth = drawSize * 0.5;
+                    ctx.lineWidth = drawSize * 0.5 * (0.7 + 0.3 * outputMul);
                     ctx.beginPath();
                     ctx.moveTo(trailX, trailY);
                     ctx.lineTo(px, py);
@@ -4461,7 +4898,18 @@
                 var energy = currentState.energy;
                 var activity = currentState.activity;
                 var breath = reducedMotion ? 0 : Math.sin(t * 3) * 0.06;
-                var totalEnergy = energy * (1 + corePulse * 0.45 + breath + currentState.coreActivity * 0.3);
+                var coreActivity = currentState.coreActivity;
+
+                var processing = 0.50;
+                if (window._worldConfiguration && window._worldConfiguration.worldProfile && typeof window._worldConfiguration.worldProfile.processing === 'number') {
+                    processing = window._worldConfiguration.worldProfile.processing;
+                }
+                processing = Math.max(0, Math.min(1, processing));
+                var processingMul = 0.4 + processing * 1.2;
+                coreActivity = coreActivity * processingMul;
+                coreActivity = Math.max(0, Math.min(1, coreActivity));
+
+                var totalEnergy = energy * (1 + corePulse * 0.45 + breath + coreActivity * 0.3 * processingMul);
                 totalEnergy = Math.min(totalEnergy, 1.4);
 
                 var baseR = isMobile ? sphereR * 0.10 : sphereR * 0.14;
@@ -4595,6 +5043,13 @@
                 if (activeNodeIdx < 0 || activeNodeIdx >= nodes.length) return;
                 var n = nodes[activeNodeIdx];
 
+                var interaction = 0.50;
+                if (window._worldConfiguration && window._worldConfiguration.worldProfile && typeof window._worldConfiguration.worldProfile.interaction === 'number') {
+                    interaction = window._worldConfiguration.worldProfile.interaction;
+                }
+                interaction = Math.max(0, Math.min(1, interaction));
+                var interactionMul = 0.60 + interaction * 0.80;
+
                 // Calculate mouse distance for 3-level reaction
                 var mouseDist = MOUSE_RADIUS;
                 if (mouseX !== undefined) {
@@ -4609,7 +5064,7 @@
                 if (!near) return;
 
                 var intensity = veryNear ? 1.0 : 0.5;
-                var ringAlpha = n.alpha * 2.5 * intensity;
+                var ringAlpha = n.alpha * 2.5 * intensity * interactionMul;
                 ringAlpha = Math.min(ringAlpha, 0.4);
                 if (ringAlpha < 0.02) return;
 
@@ -4709,6 +5164,22 @@
                     var s = systemStates[stateKey];
                     targetState = s;
                     targetLabel = s.label;
+                    secEl = section ? document.getElementById(section) : null;
+                    // Transient context response: fires once per state change.
+                    // Destination picks its dominant channel; decays below.
+                    if (!reducedMotion) {
+                        stateShift = 1;
+                        shiftKey = (stateKey === 'structuring') ? 'routeActivity'
+                            : (stateKey === 'configuring') ? 'nodeActivity'
+                            : (stateKey === 'processing') ? 'coreActivity'
+                            : (stateKey === 'output') ? 'outputActivity' : null;
+                        if (stateKey === 'processing') {
+                            corePulse = Math.min(corePulse + 0.30, 1.0);
+                        }
+                    } else {
+                        stateShift = 0;
+                        shiftKey = null;
+                    }
                 }
 
                 var lerpFactor = 0.035;
@@ -4726,6 +5197,34 @@
                 currentState.coreActivity = lerp(currentState.coreActivity, targetState.coreActivity, lerpFactor);
                 currentState.outputActivity = lerp(currentState.outputActivity, targetState.outputActivity, lerpFactor);
                 currentLabel = targetLabel;
+
+                // Decay the transient response back into destination steady state.
+                stateShift = lerp(stateShift, 0, 0.05);
+                if (stateShift > 0.01 && shiftKey) {
+                    if (shiftKey === 'routeActivity') currentState.routeActivity += stateShift * 0.22;
+                    else if (shiftKey === 'nodeActivity') currentState.nodeActivity += stateShift * 0.25;
+                    else if (shiftKey === 'coreActivity') currentState.coreActivity += stateShift * 0.30;
+                    else if (shiftKey === 'outputActivity') currentState.outputActivity += stateShift * 0.35;
+                }
+
+                // Continuous section-progress modulation (complements one-shot shift).
+                if (!reducedMotion && secEl) {
+                    var secTarget = 0.5;
+                    var sr = secEl.getBoundingClientRect();
+                    if (sr && sr.height > 0) {
+                        secTarget = (80 - sr.top) / sr.height;
+                        secTarget = Math.max(0, Math.min(1, secTarget));
+                    }
+                    secProg = lerp(secProg, secTarget, 0.12);
+                    var progFx = (secProg - 0.5) * 2;
+                    if (progFx !== 0) {
+                        var progKey = sectionToState[section] || 'online';
+                        if (progKey === 'structuring') currentState.routeActivity += progFx * 0.10;
+                        else if (progKey === 'configuring') currentState.nodeActivity += progFx * 0.10;
+                        else if (progKey === 'processing') currentState.coreActivity += progFx * 0.12;
+                        else if (progKey === 'output') currentState.outputActivity += progFx * 0.15;
+                    }
+                }
 
                 corePulse = lerp(corePulse, 0, 0.018);
                 coreWave = lerp(coreWave, 0, 0.015);
